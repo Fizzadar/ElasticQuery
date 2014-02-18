@@ -36,31 +36,31 @@ A _simple_ query builder for Elasticsearch.
 
 ### ElasticQuery
 
-#### query.must( Query/Filter )
+### query.must( Query/Filter )
 
-#### query.should( Query/Filter )
+### query.should( Query/Filter )
 
-#### query.must_not( Query/Filter )
+### query.must_not( Query/Filter )
 
-#### query.sort( field, order )
+### query.sort( field, order )
 
-#### query.aggregate( name, Aggregate )
-
-
-### Filter
-
-#### Filter.nested( path, musts, shoulds, must_nots )
-
-#### Filter.range( field, range_from, range_to )
-
-#### Filter.prefix( **kwargs )
-
-#### Filter.term( **kwargs )
-
-#### Filter.terms( **kwargs )
+### query.aggregate( name, Aggregate )
 
 
-### Query
+## Filter
+
+### Filter.nested( path, musts, shoulds, must_nots )
+
+### Filter.range( field, range_from, range_to )
+
+### Filter.prefix( **kwargs )
+
+### Filter.term( **kwargs )
+
+### Filter.terms( **kwargs )
+
+
+## Query
 
 The `Query` class inherits from `Filter`, see above for API details.
 
@@ -69,19 +69,19 @@ The `Query` class inherits from `Filter`, see above for API details.
 #### Query.string( default_operator='AND', **kwargs )
 
 
-### Aggregate
+## Aggregate
 
-#### Aggregate.stats( field )
+### Aggregate.stats( field )
 
-#### Aggregate.extended_stats( field )
+### Aggregate.extended_stats( field )
 
-#### Aggregate.histogram( field, interval )
+### Aggregate.histogram( field, interval )
 
-#### Aggregate.date_histogram( field, interval='day' )
+### Aggregate.date_histogram( field, interval='day' )
 
-#### Aggregate.terms( field )
+### Aggregate.terms( field )
 
-#### Aggregate.nested( path, **kwargs )
+### Aggregate.nested( path, **kwargs )
 
 
 
