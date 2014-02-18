@@ -32,9 +32,7 @@ A _simple_ query builder for Elasticsearch.
 	json = query.compile()
 
 
-## API
-
-### ElasticQuery
+## API: ElasticQuery
 
 ### query.must( Query/Filter )
 
