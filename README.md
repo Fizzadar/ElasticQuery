@@ -34,6 +34,8 @@ A _simple_ query builder for Elasticsearch.
 
 ## API: ElasticQuery
 
+`query = ElasticQuery()`
+
 ### query.must( Query/Filter )
 
 ### query.should( Query/Filter )
@@ -62,9 +64,9 @@ A _simple_ query builder for Elasticsearch.
 
 The `Query` class inherits from `Filter`, see above for API details.
 
-#### Query.raw_string( string, default_operator='AND' )
+### Query.raw_string( string, default_operator='AND' )
 
-#### Query.string( default_operator='AND', **kwargs )
+### Query.string( default_operator='AND', **kwargs )
 
 
 ## Aggregate
