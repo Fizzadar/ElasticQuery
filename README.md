@@ -3,7 +3,7 @@
 A _simple_ query builder for Elasticsearch.
 
 + [Example](#example)
-+ [API](#API)
++ [API](#api)
 	- [ElasticQuery](#elasticquery-1)
 	- [Filter](#filter)
 	- [Query](#query)
@@ -49,15 +49,15 @@ A _simple_ query builder for Elasticsearch.
 
 ### Filter
 
-##### Filter.nested( path, musts, shoulds, must_nots )
+#### Filter.nested( path, musts, shoulds, must_nots )
 
-##### Filter.range( field, range_from, range_to )
+#### Filter.range( field, range_from, range_to )
 
-##### Filter.prefix( **kwargs )
+#### Filter.prefix( **kwargs )
 
-##### Filter.term( **kwargs )
+#### Filter.term( **kwargs )
 
-##### Filter.terms( **kwargs )
+#### Filter.terms( **kwargs )
 
 
 ### Query
@@ -71,17 +71,17 @@ The `Query` class inherits from `Filter`, see above for API details.
 
 ### Aggregate
 
-##### Aggregate.stats( field )
+#### Aggregate.stats( field )
 
-##### Aggregate.extended_stats( field )
+#### Aggregate.extended_stats( field )
 
-##### Aggregate.histogram( field, interval )
+#### Aggregate.histogram( field, interval )
 
-##### Aggregate.date_histogram( field, interval='day' )
+#### Aggregate.date_histogram( field, interval='day' )
 
-##### Aggregate.terms( field )
+#### Aggregate.terms( field )
 
-##### Aggregate.nested( path, **kwargs )
+#### Aggregate.nested( path, **kwargs )
 
 
 
