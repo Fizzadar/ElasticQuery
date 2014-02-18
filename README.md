@@ -3,8 +3,8 @@
 A _simple_ query builder for Elasticsearch.
 
 + [Example](#example)
-+ [API](#api)
-	- [ElasticQuery](#elasticquery-1)
++ [API](#api-elasticquery)
+	- [ElasticQuery](#api-elasticquery)
 	- [Filter](#filter)
 	- [Query](#query)
 	- [Aggregate](#aggregate)
