@@ -1,6 +1,6 @@
 # ElasticQuery
 
-A _simple_ query builder for Elasticsearch.
+A _simple_ query builder for Elasticsearch. Outputs json ready to be sent to Elasticsearch via your favourite client.
 
 + [Example](#example)
 + [API](#api-elasticquery)
@@ -35,6 +35,10 @@ A _simple_ query builder for Elasticsearch.
 ## API: ElasticQuery
 
 `query = ElasticQuery()`
+
+### query.compile()
+
+Return a json string ready to send to Elasticsearch.
 
 ### query.fields( fields )
 
