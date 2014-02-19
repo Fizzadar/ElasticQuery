@@ -3,4 +3,4 @@
 # Desc: ES query builder exceptions
 
 class ElasticQueryError( Exception ):
-	pass
+    pass
