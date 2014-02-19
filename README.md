@@ -83,18 +83,22 @@ Search multiple key=>value terms.
 
 Search multiple key=>[values] terms.
 
+### Filter.raw_string( string, default_operator='AND' )
+
+Adds a raw query string to match against.
+
+### Filter.string( default_operator='AND', **kwargs )
+
+This builds a query string based on `kwargs`. Values can be simple (ints/strings) or lists, in which case they are `OR`'d together.
+
 
 ## Query
 
 The `Query` class inherits from `Filter`, see above for API details.
 
-### Query.raw_string( string, default_operator='AND' )
+### Query.mlt( field, match, min_term_frequency=1, max_query_terms=False )
 
-Adds a raw query string to match against.
-
-### Query.string( default_operator='AND', **kwargs )
-
-This builds a query string based on `kwargs`. Values can be simple (ints/strings) or lists, in which case they are `OR`'d together.
+Searches objects where field is similar to the match.
 
 
 ## Aggregate

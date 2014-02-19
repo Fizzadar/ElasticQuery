@@ -116,6 +116,21 @@ class FilterStructs:
 class QueryStructs( FilterStructs ):
     type = 'query'
 
+    def mlt( self, field, match, min_term_frequency=1, max_query_terms=False ):
+        settings = {
+            'like_text': match
+        }
+        if min_term_frequency:
+            settings['min_term_freq'] = min_term_frequency
+        if max_query_terms:
+            settings['max_query_terms'] = max_query_terms
+
+        return self.type, {
+            'more_like_this_field': {
+                field: settings
+            }
+        }
+
 
 # Aggregate structures
 # named, so only return self-contained dict
