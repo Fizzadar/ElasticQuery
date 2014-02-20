@@ -149,6 +149,20 @@ class AggregateStructs:
             }
         }
 
+    def missing( self, field ):
+        return {
+            'missing': {
+                'field': field
+            }
+        }
+
+    def value_count( self, field ):
+        return {
+            'value_count': {
+                'field': field
+            }
+        }
+
     def histogram( self, field, interval ):
         return {
             'histogram': {
@@ -165,10 +179,16 @@ class AggregateStructs:
             }
         }
 
-    def terms( self, field ):
+    def terms( self, field, size=None ):
+        if size is None:
+            size = 99999999
+        if not isinstance( size, int ):
+            raise ElasticQueryError( 'size must be int or None' )
+
         return {
             'terms': {
-                'field': field
+                'field': field,
+                'size': size
             }
         }
 

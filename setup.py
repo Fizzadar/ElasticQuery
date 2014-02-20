@@ -7,7 +7,7 @@ except ImportError:
     from distutils.core import setup
 
 setup(
-    version = '0.1.0',
+    version = '0.1.1',
     name = 'ElasticQuery',
     description = 'A simple query builder for Elasticsearch',
     author = 'Nick Barrett',
