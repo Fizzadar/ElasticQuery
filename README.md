@@ -115,6 +115,14 @@ Get stats on a field.
 
 Get extended stats on a field.
 
+### Aggregate.missing( field )
+
+Count how many documents are missing a given field.
+
+### Aggregate.value_count( field )
+
+Count how many documents contain a given field.
+
 ### Aggregate.histogram( field, interval )
 
 Generate a histogram.
