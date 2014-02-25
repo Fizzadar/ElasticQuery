@@ -164,6 +164,11 @@ class AggregateStructs:
         }
 
     def histogram( self, field, interval ):
+        try:
+            interval = int( interval )
+        except ValueError:
+            raise ElasticQueryError( 'interval must be a number' )
+
         return {
             'histogram': {
                 'field': field,
@@ -182,8 +187,10 @@ class AggregateStructs:
     def terms( self, field, size=None ):
         if size is None:
             size = 99999999
-        if not isinstance( size, int ):
-            raise ElasticQueryError( 'size must be int or None' )
+        try:
+            size = int( size )
+        except ValueError:
+            raise ElasticQueryError( 'size must be a number or None' )
 
         return {
             'terms': {

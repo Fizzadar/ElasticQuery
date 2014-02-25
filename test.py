@@ -125,7 +125,8 @@ AGGREGATES = {
     },
     'TERMS': {
         'terms': {
-            'field': 'field_name1'
+            'field': 'field_name1',
+            'size': 99999999
         }
     },
     'NESTED_STATS': {
@@ -157,7 +158,8 @@ QUERIES = {
         'aggregations': {
             'test_aggregate1': {
                 'terms': {
-                    'field': 'field_name1'
+                    'field': 'field_name1',
+                    'size': 99999999
                 }
             },
             'test_aggregate2': {
