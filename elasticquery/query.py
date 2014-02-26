@@ -33,9 +33,9 @@ class ElasticQuery:
 
     def sort( self, field, order=False ):
         if not order:
-            self.structure.sort.append( field )
+            self.structure['sort'].append( field )
         else:
-            self.structure.sort.append({
+            self.structure['sort'].append({
                 field: {
                     'order': order
                 }
