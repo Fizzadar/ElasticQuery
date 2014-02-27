@@ -33,9 +33,9 @@ class FilterStructs:
             }
         }
 
-        if isinstance( range_from, int ):
+        if range_from != False:
             data['range'][field]['from'] = range_from
-        if isinstance( range_to, int ):
+        if range_to != False:
             data['range'][field]['to'] = range_to
 
         return self.type, data
