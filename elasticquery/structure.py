@@ -32,7 +32,6 @@ class FilterStructs:
                 field: {}
             }
         }
-
         if range_from != False:
             data['range'][field]['from'] = range_from
         if range_to != False:
@@ -186,7 +185,7 @@ class AggregateStructs:
 
     def terms( self, field, size=None ):
         if size is None:
-            size = 99999999
+            size = 999999999
         try:
             size = int( size )
         except ValueError:
