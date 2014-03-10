@@ -207,7 +207,27 @@ class AggregateStructs:
             'nested': {
                 'path': path
             },
-            'aggregates': aggregates
+            'aggregations': aggregates
+        }
+
+    def filter( self, musts=[], shoulds=[], must_nots=[], **kwargs ):
+        must = [v[1] for v in musts]
+        should = [v[1] for v in shoulds]
+        must_not = [v[1] for v in must_nots]
+
+        aggregates = {}
+        for key, value in kwargs.iteritems():
+            aggregates[key] = value
+
+        return {
+            'filter': {
+                'bool': {
+                    'must': must,
+                    'should': should,
+                    'must_not': must_not
+                }
+            },
+            'aggregations': aggregates
         }
 
 
