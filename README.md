@@ -107,6 +107,26 @@ Searches objects where field is similar to the match.
 
 ## Aggregate
 
+### Aggregate.sub( aggregate, **aggregates )
+
+Puts **aggregates as sub-aggregats under aggregate.
+
+### Aggregate.sum( field )
+
+Get sum of a field.
+
+### Aggregate.avg( field )
+
+Get the average value across a field.
+
+### Aggregate.min( field )
+
+Get the lowest value of a field.
+
+### Aggregate.max( field )
+
+Get the highest value of a field.
+
 ### Aggregate.stats( field )
 
 Get stats on a field.
@@ -135,9 +155,13 @@ Generate a date histogram.
 
 Count number of terms on a field.
 
-### Aggregate.nested( path, **kwargs )
+### Aggregate.nested( path )
 
-Create a nested aggregation, where each kwargs pair is `name`, `Aggregate`.
+Create a nested aggregation (for use with sub aggregates, see Aggregate.sub).
+
+### Aggregate.filter( musts=[], shoulds=[], must_nots=[] )
+
+Creates a filtered aggregate (for use with sub aggregates, see Aggregate.sub).
 
 
 

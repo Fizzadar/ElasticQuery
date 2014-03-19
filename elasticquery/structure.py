@@ -32,9 +32,9 @@ class FilterStructs:
                 field: {}
             }
         }
-        if range_from != False:
+        if range_from is not False:
             data['range'][field]['from'] = range_from
-        if range_to != False:
+        if range_to is not False:
             data['range'][field]['to'] = range_to
 
         return self.type, data
@@ -134,6 +134,38 @@ class QueryStructs( FilterStructs ):
 # Aggregate structures
 # named, so only return self-contained dict
 class AggregateStructs:
+    def sub( self, aggregate, **aggregates ):
+        aggregate['aggregations'] = aggregates
+        return aggregate
+
+    def sum( self, field ):
+        return {
+            'sum': {
+                'field': field
+            }
+        }
+
+    def avg( self, field ):
+        return {
+            'avg': {
+                'field': field
+            }
+        }
+
+    def min( self, field ):
+        return {
+            'min': {
+                'field': field
+            }
+        }
+
+    def max( self, field ):
+        return {
+            'max': {
+                'field': field
+            }
+        }
+
     def stats( self, field ):
         return {
             'stats': {
@@ -198,26 +230,17 @@ class AggregateStructs:
             }
         }
 
-    def nested( self, path, **kwargs ):
-        aggregates = {}
-        for key, value in kwargs.iteritems():
-            aggregates[key] = value
-
+    def nested( self, path ):
         return {
             'nested': {
                 'path': path
-            },
-            'aggregations': aggregates
+            }
         }
 
-    def filter( self, musts=[], shoulds=[], must_nots=[], **kwargs ):
+    def filter( self, musts=[], shoulds=[], must_nots=[] ):
         must = [v[1] for v in musts]
         should = [v[1] for v in shoulds]
         must_not = [v[1] for v in must_nots]
-
-        aggregates = {}
-        for key, value in kwargs.iteritems():
-            aggregates[key] = value
 
         return {
             'filter': {
@@ -226,8 +249,7 @@ class AggregateStructs:
                     'should': should,
                     'must_not': must_not
                 }
-            },
-            'aggregations': aggregates
+            }
         }
 
 

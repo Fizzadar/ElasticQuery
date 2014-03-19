@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 # ElasticQuery testing
 # This is not thorough and doesn't have 100% coverage
 #
@@ -13,6 +15,7 @@
 
 
 import sys
+import json
 
 from elasticquery import ElasticQuery, Filter, Query, Aggregate
 
@@ -27,6 +30,8 @@ def success( message ):
 
 def test( name, got, want ):
     if got != want:
+        print 'want: {0}'.format( json.dumps( want ))
+        print 'got: {0}'.format( json.dumps( got ))
         error( '{0} fail: {1} != {2}'.format( name, got, want ))
     else:
         success( '{0}'.format( name ))
@@ -126,11 +131,52 @@ AGGREGATES = {
     'TERMS': {
         'terms': {
             'field': 'field_name1',
-            'size': 99999999
+            'size': 999999999
         }
     },
     'NESTED_STATS': {
 
+    },
+    'SUB_AGGREGATES': {
+        'terms': {
+            'field': 'field_name1',
+            'size': 999999999
+        },
+        'aggregations': {
+            'sub_aggregate1': {
+                'sum': {
+                    'field': 'sub_field1'
+                }
+            }
+        }
+    },
+    'FILTER_SUB_AGGREGATES': {
+        'filter': {
+            'bool': {
+                'should': [],
+                'must_not': [],
+                'must': [{
+                    'term': {
+                        'key': 'value'
+                    }
+                }]
+            }
+        },
+        'aggregations': {
+            'price_histogram': {
+                'terms': {
+                    'field': 'bp_now',
+                    'size': 999999999
+                },
+                'aggregations': {
+                    'option_count': {
+                        'sum': {
+                            'field': 'option_count_current'
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -151,6 +197,19 @@ test( 'Aggregate.date_histogram', aggregate, AGGREGATES['DATE_HISTOGRAM'] )
 aggregate = Aggregate.terms( 'field_name1' )
 test( 'Aggregate.terms', aggregate, AGGREGATES['TERMS'] )
 
+aggregate = Aggregate.sub( Aggregate.terms( 'field_name1' ), **{ 'sub_aggregate1': Aggregate.sum( 'sub_field1' )})
+test( 'Aggregate.sum + sub aggregate', aggregate, AGGREGATES['SUB_AGGREGATES'] )
+
+aggregate = Aggregate.sub(
+    Aggregate.filter( musts=[Filter.term( **{ 'key': 'value' } )] ), **{
+        'price_histogram': Aggregate.sub(
+            Aggregate.terms('bp_now'),**{
+                'option_count':Aggregate.sum('option_count_current')
+            }
+        )
+    }
+)
+test( 'Aggregate.filter + sub aggregate', aggregate, AGGREGATES['FILTER_SUB_AGGREGATES'] )
 
 # Queries
 QUERIES = {
@@ -159,7 +218,7 @@ QUERIES = {
             'test_aggregate1': {
                 'terms': {
                     'field': 'field_name1',
-                    'size': 99999999
+                    'size': 999999999
                 }
             },
             'test_aggregate2': {
