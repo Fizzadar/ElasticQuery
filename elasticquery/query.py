@@ -31,6 +31,10 @@ class ElasticQuery:
         self.structure['_source'] = fields
         return self
 
+    def set( self, key, value ):
+        self.structure[key] = value
+        return self
+
     def sort( self, field, order=False ):
         if not order:
             self.structure['sort'].append( field )
