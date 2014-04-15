@@ -5,7 +5,7 @@
 from exception import ElasticQueryError
 
 # Filter structures
-class FilterStructs:
+class FilterStructs( object ):
     type = 'filter'
 
     def nested( self, path, musts=[], shoulds=[], must_nots=[] ):
@@ -133,7 +133,7 @@ class QueryStructs( FilterStructs ):
 
 # Aggregate structures
 # named, so only return self-contained dict
-class AggregateStructs:
+class AggregateStructs( object ):
     def sub( self, aggregate, **aggregates ):
         aggregate['aggregations'] = aggregates
         return aggregate
