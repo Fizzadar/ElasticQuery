@@ -73,7 +73,7 @@ FILTERS = {
     },
     'STRING': {
         'query_string': {
-            'query': 'field_name1:value_name1 AND ( field_name2:value_name2 OR field_name2:value_name3 )',
+            'query': 'field_name1:value_name1 AND (field_name2:("value_name2" OR "value_name3"))',
             'default_operator': 'AND'
         }
     },
