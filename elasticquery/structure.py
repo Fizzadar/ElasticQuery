@@ -219,7 +219,7 @@ class AggregateStructs( object ):
         if size is None:
             size = 999999999
         if shard_size is None:
-            size = 999999999
+            shard_size = 999999999
 
         try:
             size = int( size )
