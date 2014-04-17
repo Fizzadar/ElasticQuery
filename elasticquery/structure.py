@@ -215,18 +215,23 @@ class AggregateStructs( object ):
             }
         }
 
-    def terms( self, field, size=None ):
+    def terms( self, field, size=None, shard_size=None ):
         if size is None:
             size = 999999999
+        if shard_size is None:
+            size = 999999999
+
         try:
             size = int( size )
+            shard_size = int( shard_size )
         except ValueError:
-            raise ElasticQueryError( 'size must be a number or None' )
+            raise ElasticQueryError( 'size/shard_size must be a number or None' )
 
         return {
             'terms': {
                 'field': field,
-                'size': size
+                'size': size,
+                'shard_size': shard_size
             }
         }
 
