@@ -73,7 +73,7 @@ FILTERS = {
     },
     'STRING': {
         'query_string': {
-            'query': 'field_name1:value_name1 AND (field_name2:("value_name2" OR "value_name3"))',
+            'query': 'field_name1:value_name1 AND (field_name2:((value_name2) OR (value_name3)))',
             'default_operator': 'AND'
         }
     },
@@ -131,7 +131,8 @@ AGGREGATES = {
     'TERMS': {
         'terms': {
             'field': 'field_name1',
-            'size': 999999999
+            'size': 999999999,
+            'shard_size': 999999999
         }
     },
     'NESTED_STATS': {
@@ -140,7 +141,8 @@ AGGREGATES = {
     'SUB_AGGREGATES': {
         'terms': {
             'field': 'field_name1',
-            'size': 999999999
+            'size': 999999999,
+            'shard_size': 999999999
         },
         'aggregations': {
             'sub_aggregate1': {
@@ -166,7 +168,8 @@ AGGREGATES = {
             'price_histogram': {
                 'terms': {
                     'field': 'bp_now',
-                    'size': 999999999
+                    'size': 999999999,
+                    'shard_size': 999999999
                 },
                 'aggregations': {
                     'option_count': {
@@ -218,7 +221,8 @@ QUERIES = {
             'test_aggregate1': {
                 'terms': {
                     'field': 'field_name1',
-                    'size': 999999999
+                    'size': 999999999,
+                    'shard_size': 999999999
                 }
             },
             'test_aggregate2': {

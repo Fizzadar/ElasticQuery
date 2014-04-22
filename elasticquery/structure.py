@@ -84,7 +84,7 @@ class FilterStructs( object ):
                     or_filters = []
 
                     for match in value:
-                        or_filters.append( '"{0}"'.format( match ))
+                        or_filters.append( '({0})'.format( match ))
 
                     and_filters.append( '({0}:({1}))'.format( key, ' OR '.join( or_filters )))
             else:
