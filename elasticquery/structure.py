@@ -76,7 +76,7 @@ class FilterStructs( object ):
                 }
             }
 
-    def string( self, default_operator='AND', **kwargs ):
+    def string( self, default_operator='AND', list_operator='OR', **kwargs ):
         and_filters = []
         for key, value in kwargs.iteritems():
             if isinstance( value, list ):
@@ -86,7 +86,7 @@ class FilterStructs( object ):
                     for match in value:
                         or_filters.append( '({0})'.format( match ))
 
-                    and_filters.append( '({0}:({1}))'.format( key, ' OR '.join( or_filters )))
+                    and_filters.append( '({0}:({1}))'.format( key, ' {0} '.format( list_operator ).join( or_filters )))
             else:
                 and_filters.append( '{0}:{1}'.format( key, value ))
 
