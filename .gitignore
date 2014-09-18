@@ -3,3 +3,5 @@
 
 # Python
 *.pyc
+ElasticQuery.egg-info/
+dist/
