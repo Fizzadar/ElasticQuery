@@ -111,13 +111,13 @@ class FilterStructs(object):
     def or_filter(self, *args):
         if self.type == 'filter':
             return self.type, {
-                'or': args
+                'or': [arg[1] for arg in args]
             }
         else:
             return self.type, {
                 'filtered': {
                     'filter': {
-                        'or': args
+                        'or': [arg[1] for arg in args]
                     }
                 }
             }
