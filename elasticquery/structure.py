@@ -82,7 +82,6 @@ class FilterStructs(object):
             if isinstance(value, list):
                 if len(value) > 0:
                     or_filters = []
-
                     for match in value:
                         or_filters.append(u'({0})'.format(match))
 
@@ -106,6 +105,20 @@ class FilterStructs(object):
                 'query_string': {
                     'query': query_string,
                     'default_operator': default_operator
+                }
+            }
+
+    def or_filter(self, *args):
+        if self.type == 'filter':
+            return self.type, {
+                'or': args
+            }
+        else:
+            return self.type, {
+                'filtered': {
+                    'filter': {
+                        'or': args
+                    }
                 }
             }
 
