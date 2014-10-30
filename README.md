@@ -18,16 +18,16 @@ A _simple_ query builder for Elasticsearch. Outputs json ready to be sent to Ela
 	query = ElasticQuery()
 	
 	# Filter
-	query.must( Filter.range( 'price', 0, 500 ))
+	query.must(Filter.range('price', 0, 500))
 	
 	# Query
-	query.should( Query.nested( 'nested_key', musts=[
-		Query.terms( nested_key_key=['value'] ),
-		Query.prefix( another_key='prefixed_with_' )
+	query.should(Query.nested('nested_key', musts=[
+		Query.terms(nested_key_key=['value']),
+		Query.prefix(another_key='prefixed_with_')
 	]))
 	
 	# Aggregate
-	query.aggregate( 'key_terms', Aggregate.terms( 'key' ))
+	query.aggregate('key_terms', Aggregate.terms('key'))
 	
 	json = query.compile()
 
@@ -40,126 +40,129 @@ A _simple_ query builder for Elasticsearch. Outputs json ready to be sent to Ela
 
 Return a json string ready to send to Elasticsearch.
 
-### query.fields( fields )
+### query.fields(fields)
 
 **fields**: list of fields to return
 
-### query.sort( field, order=False )
+### query.sort(field, order=False)
 
 Sort the result set by a field, order optional.
 
-### query.must( Query/Filter )
+### query.must(Query/Filter)
 
 Search where the `Query`/`Filter` object matches.
 
-### query.should( Query/Filter )
+### query.should(Query/Filter)
 
 Search where the `Query`/`Filter` object might matches.
 
-### query.must_not( Query/Filter )
+### query.must_not(Query/Filter)
 
 Search where the `Query`/`Filter` object does not match.
 
-### query.aggregate( name, Aggregate )
+### query.aggregate(name, Aggregate)
 
 Add an `Aggregate` to our search query.
 
 
 ## Filter
 
-### Filter.nested( path, musts=[], shoulds=[], must_nots=[] )
+### Filter.nested(path, musts=[], shoulds=[], must_nots=[])
 
 Adds a nested query.
 
 **musts, shoulds & must_nots**: all lists containing `Query` or `Filter` objects.
 
-### Filter.range( field, range_from=False, range_to=False )
+### Filter.range(field, range_from=False, range_to=False)
 
-### Filter.prefix( **kwargs )
+### Filter.prefix(**kwargs)
 
 Prefix multiple keys.
 
-### Filter.term( **kwargs )
+### Filter.term(**kwargs)
 
 Search multiple key=>value terms.
 
-### Filter.terms( **kwargs )
+### Filter.terms(**kwargs)
 
 Search multiple key=>[values] terms.
 
-### Filter.raw_string( string, default_operator='AND' )
+### Filter.raw_string(string, default_operator='AND')
 
 Adds a raw query string to match against.
 
-### Filter.string( default_operator='AND', **kwargs )
+### Filter.string(default_operator='AND', **kwargs)
 
 This builds a query string based on `kwargs`. Values can be simple (ints/strings) or lists, in which case they are `OR`'d together.
 
+### Filter.or_filter(*args)
+
+Or the arg filters/queries together.
 
 ## Query
 
 The `Query` class inherits from `Filter`, see above for API details.
 
-### Query.mlt( field, match, min_term_frequency=1, max_query_terms=False )
+### Query.mlt(field, match, min_term_frequency=1, max_query_terms=False)
 
 Searches objects where field is similar to the match.
 
 
 ## Aggregate
 
-### Aggregate.sub( aggregate, **aggregates )
+### Aggregate.sub(aggregate, **aggregates)
 
 Puts **aggregates as sub-aggregats under aggregate.
 
-### Aggregate.sum( field )
+### Aggregate.sum(field)
 
 Get sum of a field.
 
-### Aggregate.avg( field )
+### Aggregate.avg(field)
 
 Get the average value across a field.
 
-### Aggregate.min( field )
+### Aggregate.min(field)
 
 Get the lowest value of a field.
 
-### Aggregate.max( field )
+### Aggregate.max(field)
 
 Get the highest value of a field.
 
-### Aggregate.stats( field )
+### Aggregate.stats(field)
 
 Get stats on a field.
 
-### Aggregate.extended_stats( field )
+### Aggregate.extended_stats(field)
 
 Get extended stats on a field.
 
-### Aggregate.missing( field )
+### Aggregate.missing(field)
 
 Count how many documents are missing a given field.
 
-### Aggregate.value_count( field )
+### Aggregate.value_count(field)
 
 Count how many documents contain a given field.
 
-### Aggregate.histogram( field, interval )
+### Aggregate.histogram(field, interval)
 
 Generate a histogram.
 
-### Aggregate.date_histogram( field, interval='day' )
+### Aggregate.date_histogram(field, interval='day')
 
 Generate a date histogram.
 
-### Aggregate.terms( field )
+### Aggregate.terms(field)
 
 Count number of terms on a field.
 
-### Aggregate.nested( path )
+### Aggregate.nested(path)
 
 Create a nested aggregation (for use with sub aggregates, see Aggregate.sub).
 
-### Aggregate.filter( musts=[], shoulds=[], must_nots=[] )
+### Aggregate.filter(musts=[], shoulds=[], must_nots=[])
 
 Creates a filtered aggregate (for use with sub aggregates, see Aggregate.sub).
 
