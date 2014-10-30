@@ -22,19 +22,19 @@ from elasticquery import ElasticQuery, Filter, Query, Aggregate
 
 # Some horrible helper functions
 test_count = {'count': 1}
-def error( message ):
-    print '\t[{0}] Error: {1}\n'.format( test_count['count'], message )
-    sys.exit( 1 )
-def success( message ):
-    print '\t[{0}] Success: {1}'.format( test_count['count'], message )
+def error(message):
+    print '\t[{0}] Error: {1}\n'.format(test_count['count'], message)
+    sys.exit(1)
+def success(message):
+    print '\t[{0}] Success: {1}'.format(test_count['count'], message)
 
-def test( name, got, want ):
+def test(name, got, want):
     if got != want:
-        print 'want: {0}'.format( json.dumps( want ))
-        print 'got: {0}'.format( json.dumps( got ))
-        error( '{0} fail: {1} != {2}'.format( name, got, want ))
+        print 'want: {0}'.format(json.dumps(want))
+        print 'got: {0}'.format(json.dumps(got))
+        error('{0} fail: {1} != {2}'.format(name, got, want))
     else:
-        success( '{0}'.format( name ))
+        success('{0}'.format(name))
 
     test_count['count'] += 1
 
@@ -84,23 +84,23 @@ FILTERS = {
 
 # Test filters
 print '[ElasticQuery] Testing: filters & queries'
-query = Query.range( 'field_name1', range_from=0, range_to=100 )[1]
-test( 'Query.range', query, FILTERS['RANGE'] )
+query = Query.range('field_name1', range_from=0, range_to=100)[1]
+test('Query.range', query, FILTERS['RANGE'])
 
-query = Query.prefix( field_name1='value_name1' )[1]
-test( 'Query.prefix', query, FILTERS['PREFIX'] )
+query = Query.prefix(field_name1='value_name1')[1]
+test('Query.prefix', query, FILTERS['PREFIX'])
 
-query = Query.term( field_name1='value_name1' )[1]
-test( 'Query.term', query, FILTERS['TERM'] )
+query = Query.term(field_name1='value_name1')[1]
+test('Query.term', query, FILTERS['TERM'])
 
-query = Query.terms( field_name1=['value_name1', 'value_name2'] )[1]
-test( 'Query.terms', query, FILTERS['TERMS'] )
+query = Query.terms(field_name1=['value_name1', 'value_name2'])[1]
+test('Query.terms', query, FILTERS['TERMS'])
 
-query = Query.raw_string( 'QUERYSTRING' )[1]
-test( 'Query.raw_string', query, FILTERS['RAW_STRING'] )
+query = Query.raw_string('QUERYSTRING')[1]
+test('Query.raw_string', query, FILTERS['RAW_STRING'])
 
-query = Query.string( field_name1='value_name1', field_name2=['value_name2', 'value_name3'] )[1]
-test( 'Query.string', query, FILTERS['STRING'] )
+query = Query.string(field_name1='value_name1', field_name2=['value_name2', 'value_name3'])[1]
+test('Query.string', query, FILTERS['STRING'])
 
 
 
@@ -185,34 +185,34 @@ AGGREGATES = {
 
 # Test aggregates
 print '[ElasticQuery] Testing: aggregates'
-aggregate = Aggregate.stats( 'field_name1' )
-test( 'Aggregate.stats', aggregate, AGGREGATES['STATS'] )
+aggregate = Aggregate.stats('field_name1')
+test('Aggregate.stats', aggregate, AGGREGATES['STATS'])
 
-aggregate = Aggregate.extended_stats( 'field_name1' )
-test( 'Aggregate.extended_stats', aggregate, AGGREGATES['EXTENDED_STATS'] )
+aggregate = Aggregate.extended_stats('field_name1')
+test('Aggregate.extended_stats', aggregate, AGGREGATES['EXTENDED_STATS'])
 
-aggregate = Aggregate.histogram( 'field_name1', interval=100 )
-test( 'Aggregate.histogram', aggregate, AGGREGATES['HISTOGRAM'] )
+aggregate = Aggregate.histogram('field_name1', interval=100)
+test('Aggregate.histogram', aggregate, AGGREGATES['HISTOGRAM'])
 
-aggregate = Aggregate.date_histogram( 'field_name1' )
-test( 'Aggregate.date_histogram', aggregate, AGGREGATES['DATE_HISTOGRAM'] )
+aggregate = Aggregate.date_histogram('field_name1')
+test('Aggregate.date_histogram', aggregate, AGGREGATES['DATE_HISTOGRAM'])
 
-aggregate = Aggregate.terms( 'field_name1' )
-test( 'Aggregate.terms', aggregate, AGGREGATES['TERMS'] )
+aggregate = Aggregate.terms('field_name1')
+test('Aggregate.terms', aggregate, AGGREGATES['TERMS'])
 
-aggregate = Aggregate.sub( Aggregate.terms( 'field_name1' ), **{ 'sub_aggregate1': Aggregate.sum( 'sub_field1' )})
-test( 'Aggregate.sum + sub aggregate', aggregate, AGGREGATES['SUB_AGGREGATES'] )
+aggregate = Aggregate.sub(Aggregate.terms('field_name1'), **{ 'sub_aggregate1': Aggregate.sum('sub_field1')})
+test('Aggregate.sum + sub aggregate', aggregate, AGGREGATES['SUB_AGGREGATES'])
 
 aggregate = Aggregate.sub(
-    Aggregate.filter( musts=[Filter.term( **{ 'key': 'value' } )] ), **{
+    Aggregate.filter(musts=[Filter.term(**{ 'key': 'value' })]), **{
         'price_histogram': Aggregate.sub(
             Aggregate.terms('bp_now'),**{
                 'option_count':Aggregate.sum('option_count_current')
             }
-        )
+       )
     }
 )
-test( 'Aggregate.filter + sub aggregate', aggregate, AGGREGATES['FILTER_SUB_AGGREGATES'] )
+test('Aggregate.filter + sub aggregate', aggregate, AGGREGATES['FILTER_SUB_AGGREGATES'])
 
 # Queries
 QUERIES = {
@@ -256,12 +256,12 @@ QUERIES = {
 
 # Test queries
 query = ElasticQuery()
-query.must( Filter.range( 'field_name1', 0, 100 ))
-query.aggregate( 'test_aggregate1', Aggregate.terms( 'field_name1' ))
-query.aggregate( 'test_aggregate2', Aggregate.stats( 'field_name2' ))
-test( 'Full query: range + terms agg + stats agg', query.structure, QUERIES['RANGE_AGGTERMS_AGGSTATS'] )
+query.must(Filter.range('field_name1', 0, 100))
+query.aggregate('test_aggregate1', Aggregate.terms('field_name1'))
+query.aggregate('test_aggregate2', Aggregate.stats('field_name2'))
+test('Full query: range + terms agg + stats agg', query.structure, QUERIES['RANGE_AGGTERMS_AGGSTATS'])
 
 
 # If we're still here, we're done!
 print '[ElasticQuery] All tests complete!\n'
-sys.exit( 0 )
+sys.exit(0)
