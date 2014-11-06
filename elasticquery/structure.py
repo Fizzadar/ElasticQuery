@@ -26,16 +26,20 @@ class FilterStructs(object):
             }
         }
 
-    def range(self, field, range_from=False, range_to=False):
+    def range(self, field, gt=None, gte=None, lt=None, lte=None):
         data = {
             'range': {
                 field: {}
             }
         }
-        if range_from is not False:
-            data['range'][field]['from'] = range_from
-        if range_to is not False:
-            data['range'][field]['to'] = range_to
+        if gt is not None:
+            data['range'][field]['gt'] = gt
+        if gte is not None:
+            data['range'][field]['gte'] = gte
+        if lt is not None:
+            data['range'][field]['lt'] = lt
+        if lte is not None:
+            data['range'][field]['lte'] = lte
 
         return self.type, data
 

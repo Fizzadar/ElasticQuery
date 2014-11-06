@@ -73,7 +73,7 @@ Adds a nested query.
 
 **musts, shoulds & must_nots**: all lists containing `Query` or `Filter` objects.
 
-### Filter.range(field, range_from=False, range_to=False)
+### Filter.range(field, gt=None, gte=None, lt=None, lte=None)
 
 ### Filter.prefix(**kwargs)
 

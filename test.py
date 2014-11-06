@@ -45,8 +45,8 @@ FILTERS = {
     'RANGE': {
         'range': {
             'field_name1': {
-                'from': 0,
-                'to': 100
+                'gt': 0,
+                'lte': 100
             }
         }
     },
@@ -84,7 +84,7 @@ FILTERS = {
 
 # Test filters
 print '[ElasticQuery] Testing: filters & queries'
-query = Query.range('field_name1', range_from=0, range_to=100)[1]
+query = Query.range('field_name1', gt=0, lte=100)[1]
 test('Query.range', query, FILTERS['RANGE'])
 
 query = Query.prefix(field_name1='value_name1')[1]
@@ -240,8 +240,8 @@ QUERIES = {
                     {
                         'range': {
                             'field_name1': {
-                                'from': 0,
-                                'to': 100
+                                'gte': 0,
+                                'lt': 100
                             }
                         }
                     }
@@ -256,7 +256,7 @@ QUERIES = {
 
 # Test queries
 query = ElasticQuery()
-query.must(Filter.range('field_name1', 0, 100))
+query.must(Filter.range('field_name1', gte=0, lt=100))
 query.aggregate('test_aggregate1', Aggregate.terms('field_name1'))
 query.aggregate('test_aggregate2', Aggregate.stats('field_name2'))
 test('Full query: range + terms agg + stats agg', query.structure, QUERIES['RANGE_AGGTERMS_AGGSTATS'])
