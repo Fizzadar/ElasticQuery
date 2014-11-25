@@ -1,6 +1,6 @@
-# ElasticQuery
+# ElasticQuery v0.2
 
-A _simple_ query builder for Elasticsearch. Outputs json ready to be sent to Elasticsearch via your favourite client.
+A _simple_ query builder for Elasticsearch. Outputs JSON ready to be sent to Elasticsearch via your favourite client.
 
 + [Example](#example)
 + [API](#api-elasticquery)
@@ -87,6 +87,10 @@ Search multiple key=>value terms.
 
 Search multiple key=>[values] terms.
 
+### Filter.missing(field)
+
+Filter for missing/null fields.
+
 ### Filter.raw_string(string, default_operator='AND')
 
 Adds a raw query string to match against.
@@ -98,6 +102,7 @@ This builds a query string based on `kwargs`. Values can be simple (ints/strings
 ### Filter.or_filter(*args)
 
 Or the arg filters/queries together.
+
 
 ## Query
 
@@ -165,7 +170,6 @@ Create a nested aggregation (for use with sub aggregates, see Aggregate.sub).
 ### Aggregate.filter(musts=[], shoulds=[], must_nots=[])
 
 Creates a filtered aggregate (for use with sub aggregates, see Aggregate.sub).
-
 
 
 ## Internals
