@@ -2,12 +2,14 @@
 # File: structure.py
 # Desc: define structures for ES query elements
 
-from exception import ElasticQueryError
+from .exception import ElasticQueryError
+
 
 # Filter structures
-class FilterStructs(object):
+class Filter(object):
     type = 'filter'
 
+    @classmethod
     def nested(self, path, musts=[], shoulds=[], must_nots=[]):
         must = [v[1] for v in musts]
         should = [v[1] for v in shoulds]
@@ -26,6 +28,7 @@ class FilterStructs(object):
             }
         }
 
+    @classmethod
     def range(self, field, gt=None, gte=None, lt=None, lte=None):
         data = {
             'range': {
@@ -43,16 +46,19 @@ class FilterStructs(object):
 
         return self.type, data
 
+    @classmethod
     def prefix(self, **kwargs):
         return self.type, {
             'prefix': kwargs
         }
 
+    @classmethod
     def term(self, **kwargs):
         return self.type, {
             'term': kwargs
         }
 
+    @classmethod
     def terms(self, **kwargs):
         for key, value in kwargs.iteritems():
             if not isinstance(value, list):
@@ -62,6 +68,26 @@ class FilterStructs(object):
             'terms': kwargs
         }
 
+    @classmethod
+    def missing(self, field):
+        if self.type == 'filter':
+            return self.type, {
+                'missing': {
+                    'field': field
+                }
+            }
+        else:
+            return self.type, {
+                'filtered': {
+                    'filter': {
+                        'missing': {
+                            'field': field
+                        }
+                    }
+                }
+            }
+
+    @classmethod
     def raw_string(self, string, default_operator='AND'):
         if self.type == 'filter':
             return self.type, {
@@ -80,6 +106,7 @@ class FilterStructs(object):
                 }
             }
 
+    @classmethod
     def string(self, default_operator='AND', list_operator='OR', **kwargs):
         and_filters = []
         for key, value in kwargs.iteritems():
@@ -112,6 +139,7 @@ class FilterStructs(object):
                 }
             }
 
+    @classmethod
     def or_filter(self, *args):
         if self.type == 'filter':
             return self.type, {
@@ -129,9 +157,10 @@ class FilterStructs(object):
 
 # Query structures
 # inherits filters due to overlap
-class QueryStructs(FilterStructs):
+class Query(Filter):
     type = 'query'
 
+    @classmethod
     def mlt(self, field, match, min_term_frequency=1, max_query_terms=False):
         settings = {
             'like_text': match
@@ -150,11 +179,13 @@ class QueryStructs(FilterStructs):
 
 # Aggregate structures
 # named, so only return self-contained dict
-class AggregateStructs(object):
+class Aggregate(object):
+    @classmethod
     def sub(self, aggregate, **aggregates):
         aggregate['aggregations'] = aggregates
         return aggregate
 
+    @classmethod
     def sum(self, field):
         return {
             'sum': {
@@ -162,6 +193,7 @@ class AggregateStructs(object):
             }
         }
 
+    @classmethod
     def avg(self, field):
         return {
             'avg': {
@@ -169,6 +201,7 @@ class AggregateStructs(object):
             }
         }
 
+    @classmethod
     def min(self, field):
         return {
             'min': {
@@ -176,6 +209,7 @@ class AggregateStructs(object):
             }
         }
 
+    @classmethod
     def max(self, field):
         return {
             'max': {
@@ -183,6 +217,7 @@ class AggregateStructs(object):
             }
         }
 
+    @classmethod
     def stats(self, field):
         return {
             'stats': {
@@ -190,6 +225,7 @@ class AggregateStructs(object):
             }
         }
 
+    @classmethod
     def extended_stats(self, field):
         return {
             'extended_stats': {
@@ -197,6 +233,7 @@ class AggregateStructs(object):
             }
         }
 
+    @classmethod
     def missing(self, field):
         return {
             'missing': {
@@ -204,6 +241,7 @@ class AggregateStructs(object):
             }
         }
 
+    @classmethod
     def value_count(self, field):
         return {
             'value_count': {
@@ -211,6 +249,7 @@ class AggregateStructs(object):
             }
         }
 
+    @classmethod
     def histogram(self, field, interval):
         try:
             interval = int(interval)
@@ -224,6 +263,7 @@ class AggregateStructs(object):
             }
         }
 
+    @classmethod
     def date_histogram(self, field, interval='day'):
         return {
             'date_histogram': {
@@ -232,6 +272,7 @@ class AggregateStructs(object):
             }
         }
 
+    @classmethod
     def terms(self, field, size=None, shard_size=None):
         if size is None:
             size = 999999999
@@ -252,6 +293,7 @@ class AggregateStructs(object):
             }
         }
 
+    @classmethod
     def nested(self, path):
         return {
             'nested': {
@@ -259,6 +301,7 @@ class AggregateStructs(object):
             }
         }
 
+    @classmethod
     def filter(self, musts=[], shoulds=[], must_nots=[]):
         must = [v[1] for v in musts]
         should = [v[1] for v in shoulds]
@@ -273,9 +316,3 @@ class AggregateStructs(object):
                 }
             }
         }
-
-
-# Init for importing
-Filter = FilterStructs()
-Query = QueryStructs()
-Aggregate = AggregateStructs()

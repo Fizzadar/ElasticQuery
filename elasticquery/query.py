@@ -4,6 +4,7 @@
 
 import json
 
+
 class ElasticQuery(object):
     def __init__(self):
         self.structure = {
