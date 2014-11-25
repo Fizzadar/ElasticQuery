@@ -13,7 +13,6 @@
 # number high   = 100
 # lucene query  = QUERYSTRING
 
-
 import sys
 import json
 
@@ -65,6 +64,20 @@ FILTERS = {
             'field_name1': ['value_name1', 'value_name2']
         }
     },
+    'FILTER_MISSING': {
+        'missing': {
+            'field': 'field_name1'
+        }
+    },
+    'QUERY_MISSING': {
+        'filtered': {
+            'filter': {
+                'missing': {
+                    'field': 'field_name1'
+                }
+            }
+        }
+    },
     'RAW_STRING': {
         'query_string': {
             'query': 'QUERYSTRING',
@@ -96,12 +109,16 @@ test('Query.term', query, FILTERS['TERM'])
 query = Query.terms(field_name1=['value_name1', 'value_name2'])[1]
 test('Query.terms', query, FILTERS['TERMS'])
 
+query = Filter.missing('field_name1')[1]
+test('Filter.missing', query, FILTERS['FILTER_MISSING'])
+query = Query.missing('field_name1')[1]
+test('Query.missing', query, FILTERS['QUERY_MISSING'])
+
 query = Query.raw_string('QUERYSTRING')[1]
 test('Query.raw_string', query, FILTERS['RAW_STRING'])
 
 query = Query.string(field_name1='value_name1', field_name2=['value_name2', 'value_name3'])[1]
 test('Query.string', query, FILTERS['STRING'])
-
 
 
 # Aggregates:
