@@ -1,6 +1,6 @@
 #!/bin/sh
 
-VERSION=`python setup.py version`
+VERSION=`python setup.py --version`
 
 echo "# Releasing ElasticQuery v$VERSION..."
 
@@ -9,6 +9,6 @@ git tag -a v$VERSION -m v$VERSION
 git push --tags
 
 echo "# Doing pypi..."
-python sdist upload
+python setup.py sdist upload
 
 echo "# Released!"
