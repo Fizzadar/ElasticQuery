@@ -1,6 +1,6 @@
 # ElasticQuery
 
-A _simple_ query builder for Elasticsearch.
+A simple query builder for Elasticsearch.
 
 
 ## Synopsis
