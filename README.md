@@ -1,73 +1,84 @@
-# ElasticQuery v0.2
+# ElasticQuery
 
-A _simple_ query builder for Elasticsearch. Outputs JSON ready to be sent to Elasticsearch via your favourite client.
-
-+ [Example](#example)
-+ [API](#api-elasticquery)
-	- [ElasticQuery](#api-elasticquery)
-	- [Filter](#filter)
-	- [Query](#query)
-	- [Aggregate](#aggregate)
-+ [Internals](#internals)
+A _simple_ query builder for Elasticsearch.
 
 
-## Example
+## Synopsis
 
-	from elasticquery import ElasticQuery, Filter, Query, Aggregate
-	
-	query = ElasticQuery()
-	
-	# Filter
-	query.must(Filter.range('price', 0, 500))
-	
-	# Query
-	query.should(Query.nested('nested_key', musts=[
-		Query.terms(nested_key_key=['value']),
-		Query.prefix(another_key='prefixed_with_')
-	]))
-	
-	# Aggregate
-	query.aggregate('key_terms', Aggregate.terms('key'))
-	
-	json = query.compile()
+```py
+from elasticquery import ElasticQuery, Filter, Query, Aggregate
+
+q = ElasticQuery()
+
+# Filters & queries
+q.must(
+    Filter.range('field', 0, 500),
+    Filter.terms(my_field=['list', 'of', 'terms']),
+    Filter.or_filter(
+        Query.string(field='matching string'),
+        Query.raw_string('field: another matching string')
+    )
+)
+
+# Nested filter/query
+q.should(
+    Query.nested('path', must=[
+        Query.term(field='match')
+    ])
+)
+
+# Aggregates
+q.aggregate('aggregate_name', Aggregate.sum('field_name'))
+q.aggregates(
+    ('another_aggregate', Aggregate.terms('field_name')),
+    ('yet_another_agg', Aggregate.avg('field_name'))
+)
+
+# Print out JSON ready for ES
+print q.json(indent=4)
+```
 
 
 ## API: ElasticQuery
 
-`query = ElasticQuery()`
+`q = ElasticQuery()`
 
-### query.compile()
+### q.json()
 
 Return a json string ready to send to Elasticsearch.
 
-### query.fields(fields)
+### q.fields(fields)
 
 **fields**: list of fields to return
 
-### query.sort(field, order=False)
+### q.sort(field, order=False)
 
 Sort the result set by a field, order optional.
 
-### query.must(Query/Filter)
+### q.must(*Query/Filter)
 
 Search where the `Query`/`Filter` object matches.
 
-### query.should(Query/Filter)
+### q.should(*Query/Filter)
 
 Search where the `Query`/`Filter` object might matches.
 
-### query.must_not(Query/Filter)
+### q.must_not(*Query/Filter)
 
 Search where the `Query`/`Filter` object does not match.
 
-### query.aggregate(name, Aggregate)
+### q.aggregate(name, Aggregate)
 
 Add an `Aggregate` to our search query.
+
+### q.aggregates(*(name, Aggregate))
+
+Shortcut to add multiple of the above.
 
 
 ## Filter
 
-### Filter.nested(path, musts=[], shoulds=[], must_nots=[])
+### Filter.nested(path, must=None, should=None, must_not=None)
 
 Adds a nested query.
 
@@ -167,13 +178,6 @@ Count number of terms on a field.
 
 Create a nested aggregation (for use with sub aggregates, see Aggregate.sub).
 
-### Aggregate.filter(musts=[], shoulds=[], must_nots=[])
+### Aggregate.filter(musts=None, shoulds=None, must_nots=None)
 
 Creates a filtered aggregate (for use with sub aggregates, see Aggregate.sub).
-
-
-## Internals
-
-`ElasticQuery` contains `.structure` which represents the final output. `Filter.*`, `Query.*` and `Aggregate.*` functions are essentially structs, each builds from its input and returns a dict representing the relevant json structure Elasticsearch wants.
-
-Although there's multiple ways of doing most query/filter types in ES (ie `query['range'] = { 'to': 500 '}`), `ElasticQuery` stores everything inside a bool query. I haven't seen any performance degredation as a result makes everything a lot simpler. This way queries, filters and nested queries/filters all have a combination none or more of `must`, `should` and `must_not` matches.
