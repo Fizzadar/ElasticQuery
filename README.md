@@ -1,6 +1,6 @@
 # ElasticQuery
 
-A simple query builder for Elasticsearch.
+A simple query builder for Elasticsearch. Install with `pip install elasticquery`.
 
 
 ## Synopsis
