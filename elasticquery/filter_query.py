@@ -2,6 +2,8 @@
 # File: filter_query.py
 # Desc: define structs for ES Filters & Queries
 
+from datetime import datetime
+
 from .exception import ElasticQueryException
 
 
@@ -42,6 +44,10 @@ class Filter(object):
             data['range'][field]['lt'] = lt
         if lte is not None:
             data['range'][field]['lte'] = lte
+
+        for range_key, range_value in data['range'][field].iteritems():
+            if isinstance(range_value, datetime):
+                data['range'][field][range_key] = range_value.isoformat()
 
         return self.type, field, data
 

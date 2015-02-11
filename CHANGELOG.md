@@ -1,3 +1,7 @@
+# v1.2
+
++ Convert datetimes -> isoformat in range
+
 # v1.1
 
 + Fix bug with field count on Aggregate
