@@ -1,3 +1,7 @@
+# v1.3
+
++ Much improved method for creating sub-aggregates
+
 # v1.2
 
 + Convert datetimes -> isoformat in range

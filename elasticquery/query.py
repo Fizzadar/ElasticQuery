@@ -77,17 +77,6 @@ class ElasticQuery(object):
         self.structure['_source'] = fields
         return self
 
-    def aggregate(self, name, (fields, aggregate)):
-        '''Add an aggregation to the query'''
-        self._ensure_fields(fields)
-        self.structure['aggregations'][name] = aggregate
-        return self
-
-    def aggregates(self, *aggregates):
-        '''Shortcut to add multiple aggregates at once'''
-        [self.aggregate(*aggregate) for aggregate in aggregates]
-        return self
-
     def must(self, *must):
         '''Add one or more conditions which must be met by this query'''
         for (type, fields, object) in must:
@@ -113,6 +102,14 @@ class ElasticQuery(object):
             self._ensure_bool(type, 'must_not')
             self.structure[type]['bool']['must_not'].append(object)
 
+        return self
+
+    def aggregate(self, *aggregates):
+        '''Add a aggregations to the query'''
+        [
+            self.structure['aggregations'].update(aggregate)
+            for aggregate in aggregates
+        ]
         return self
 
     def dict(self):

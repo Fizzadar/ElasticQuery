@@ -28,10 +28,12 @@ q.should(
 )
 
 # Aggregates
-q.aggregate('aggregate_name', Aggregate.sum('field_name'))
-q.aggregates(
-    ('another_aggregate', Aggregate.terms('field_name')),
-    ('yet_another_agg', Aggregate.avg('field_name'))
+q.aggregate(Aggregate.sum('aggregate_name', 'field_name'))
+
+# Sub aggregates
+q.aggregate(
+    Aggregate.terms('aggregate_name', 'field_name') \
+    .sub(Aggregate.sum('sub_aggregate_name', 'field_name'))
 )
 
 # Print out JSON ready for ES
@@ -125,10 +127,6 @@ Searches objects where field is similar to the match.
 
 
 ## Aggregate
-
-### Aggregate.sub(aggregate, **aggregates)
-
-Puts **aggregates as sub-aggregats under aggregate.
 
 ### Aggregate.sum(field)
 

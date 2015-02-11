@@ -169,74 +169,88 @@ test('Query.raw_string', query, FILTERS['NESTED_FILTER'])
 # Aggregates:
 AGGREGATES = {
     'STATS': {
-        'stats': {
-            'field': 'field_name1'
+        'agg_name': {
+            'stats': {
+                'field': 'field_name1'
+            }
         }
     },
     'EXTENDED_STATS': {
-        'extended_stats': {
-            'field': 'field_name1'
+        'agg_name': {
+            'extended_stats': {
+                'field': 'field_name1'
+            }
         }
     },
     'HISTOGRAM': {
-        'histogram': {
-            'field': 'field_name1',
-            'interval': 100
+        'agg_name': {
+            'histogram': {
+                'field': 'field_name1',
+                'interval': 100
+            }
         }
     },
     'DATE_HISTOGRAM': {
-        'date_histogram': {
-            'field': 'field_name1',
-            'interval': 'day'
+        'agg_name': {
+            'date_histogram': {
+                'field': 'field_name1',
+                'interval': 'day'
+            }
         }
     },
     'TERMS': {
-        'terms': {
-            'field': 'field_name1',
-            'size': 0,
-            'shard_size': 0
+        'agg_name': {
+            'terms': {
+                'field': 'field_name1',
+                'size': 0,
+                'shard_size': 0
+            }
         }
     },
     'NESTED_STATS': {
 
     },
     'SUB_AGGREGATES': {
-        'terms': {
-            'field': 'field_name1',
-            'size': 0,
-            'shard_size': 0
-        },
-        'aggregations': {
-            'sub_aggregate1': {
-                'sum': {
-                    'field': 'sub_field1'
+        'agg_name': {
+            'terms': {
+                'field': 'field_name1',
+                'size': 0,
+                'shard_size': 0
+            },
+            'aggregations': {
+                'sub_aggregate1': {
+                    'sum': {
+                        'field': 'sub_field1'
+                    }
                 }
             }
         }
     },
     'FILTER_SUB_AGGREGATES': {
-        'filter': {
-            'bool': {
-                'should': [],
-                'must_not': [],
-                'must': [{
-                    'term': {
-                        'key': 'value'
-                    }
-                }]
-            }
-        },
-        'aggregations': {
-            'price_histogram': {
-                'terms': {
-                    'field': 'bp_now',
-                    'size': 0,
-                    'shard_size': 0
-                },
-                'aggregations': {
-                    'option_count': {
-                        'sum': {
-                            'field': 'option_count_current'
+        'agg_name': {
+            'filter': {
+                'bool': {
+                    'should': [],
+                    'must_not': [],
+                    'must': [{
+                        'term': {
+                            'key': 'value'
+                        }
+                    }]
+                }
+            },
+            'aggregations': {
+                'histogram': {
+                    'terms': {
+                        'field': 'benchmark_value',
+                        'size': 0,
+                        'shard_size': 0
+                    },
+                    'aggregations': {
+                        'option_count': {
+                            'sum': {
+                                'field': 'options'
+                            }
                         }
                     }
                 }
@@ -247,34 +261,34 @@ AGGREGATES = {
 
 # Test aggregates
 print '[ElasticQuery] Testing: aggregates'
-aggregate = Aggregate.stats('field_name1')
-test('Aggregate.stats', aggregate[1], AGGREGATES['STATS'])
+aggregate = Aggregate.stats('agg_name', 'field_name1')
+test('Aggregate.stats', aggregate, AGGREGATES['STATS'])
 
-aggregate = Aggregate.extended_stats('field_name1')
-test('Aggregate.extended_stats', aggregate[1], AGGREGATES['EXTENDED_STATS'])
+aggregate = Aggregate.extended_stats('agg_name', 'field_name1')
+test('Aggregate.extended_stats', aggregate, AGGREGATES['EXTENDED_STATS'])
 
-aggregate = Aggregate.histogram('field_name1', interval=100)
-test('Aggregate.histogram', aggregate[1], AGGREGATES['HISTOGRAM'])
+aggregate = Aggregate.histogram('agg_name', 'field_name1', interval=100)
+test('Aggregate.histogram', aggregate, AGGREGATES['HISTOGRAM'])
 
-aggregate = Aggregate.date_histogram('field_name1')
-test('Aggregate.date_histogram', aggregate[1], AGGREGATES['DATE_HISTOGRAM'])
+aggregate = Aggregate.date_histogram('agg_name', 'field_name1')
+test('Aggregate.date_histogram', aggregate, AGGREGATES['DATE_HISTOGRAM'])
 
-aggregate = Aggregate.terms('field_name1')
-test('Aggregate.terms', aggregate[1], AGGREGATES['TERMS'])
+aggregate = Aggregate.terms('agg_name', 'field_name1')
+test('Aggregate.terms', aggregate, AGGREGATES['TERMS'])
 
-aggregate = Aggregate.sub(Aggregate.terms('field_name1'), **{'sub_aggregate1': Aggregate.sum('sub_field1')})
-test('Aggregate.sum + sub aggregate', aggregate[1], AGGREGATES['SUB_AGGREGATES'])
+aggregate = Aggregate.terms('agg_name', 'field_name1')
+aggregate.sub(Aggregate.sum('sub_aggregate1', 'sub_field1'))
+test('Aggregate.sum + sub aggregate', aggregate, AGGREGATES['SUB_AGGREGATES'])
 
-aggregate = Aggregate.sub(
-    Aggregate.filter(must=[Filter.term(**{'key': 'value'})]), **{
-        'price_histogram': Aggregate.sub(
-            Aggregate.terms('bp_now'), **{
-                'option_count': Aggregate.sum('option_count_current')
-            }
-        )
-    }
+aggregate = Aggregate.filter(
+    'agg_name',
+    must=[Filter.term(**{'key': 'value'})]
+).sub(
+    Aggregate.terms('histogram', 'benchmark_value').sub(
+        Aggregate.sum('option_count', 'options')
+    )
 )
-test('Aggregate.filter + sub aggregate', aggregate[1], AGGREGATES['FILTER_SUB_AGGREGATES'])
+test('Aggregate.filter + sub aggregate', aggregate, AGGREGATES['FILTER_SUB_AGGREGATES'])
 
 # Queries
 QUERIES = {
@@ -319,8 +333,8 @@ QUERIES = {
 # Test queries
 query = ElasticQuery()
 query.must(Filter.range('field_name1', gte=0, lt=100))
-query.aggregate('test_aggregate1', Aggregate.terms('field_name1'))
-query.aggregate('test_aggregate2', Aggregate.stats('field_name2'))
+query.aggregate(Aggregate.terms('test_aggregate1', 'field_name1'))
+query.aggregate(Aggregate.stats('test_aggregate2', 'field_name2'))
 test('Full query: range + terms agg + stats agg', query.structure, QUERIES['RANGE_AGGTERMS_AGGSTATS'])
 
 
