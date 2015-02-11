@@ -12,11 +12,12 @@ class Aggregate(object):
             name: aggregate
             for name, (fields, aggregate) in aggregates.iteritems()
         }
-        return None, aggregate
+        print
+        return [], aggregate
 
     @classmethod
     def sum(self, field):
-        return None, {
+        return [], {
             'sum': {
                 'field': field
             }
@@ -24,7 +25,7 @@ class Aggregate(object):
 
     @classmethod
     def avg(self, field):
-        return None, {
+        return [], {
             'avg': {
                 'field': field
             }
@@ -32,7 +33,7 @@ class Aggregate(object):
 
     @classmethod
     def min(self, field):
-        return None, {
+        return [], {
             'min': {
                 'field': field
             }
@@ -40,7 +41,7 @@ class Aggregate(object):
 
     @classmethod
     def max(self, field):
-        return None, {
+        return [], {
             'max': {
                 'field': field
             }
@@ -48,7 +49,7 @@ class Aggregate(object):
 
     @classmethod
     def stats(self, field):
-        return None, {
+        return [], {
             'stats': {
                 'field': field
             }
@@ -56,7 +57,7 @@ class Aggregate(object):
 
     @classmethod
     def extended_stats(self, field):
-        return None, {
+        return [], {
             'extended_stats': {
                 'field': field
             }
@@ -64,7 +65,7 @@ class Aggregate(object):
 
     @classmethod
     def missing(self, field):
-        return None, {
+        return [], {
             'missing': {
                 'field': field
             }
@@ -72,7 +73,7 @@ class Aggregate(object):
 
     @classmethod
     def value_count(self, field):
-        return None, {
+        return [], {
             'value_count': {
                 'field': field
             }
@@ -85,7 +86,7 @@ class Aggregate(object):
         except ValueError:
             raise ElasticQueryException('interval must be a number')
 
-        return None, {
+        return [], {
             'histogram': {
                 'field': field,
                 'interval': interval
@@ -94,7 +95,7 @@ class Aggregate(object):
 
     @classmethod
     def date_histogram(self, field, interval='day'):
-        return None, {
+        return [], {
             'date_histogram': {
                 'field': field,
                 'interval': interval
@@ -114,7 +115,7 @@ class Aggregate(object):
         except ValueError:
             raise ElasticQueryException('size/shard_size must be a number or None')
 
-        return None, {
+        return [], {
             'terms': {
                 'field': field,
                 'size': size,
@@ -124,7 +125,7 @@ class Aggregate(object):
 
     @classmethod
     def nested(self, path):
-        return None, {
+        return [], {
             'nested': {
                 'path': path
             }
@@ -136,7 +137,7 @@ class Aggregate(object):
         should = [v[2] for v in should] if isinstance(should, list) else []
         must_not = [v[2] for v in must_not] if isinstance(must_not, list) else []
 
-        return None, {
+        return [], {
             'filter': {
                 'bool': {
                     'must': must,

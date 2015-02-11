@@ -1,3 +1,7 @@
+# v1.1
+
++ Fix bug with field count on Aggregate
+
 # v1.0
 
 Major reshuffle.
