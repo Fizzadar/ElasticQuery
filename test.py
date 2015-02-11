@@ -193,8 +193,8 @@ AGGREGATES = {
     'TERMS': {
         'terms': {
             'field': 'field_name1',
-            'size': 999999999,
-            'shard_size': 999999999
+            'size': 0,
+            'shard_size': 0
         }
     },
     'NESTED_STATS': {
@@ -203,8 +203,8 @@ AGGREGATES = {
     'SUB_AGGREGATES': {
         'terms': {
             'field': 'field_name1',
-            'size': 999999999,
-            'shard_size': 999999999
+            'size': 0,
+            'shard_size': 0
         },
         'aggregations': {
             'sub_aggregate1': {
@@ -230,8 +230,8 @@ AGGREGATES = {
             'price_histogram': {
                 'terms': {
                     'field': 'bp_now',
-                    'size': 999999999,
-                    'shard_size': 999999999
+                    'size': 0,
+                    'shard_size': 0
                 },
                 'aggregations': {
                     'option_count': {
@@ -283,8 +283,8 @@ QUERIES = {
             'test_aggregate1': {
                 'terms': {
                     'field': 'field_name1',
-                    'size': 999999999,
-                    'shard_size': 999999999
+                    'size': 0,
+                    'shard_size': 0
                 }
             },
             'test_aggregate2': {
