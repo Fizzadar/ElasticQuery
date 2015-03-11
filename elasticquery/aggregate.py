@@ -166,6 +166,14 @@ class Aggregate(object):
         })
 
     @classmethod
+    def reverse_nested(self, name):
+        return AggregateDict({
+            name: {
+                'reverse_nested': {}
+            }
+        })
+
+    @classmethod
     def filter(self, name, must=None, should=None, must_not=None):
         must = [v[2] for v in must] if isinstance(must, list) else []
         should = [v[2] for v in should] if isinstance(should, list) else []
