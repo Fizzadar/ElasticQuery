@@ -326,7 +326,10 @@ QUERIES = {
                 'should': []
             }
         },
-        'sort': []
+        'sort': [],
+        'from':0,
+        'size': 10
+
     }
 }
 
@@ -335,6 +338,8 @@ query = ElasticQuery()
 query.must(Filter.range('field_name1', gte=0, lt=100))
 query.aggregate(Aggregate.terms('test_aggregate1', 'field_name1'))
 query.aggregate(Aggregate.stats('test_aggregate2', 'field_name2'))
+query.offset(0)
+query.limit(10)
 test('Full query: range + terms agg + stats agg', query.structure, QUERIES['RANGE_AGGTERMS_AGGSTATS'])
 
 

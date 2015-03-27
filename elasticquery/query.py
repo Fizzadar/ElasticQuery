@@ -29,7 +29,8 @@ class ElasticQuery(object):
                 'match_all': {}
             },
             'aggregations': {},
-            'sort': []
+            'sort': [],
+
         }
 
     def _ensure_bool(self, type, name):
@@ -69,6 +70,21 @@ class ElasticQuery(object):
                 }
             })
 
+        return self
+
+    def offset(self, field):
+        '''offset the query results'''
+        self.structure['from']=field
+        if 'size' not in self.structure:
+            self.structure['size']=5
+        return self
+
+    def limit(self, field):
+        '''offset the query results'''
+
+        self.structure['size']=field
+        if 'from' not in self.structure:
+            self.structure['from']=0    
         return self
 
     def fields(self, fields):
