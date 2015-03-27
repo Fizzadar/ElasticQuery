@@ -2,8 +2,6 @@
 # File: aggregate.py
 # Desc: define structs for ES aggregations
 
-from .exception import ElasticQueryException
-
 
 class AggregateDict(dict):
     _name = None
@@ -106,11 +104,19 @@ class Aggregate(object):
         })
 
     @classmethod
+    def range(self, name, field, ranges):
+        return AggregateDict({
+            name: {
+                'range': {
+                    'field': field,
+                    'ranges': ranges
+                }
+            }
+        })
+
+    @classmethod
     def histogram(self, name, field, interval):
-        try:
-            interval = int(interval)
-        except ValueError:
-            raise ElasticQueryException('interval must be a number')
+        interval = int(interval)
 
         return AggregateDict({
             name: {
@@ -138,12 +144,6 @@ class Aggregate(object):
             size = 0
         if shard_size is None:
             shard_size = 0
-
-        try:
-            size = int(size)
-            shard_size = int(shard_size)
-        except ValueError:
-            raise ElasticQueryException('size/shard_size must be a number or None')
 
         return AggregateDict({
             name: {
