@@ -4,8 +4,6 @@
 
 from datetime import datetime
 
-from .exception import ElasticQueryException
-
 
 class Filter(object):
     type = 'filter'
@@ -65,13 +63,23 @@ class Filter(object):
 
     @classmethod
     def terms(self, **kwargs):
-        for key, value in kwargs.iteritems():
-            if not isinstance(value, list):
-                raise ElasticQueryException('terms values must be lists')
-
         return self.type, None, {
             'terms': kwargs
         }
+
+    @classmethod
+    def match(self, **kwargs):
+        if self.type == 'filter':
+            return self.type, kwargs.keys(), {
+                'query': {
+                    'match': kwargs,
+                    'analyzer': None
+                }
+            }
+        else:
+            return self.type, kwargs.keys(), {
+                'match': kwargs
+            }
 
     @classmethod
     def missing(self, field):
