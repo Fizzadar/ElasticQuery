@@ -1,3 +1,12 @@
+# v1.5
+
++ Add `match` filter + query
++ Add `range` aggregation
+
+# v1.4
+
++ Add `reverse_nested` aggregation
+
 # v1.3
 
 + Much improved method for creating sub-aggregates
