@@ -69,13 +69,9 @@ Search where the `Query`/`Filter` object might matches.
 
 Search where the `Query`/`Filter` object does not match.
 
-### q.aggregate(name, Aggregate)
+### q.aggregate(*Aggregate)
 
-Add an `Aggregate` to our search query.
-
-### q.aggregates(*(name, Aggregate))
-
-Shortcut to add multiple of the above.
+Add some `Aggregate`s to our search query.
 
 
 ## Filter
