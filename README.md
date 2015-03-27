@@ -100,6 +100,10 @@ Search multiple key=>value terms.
 
 Search multiple key=>[values] terms.
 
+### Filter.match(**kwargs)
+
+Search multiple key=>[values].
+
 ### Filter.missing(field)
 
 Filter for missing/null fields.
@@ -128,54 +132,58 @@ Searches objects where field is similar to the match.
 
 ## Aggregate
 
-### Aggregate.sum(field)
+### Aggregate.sum(name, field)
 
 Get sum of a field.
 
-### Aggregate.avg(field)
+### Aggregate.avg(name, field)
 
 Get the average value across a field.
 
-### Aggregate.min(field)
+### Aggregate.min(name, field)
 
 Get the lowest value of a field.
 
-### Aggregate.max(field)
+### Aggregate.max(name, field)
 
 Get the highest value of a field.
 
-### Aggregate.stats(field)
+### Aggregate.stats(name, field)
 
 Get stats on a field.
 
-### Aggregate.extended_stats(field)
+### Aggregate.extended_stats(name, field)
 
 Get extended stats on a field.
 
-### Aggregate.missing(field)
+### Aggregate.missing(name, field)
 
 Count how many documents are missing a given field.
 
-### Aggregate.value_count(field)
+### Aggregate.value_count(name, field)
 
 Count how many documents contain a given field.
 
-### Aggregate.histogram(field, interval)
+### Aggregate.range(name, field, ranges)
+
+Generate multiple buckets based on the input ranges.
+
+### Aggregate.histogram(name, field, interval)
 
 Generate a histogram.
 
-### Aggregate.date_histogram(field, interval='day')
+### Aggregate.date_histogram(name, field, interval='day')
 
 Generate a date histogram.
 
-### Aggregate.terms(field)
+### Aggregate.terms(name, field)
 
 Count number of terms on a field.
 
-### Aggregate.nested(path)
+### Aggregate.nested(name, path)
 
 Create a nested aggregation (for use with sub aggregates, see Aggregate.sub).
 
-### Aggregate.filter(musts=None, shoulds=None, must_nots=None)
+### Aggregate.filter(name, musts=None, shoulds=None, must_nots=None)
 
 Creates a filtered aggregate (for use with sub aggregates, see Aggregate.sub).
