@@ -1,3 +1,7 @@
+# v1.6
+
++ Remove field checking with `ElasticMapping` (incompatible with nested fields, needs rethink)
+
 # v1.5
 
 + Add `match` filter + query

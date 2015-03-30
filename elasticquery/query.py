@@ -4,7 +4,7 @@
 
 import json
 
-from .exception import NoESClient, NoIndexName, NoDocType, InvalidField
+from .exception import NoESClient, NoIndexName, NoDocType # , InvalidField
 
 
 class ElasticQuery(object):
@@ -45,13 +45,14 @@ class ElasticQuery(object):
 
     def _ensure_fields(self, fields):
         '''When we have a mapping, ensure the fields we use are valid'''
-        if self.__mapping__ is not None:
-            mapping_fields = self.__mapping__.keys()
-            fields = fields if isinstance(fields, list) else [fields]
+        pass
+        # if self.__mapping__ is not None:
+        #     mapping_fields = self.__mapping__.keys()
+        #     fields = fields if isinstance(fields, list) else [fields]
 
-            for field in fields:
-                if field not in mapping_fields:
-                    raise InvalidField(field)
+        #     for field in fields:
+        #         if field not in mapping_fields:
+        #             raise InvalidField(field)
 
     def set(self, key, value):
         '''Set an arbitrary attribute on this query'''
