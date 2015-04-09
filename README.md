@@ -92,7 +92,7 @@ Prefix multiple keys.
 
 Search multiple key=>value terms.
 
-### Filter.terms(**kwargs)
+### Filter.terms(execution='plain', **kwargs)
 
 Search multiple key=>[values] terms.
 

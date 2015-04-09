@@ -59,9 +59,15 @@ FILTERS = {
             'field_name1': 'value_name1'
         }
     },
-    'TERMS': {
+    'FILTER_TERMS': {
         'terms': {
-            'field_name1': ['value_name1', 'value_name2']
+            'field_name1': ['value_name1', 'value_name2'],
+            'execution': 'bool'
+        }
+    },
+    'QUERY_TERMS': {
+        'terms': {
+            'field_name1': ['value_name1', 'value_name2'],
         }
     },
     'FILTER_MISSING': {
@@ -142,10 +148,10 @@ test('Filter.term', query, FILTERS['TERM'])
 query = Query.term(field_name1='value_name1')[2]
 test('Query.term', query, FILTERS['TERM'])
 
-query = Filter.terms(field_name1=['value_name1', 'value_name2'])[2]
-test('Filter.terms', query, FILTERS['TERMS'])
-query = Query.terms(field_name1=['value_name1', 'value_name2'])[2]
-test('Query.terms', query, FILTERS['TERMS'])
+query = Filter.terms(execution='bool', field_name1=['value_name1', 'value_name2'])[2]
+test('Filter.terms', query, FILTERS['FILTER_TERMS'])
+query = Query.terms(execution='bool', field_name1=['value_name1', 'value_name2'])[2]
+test('Query.terms', query, FILTERS['QUERY_TERMS'])
 
 query = Filter.missing('field_name1')[2]
 test('Filter.missing', query, FILTERS['FILTER_MISSING'])
