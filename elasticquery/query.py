@@ -20,23 +20,13 @@ class ElasticQuery(object):
         self.__doc_type__ = doc_type
         self.__mapping__ = mapping
 
-        # A basic, empty, match-everything query
-        self.structure = {
-            'query': {
-                'match_all': {}
-            },
-            'filter': {
-                'match_all': {}
-            },
-            'aggregations': {},
-            'sort': [],
+        # An empty query
+        self.structure = {}
 
-        }
-
-    def _ensure_bool(self, type, name):
+    def _ensure_bool(self, query_type, name):
         '''Ensure we have a bool filter/quer struct prepared'''
-        if self.structure[type].get('match_all') == {}:
-            self.structure[type] = {
+        if not self.structure.get(query_type):
+            self.structure[query_type] = {
                 'bool': {
                     'must': [],
                     'should': [],
@@ -60,8 +50,21 @@ class ElasticQuery(object):
         self.structure[key] = value
         return self
 
+    def offset(self, offset):
+        '''Offset the query results.'''
+        self.structure['from'] = offset
+        return self
+
+    def limit(self, size):
+        '''Limit the number of query results.'''
+        self.structure['size'] = size
+        return self
+
     def sort(self, field, order=False):
         '''Sort the query results'''
+        if 'sort' not in self.structure:
+            self.structure['sort'] = []
+
         if not order:
             self.structure['sort'].append(field)
         else:
@@ -73,21 +76,6 @@ class ElasticQuery(object):
 
         return self
 
-    def offset(self, field):
-        '''offset the query results'''
-        self.structure['from']=field
-        if 'size' not in self.structure:
-            self.structure['size']=5
-        return self
-
-    def limit(self, field):
-        '''offset the query results'''
-
-        self.structure['size']=field
-        if 'from' not in self.structure:
-            self.structure['from']=0    
-        return self
-
     def fields(self, fields):
         '''Limit the fields returned by this query'''
         self._ensure_fields(fields)
@@ -96,33 +84,36 @@ class ElasticQuery(object):
 
     def must(self, *must):
         '''Add one or more conditions which must be met by this query'''
-        for (type, fields, object) in must:
+        for (query_type, fields, object) in must:
             self._ensure_fields(fields)
-            self._ensure_bool(type, 'must')
-            self.structure[type]['bool']['must'].append(object)
+            self._ensure_bool(query_type, 'must')
+            self.structure[query_type]['bool']['must'].append(object)
 
         return self
 
     def should(self, *should):
         '''Add one or more conditions which should be met by this query'''
-        for (type, fields, object) in should:
+        for (query_type, fields, object) in should:
             self._ensure_fields(fields)
-            self._ensure_bool(type, 'should')
-            self.structure[type]['bool']['should'].append(object)
+            self._ensure_bool(query_type, 'should')
+            self.structure[query_type]['bool']['should'].append(object)
 
         return self
 
     def must_not(self, *must_not):
         '''Add one or more conditions which must not be met by this query'''
-        for (type, fields, object) in must_not:
+        for (query_type, fields, object) in must_not:
             self._ensure_fields(fields)
-            self._ensure_bool(type, 'must_not')
-            self.structure[type]['bool']['must_not'].append(object)
+            self._ensure_bool(query_type, 'must_not')
+            self.structure[query_type]['bool']['must_not'].append(object)
 
         return self
 
     def aggregate(self, *aggregates):
-        '''Add a aggregations to the query'''
+        '''Add a aggregations to the query.'''
+        if 'aggregations' not in self.structure:
+            self.structure['aggregations'] = {}
+
         [
             self.structure['aggregations'].update(aggregate)
             for aggregate in aggregates
@@ -130,11 +121,11 @@ class ElasticQuery(object):
         return self
 
     def dict(self):
-        '''Return the current query representation'''
+        '''Return the current query representation.'''
         return self.structure
 
     def json(self, indent=None):
-        '''Return the current query as a JSON document'''
+        '''Return the current query as a JSON document.'''
         return json.dumps(
             self.dict(), indent=indent
         )
