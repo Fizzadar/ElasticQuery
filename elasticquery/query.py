@@ -87,8 +87,22 @@ class ElasticQuery(object):
         self.structure['_source'] = fields
         return self
 
+    def query(self, query):
+        '''
+        Assign the queries query to one Query object (no bool).
+        Note: this with overwrite/be overwritten by .must, .should & .must_not
+        '''
+        self.structure['query'] = query[2]
+
+    def filter(self, filter):
+        '''
+        Assign the query filter to one Filter object (no bool).
+        Note: this with overwrite/be overwritten by .must, .should & .must_not
+        '''
+        self.structure['filter'] = filter[2]
+
     def must(self, *must):
-        '''Add one or more conditions which must be met by this query'''
+        '''Add one or more conditions which must be met by this query.'''
         for (query_type, fields, object) in must:
             self._ensure_fields(fields)
             self._ensure_bool(query_type, 'must')
@@ -97,7 +111,7 @@ class ElasticQuery(object):
         return self
 
     def should(self, *should):
-        '''Add one or more conditions which should be met by this query'''
+        '''Add one or more conditions which should be met by this query.'''
         for (query_type, fields, object) in should:
             self._ensure_fields(fields)
             self._ensure_bool(query_type, 'should')
@@ -106,7 +120,7 @@ class ElasticQuery(object):
         return self
 
     def must_not(self, *must_not):
-        '''Add one or more conditions which must not be met by this query'''
+        '''Add one or more conditions which must not be met by this query.'''
         for (query_type, fields, object) in must_not:
             self._ensure_fields(fields)
             self._ensure_bool(query_type, 'must_not')
