@@ -5,14 +5,18 @@
 from datetime import datetime
 
 
+def inline_filter_queries(filter_queries):
+    return [v[2] for v in filter_queries] if isinstance(filter_queries, list) else []
+
+
 class Filter(object):
     type = 'filter'
 
     @classmethod
     def nested(self, path, must=None, should=None, must_not=None):
-        must = [v[2] for v in must] if isinstance(must, list) else []
-        should = [v[2] for v in should] if isinstance(should, list) else []
-        must_not = [v[2] for v in must_not] if isinstance(must_not, list) else []
+        must = inline_filter_queries(must)
+        should = inline_filter_queries(should)
+        must_not = inline_filter_queries(must_not)
 
         return self.type, path, {
             'nested': {
@@ -179,6 +183,24 @@ class Filter(object):
 
 class Query(Filter):
     type = 'query'
+
+    @classmethod
+    def constant_score(self, query_type='filter', must=None, should=None, must_not=None):
+        must = inline_filter_queries(must)
+        should = inline_filter_queries(should)
+        must_not = inline_filter_queries(must_not)
+
+        return self.type, [], {
+            'constant_score': {
+                query_type: {
+                    'bool': {
+                        'must': must,
+                        'should': should,
+                        'must_not': must_not
+                    }
+                }
+            }
+        }
 
     @classmethod
     def mlt(self, field, match, min_term_frequency=1, max_query_terms=False):
