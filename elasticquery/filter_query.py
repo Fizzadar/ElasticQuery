@@ -62,10 +62,19 @@ class Filter(object):
         }
 
     @classmethod
-    def terms(self, **kwargs):
-        return self.type, None, {
-            'terms': kwargs
-        }
+    def terms(self, execution='plain', **kwargs):
+        if self.type == 'filter':
+            kwargs.update({
+                'execution': execution
+            })
+
+            return self.type, None, {
+                'terms': kwargs
+            }
+        else:
+            return self.type, None, {
+                'terms': kwargs,
+            }
 
     @classmethod
     def match(self, **kwargs):
