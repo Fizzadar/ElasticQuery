@@ -1,3 +1,7 @@
+# v1.7
+
++ Add `execution` to terms filter
+
 # v1.6
 
 + Remove field checking with `ElasticMapping` (incompatible with nested fields, needs rethink)
