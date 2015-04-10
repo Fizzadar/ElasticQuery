@@ -1,3 +1,7 @@
+# v1.8.2
+
++ Stupid bugfix
+
 # v1.8.1
 
 + Fix for timeout: append 's' on the end (changable via `time_type` kwarg)
