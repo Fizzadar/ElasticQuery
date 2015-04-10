@@ -60,9 +60,9 @@ class ElasticQuery(object):
         self.structure['size'] = size
         return self
 
-    def timeout(self, timeout):
+    def timeout(self, timeout, time_type='s'):
         '''Set a timeout on the query.'''
-        self.structure['timeout'] = timeout
+        self.structure['timeout'] = '{}{}'.format(timeout)
         return self
 
     def sort(self, field, order=False):

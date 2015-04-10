@@ -1,3 +1,8 @@
+# v1.8.1
+
++ Fix for timeout: append 's' on the end (changable via `time_type` kwarg)
++ Start minor versioning for quick fixes(!)
+
 # v1.8
 
 + Add `Query.constant_score`
