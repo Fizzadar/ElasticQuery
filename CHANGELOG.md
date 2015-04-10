@@ -1,3 +1,11 @@
+# v1.8
+
++ Add `Query.constant_score`
++ Add `ElasticQuery.filter` and `ElasticQuery.query` as options instead of using `.must`, `.should` & `.must_not`
++ Add `ElasticQuery.timeout`
++ Tidy up `ElasticQuery.offset` and `ElasticQuery.limit`
++ Creates query structure on demand (empty query is now properly empty)
+
 # v1.7
 
 + Add `execution` to terms filter

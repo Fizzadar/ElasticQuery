@@ -125,6 +125,10 @@ The `Query` class inherits from `Filter`, see above for API details.
 
 Searches objects where field is similar to the match.
 
+### Query.constant_score(query_type='filter', must=None, should=None, must_not=None)
+
+Wraps a set of musts, shoulds and should nots under a constant score query.
+
 
 ## Aggregate
 
