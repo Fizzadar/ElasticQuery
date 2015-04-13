@@ -114,9 +114,10 @@ class Filter(object):
             }
 
     @classmethod
-    def raw_string(self, string, default_operator='AND'):
+    def raw_string(self, string, default_operator='AND', cache=False):
+        '''Returns a normal query string. Cache is only available for Filters.'''
         if self.type == 'filter':
-            return self.type, [], {
+            struct = {
                 'query': {
                     'query_string': {
                         'query': string,
@@ -124,6 +125,14 @@ class Filter(object):
                     }
                 }
             }
+
+            if cache:
+                struct['_cache'] = True
+                struct = {
+                    'fquery': struct
+                }
+
+            return self.type, [], struct
         else:
             return self.type, [], {
                 'query_string': {
@@ -133,7 +142,8 @@ class Filter(object):
             }
 
     @classmethod
-    def string(self, default_operator='AND', list_operator='OR', **kwargs):
+    def string(self, default_operator='AND', list_operator='OR', cache=False, **kwargs):
+        '''Builds a query string from kwargs. Cache is only available for Filters.'''
         and_filters = []
         for key, value in kwargs.iteritems():
             if isinstance(value, list):
@@ -149,7 +159,7 @@ class Filter(object):
         query_string = u' {0} '.format(default_operator).join(and_filters)
 
         if self.type == 'filter':
-            return self.type, [], {
+            struct = {
                 'query': {
                     'query_string': {
                         'query': query_string,
@@ -157,6 +167,14 @@ class Filter(object):
                     }
                 }
             }
+
+            if cache:
+                struct['_cache'] = True
+                struct = {
+                    'fquery': struct
+                }
+
+            return self.type, [], struct
         else:
             return self.type, [], {
                 'query_string': {
