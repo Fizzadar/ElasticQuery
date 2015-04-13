@@ -1,3 +1,8 @@
+# v1.9.0
+
++ **Breaking change**: rename `ElasticQuery.limit` -> `ElasticQuery.size` to be more inline with Elasticsearch
++ Add `cache=False` to `Filter.raw_string` and `Filter.string`
+
 # v1.8.2
 
 + Stupid bugfix
