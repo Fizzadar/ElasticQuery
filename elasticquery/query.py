@@ -55,7 +55,7 @@ class ElasticQuery(object):
         self.structure['from'] = offset
         return self
 
-    def limit(self, size):
+    def size(self, size):
         '''Limit the number of query results.'''
         self.structure['size'] = size
         return self
