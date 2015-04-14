@@ -5,12 +5,22 @@
 from datetime import datetime
 
 
+def inline_filter_query(filter_query):
+    return filter_query[2]
+
+
 def inline_filter_queries(filter_queries):
-    return [v[2] for v in filter_queries] if isinstance(filter_queries, list) else []
+    return [inline_filter_query(v) for v in filter_queries] if isinstance(filter_queries, list) else []
 
 
 class Filter(object):
     type = 'filter'
+
+    @classmethod
+    def match_all(self):
+        return self.type, [], {
+            'match_all': {}
+        }
 
     @classmethod
     def nested(self, path, must=None, should=None, must_not=None):
@@ -218,6 +228,32 @@ class Query(Filter):
                     }
                 }
             }
+        }
+
+    @classmethod
+    def filtered(self, query=None, filter=None):
+        settings = {}
+
+        if query is not None:
+            settings['query'] = inline_filter_query(query)
+
+        if filter is not None:
+            settings['filter'] = inline_filter_query(filter)
+
+        return self.type, [], {
+            'filtered': settings
+        }
+
+    @classmethod
+    def fuzzy_like_this(self, like_text, **kwargs):
+        settings = {
+            'like_text': like_text
+        }
+
+        settings.update(kwargs)
+
+        return self.type, [], {
+            'fuzzy_like_this': settings
         }
 
     @classmethod

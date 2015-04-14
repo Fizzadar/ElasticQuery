@@ -21,11 +21,16 @@ from elasticquery import ElasticQuery, Filter, Query, Aggregate
 
 # Some horrible helper functions
 test_count = {'count': 1}
+
+
 def error(message):
     print '\t[{0}] Error: {1}\n'.format(test_count['count'], message)
     sys.exit(1)
+
+
 def success(message):
     print '\t[{0}] Success: {1}'.format(test_count['count'], message)
+
 
 def test(name, got, want):
     if got != want:
@@ -127,6 +132,22 @@ FILTERS = {
                 }
             }
         }
+    },
+    'QUERY_FILTERED': {
+        'filtered': {
+            'filter': {
+                'match_all': {}
+            },
+            'query': {
+                'match_all': {}
+            }
+        }
+    },
+    'QUERY_FUZZY_LIKE_THIS': {
+        'fuzzy_like_this': {
+            'fields': ['name', 'foo'],
+            'like_text': 'test fuzzy'
+        }
     }
 }
 
@@ -170,6 +191,12 @@ test('Query.string', query, FILTERS['QUERY_STRING'])
 
 query = Filter.nested('nested_path', must=[Filter.term(field_name1='value_name1')])[2]
 test('Query.raw_string', query, FILTERS['NESTED_FILTER'])
+
+query = Query.filtered(query=Query.match_all(), filter=Filter.match_all())[2]
+test('Query.filtered', query, FILTERS['QUERY_FILTERED'])
+
+query = Query.fuzzy_like_this(like_text='test fuzzy', fields=['name', 'foo'])[2]
+test('Query.fuzzy_like_this', query, FILTERS['QUERY_FUZZY_LIKE_THIS'])
 
 
 # Aggregates:
@@ -313,9 +340,6 @@ QUERIES = {
                 }
             }
         },
-        'query': {
-            'match_all': {}
-        },
         'filter': {
             'bool': {
                 'must': [
@@ -332,10 +356,8 @@ QUERIES = {
                 'should': []
             }
         },
-        'sort': [],
-        'from':0,
+        'from': 0,
         'size': 10
-
     }
 }
 
@@ -345,7 +367,7 @@ query.must(Filter.range('field_name1', gte=0, lt=100))
 query.aggregate(Aggregate.terms('test_aggregate1', 'field_name1'))
 query.aggregate(Aggregate.stats('test_aggregate2', 'field_name2'))
 query.offset(0)
-query.limit(10)
+query.size(10)
 test('Full query: range + terms agg + stats agg', query.structure, QUERIES['RANGE_AGGTERMS_AGGSTATS'])
 
 
