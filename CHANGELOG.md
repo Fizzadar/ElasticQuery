@@ -1,3 +1,8 @@
+# v1.9.1
+
++ Add `Filter.fuzzy_like_this`
++ Add `Filter.filtered`
+
 # v1.9.0
 
 + **Breaking change**: rename `ElasticQuery.limit` -> `ElasticQuery.size` to be more inline with Elasticsearch
