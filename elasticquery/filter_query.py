@@ -23,21 +23,25 @@ class Filter(object):
         }
 
     @classmethod
-    def nested(self, path, must=None, should=None, must_not=None):
-        must = inline_filter_queries(must)
-        should = inline_filter_queries(should)
-        must_not = inline_filter_queries(must_not)
+    def bool(self, must=None, should=None, must_not=None, **kwargs):
+        settings = {
+            'must': inline_filter_queries(must),
+            'must_not': inline_filter_queries(must_not),
+            'should': inline_filter_queries(should),
+        }
 
+        settings.update(kwargs)
+
+        return self.type, [], {
+            'bool': settings
+        }
+
+    @classmethod
+    def nested(self, path, must=None, should=None, must_not=None):
         return self.type, path, {
             'nested': {
                 'path': path,
-                self.type: {
-                    'bool': {
-                        'must': must,
-                        'should': should,
-                        'must_not': must_not
-                    }
-                }
+                self.type: inline_filter_query(self.bool(must=must, should=should, must_not=must_not))
             }
         }
 
@@ -214,19 +218,9 @@ class Query(Filter):
 
     @classmethod
     def constant_score(self, query_type='filter', must=None, should=None, must_not=None):
-        must = inline_filter_queries(must)
-        should = inline_filter_queries(should)
-        must_not = inline_filter_queries(must_not)
-
         return self.type, [], {
             'constant_score': {
-                query_type: {
-                    'bool': {
-                        'must': must,
-                        'should': should,
-                        'must_not': must_not
-                    }
-                }
+                query_type: inline_filter_query(self.bool(must=must, should=should, must_not=must_not))
             }
         }
 

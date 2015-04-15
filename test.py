@@ -148,7 +148,33 @@ FILTERS = {
             'fields': ['name', 'foo'],
             'like_text': 'test fuzzy'
         }
-    }
+    },
+    'FILTER_BOOL': {
+        'bool': {
+            'must': [
+                {
+                    'term': {
+                        'field_name1': 'value_name1'
+                    }
+                }
+            ],
+            'should': [
+                {
+                    'term': {
+                        'field_name3': 'value_name3'
+                    }
+                }
+            ],
+            'must_not': [
+                {
+                    'term': {
+                        'field_name2': 'value_name2'
+                    }
+                }
+            ],
+            '_cache': True
+        }
+    },
 }
 
 # Test filters
@@ -197,6 +223,9 @@ test('Query.filtered', query, FILTERS['QUERY_FILTERED'])
 
 query = Query.fuzzy_like_this(like_text='test fuzzy', fields=['name', 'foo'])[2]
 test('Query.fuzzy_like_this', query, FILTERS['QUERY_FUZZY_LIKE_THIS'])
+
+query = Filter.bool(must=[Filter.term(field_name1='value_name1')], must_not=[Filter.term(field_name2='value_name2')], should=[Filter.term(field_name3='value_name3')], _cache=True)[2]
+test('Filter.bool', query, FILTERS['FILTER_BOOL'])
 
 
 # Aggregates:
