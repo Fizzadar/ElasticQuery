@@ -1,3 +1,7 @@
+# v1.9.2
+
++ Add support for `Filter.bool`
+
 # v1.9.1
 
 + Add `Filter.fuzzy_like_this`
