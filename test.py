@@ -149,6 +149,13 @@ FILTERS = {
             'like_text': 'test fuzzy'
         }
     },
+    'QUERY_MULTI_MATCH': {
+        'multi_match': {
+            'fields': ['name', 'foo'],
+            'type': 'cross_fields',
+            'query': 'multi match',
+        }
+    },
     'FILTER_BOOL': {
         'bool': {
             'must': [
@@ -226,6 +233,9 @@ test('Query.fuzzy_like_this', query, FILTERS['QUERY_FUZZY_LIKE_THIS'])
 
 query = Filter.bool(must=[Filter.term(field_name1='value_name1')], must_not=[Filter.term(field_name2='value_name2')], should=[Filter.term(field_name3='value_name3')], _cache=True)[2]
 test('Filter.bool', query, FILTERS['FILTER_BOOL'])
+
+query = Query.multi_match(query='multi match', fields=['name', 'foo'], type='cross_fields')[2]
+test('Query.multi_match', query, FILTERS['QUERY_MULTI_MATCH'])
 
 
 # Aggregates:
