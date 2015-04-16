@@ -1,3 +1,7 @@
+# v1.9.4
+
++ Add support for `Aggregate.cardinality`
+
 # v1.9.3
 
 + Add support for `Filter.multi_match`

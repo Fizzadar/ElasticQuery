@@ -104,6 +104,16 @@ class Aggregate(object):
         })
 
     @classmethod
+    def cardinality(self, name, field):
+        return AggregateDict({
+            name: {
+                'cardinality': {
+                    'field': field
+                }
+            }
+        })
+
+    @classmethod
     def range(self, name, field, ranges):
         return AggregateDict({
             name: {
