@@ -1,3 +1,7 @@
+# v1.9.3
+
++ Add support for `Filter.multi_match`
+
 # v1.9.2
 
 + Add support for `Filter.bool`
