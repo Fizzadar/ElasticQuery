@@ -217,6 +217,18 @@ class Query(Filter):
     type = 'query'
 
     @classmethod
+    def multi_match(self, query, **kwargs):
+        settings = {
+            'query': query
+        }
+
+        settings.update(kwargs)
+
+        return self.type, [], {
+            'multi_match': settings
+        }
+
+    @classmethod
     def constant_score(self, query_type='filter', must=None, should=None, must_not=None):
         return self.type, [], {
             'constant_score': {
