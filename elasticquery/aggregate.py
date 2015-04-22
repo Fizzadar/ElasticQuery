@@ -138,12 +138,13 @@ class Aggregate(object):
         })
 
     @classmethod
-    def date_histogram(self, name, field, interval='day'):
+    def date_histogram(self, name, field, interval='day', min_doc_count=1):
         return AggregateDict({
             name: {
                 'date_histogram': {
                     'field': field,
-                    'interval': interval
+                    'interval': interval,
+                    'min_doc_count': min_doc_count
                 }
             }
         })
