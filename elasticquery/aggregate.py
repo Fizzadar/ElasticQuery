@@ -104,12 +104,16 @@ class Aggregate(object):
         })
 
     @classmethod
-    def cardinality(self, name, field):
+    def cardinality(self, name, field, precision_threshold=None):
+        settings = {
+            'field': field
+        }
+        if precision_threshold:
+            settings['precision_threshold'] = precision_threshold
+
         return AggregateDict({
             name: {
-                'cardinality': {
-                    'field': field
-                }
+                'cardinality': settings
             }
         })
 
