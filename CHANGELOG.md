@@ -1,3 +1,11 @@
+# v1.9.6
+
++ Add `precision_threshold` to `Aggregate.cardinality`
+
+# v1.9.5
+
++ Add `min_doc_count=1` to `Aggregate.date_histogram`
+
 # v1.9.4
 
 + Add support for `Aggregate.cardinality`
