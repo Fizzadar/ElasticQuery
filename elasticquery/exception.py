@@ -18,3 +18,12 @@ class NoIndexName(ElasticQueryException):
 
 class InvalidField(ElasticQueryException):
     pass
+
+class NoQuery(ElasticQueryException):
+    pass
+
+class NoFilter(ElasticQueryException):
+    pass
+
+class InvalidArg(ElasticQueryException):
+    pass
