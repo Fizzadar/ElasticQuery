@@ -51,6 +51,7 @@ def _parse_kwargs(kwargs, kwargspec):
     return struct
 
 def make_dsl_object(cls, dsl_type, definition, *args, **kwargs):
+    '''Generates a Filter or Query object based on it's definition and the input arguments.'''
     struct = {}
 
     # List type (compound and/or filters)
@@ -77,6 +78,7 @@ def make_dsl_object(cls, dsl_type, definition, *args, **kwargs):
 
 
 def unroll_struct(struct):
+    '''Converts nested Filter and Query objects into nested dicts.'''
     if isinstance(struct, list):
         return [unroll_struct(v) for v in struct]
     elif isinstance(struct, dict):
@@ -104,6 +106,7 @@ def _unroll_spec(spec):
     return out_spec
 
 def unroll_definitions(definitions):
+    '''Unrolls definitions ensuring all arg/kwarg specs are tuples of (key, expected_type).'''
     for key, spec in definitions.iteritems():
         if isinstance(spec, dict):
             for arg_type in ['args', 'kwargs']:
