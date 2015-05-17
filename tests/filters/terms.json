@@ -1,0 +1,12 @@
+{
+    "args": ["field", ["term_value1", "term_value2"]],
+    "kwargs": {
+        "boost": 1.2
+    },
+    "output": {
+        "field": {
+            "value": ["term_value1", "term_value2"],
+            "boost": 1.2
+        }
+    }
+}

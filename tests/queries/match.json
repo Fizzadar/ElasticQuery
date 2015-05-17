@@ -1,0 +1,12 @@
+{
+    "args": ["field", "match_value"],
+    "kwargs": {
+        "boost": 1.2
+    },
+    "output": {
+        "field": {
+            "query": "match_value",
+            "boost": 1.2
+        }
+    }
+}
