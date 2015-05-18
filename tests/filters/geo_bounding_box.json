@@ -1,0 +1,13 @@
+{
+    "args": ["geo_field"],
+    "kwargs": {
+        "top_left": 50,
+        "bottom_right": 10
+    },
+    "output": {
+        "geo_field": {
+            "top_left": 50,
+            "bottom_right": 10
+        }
+    }
+}

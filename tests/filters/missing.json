@@ -1,0 +1,6 @@
+{
+    "args": ["exists_field"],
+    "output": {
+        "field": "exists_field"
+    }
+}

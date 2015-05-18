@@ -1,0 +1,12 @@
+{
+    "kwargs": {
+        "positive_boost": 2,
+        "positive": "_query",
+        "negative": "_query"
+    },
+    "output": {
+        "positive_boost": 2,
+        "positive": {"_query": {}},
+        "negative": {"_query": {}}
+    }
+}

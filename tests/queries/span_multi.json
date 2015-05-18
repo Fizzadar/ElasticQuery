@@ -1,0 +1,6 @@
+{
+    "args": ["_query"],
+    "output": {
+        "match": {"_query": {}}
+    }
+}

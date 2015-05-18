@@ -1,0 +1,7 @@
+{
+    "args": ["nested_field", "_query"],
+    "output": {
+        "path": "nested_field",
+        "query": {"_query": {}}
+    }
+}

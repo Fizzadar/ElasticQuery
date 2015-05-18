@@ -1,0 +1,9 @@
+{
+    "args": [["_query", "_query"]],
+    "output": {
+        "queries": [
+            {"_query": {}},
+            {"_query": {}}
+        ]
+    }
+}

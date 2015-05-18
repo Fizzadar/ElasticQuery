@@ -1,0 +1,14 @@
+{
+    "kwargs": {
+        "filter": "_filter",
+        "query": "_query"
+    },
+    "output": {
+        "filter": {
+            "_filter": {}
+        },
+        "query": {
+            "_query": {}
+        }
+    }
+}

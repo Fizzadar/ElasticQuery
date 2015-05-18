@@ -1,0 +1,6 @@
+{
+    "args": ["a query string, yo!"],
+    "output": {
+        "query": "a query string, yo!"
+    }
+}

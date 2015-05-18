@@ -1,0 +1,7 @@
+{
+    "args": [["list", "of", "fields"], "like text"],
+    "output": {
+        "fields": ["list", "of", "fields"],
+        "like_text": "like text"
+    }
+}

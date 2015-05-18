@@ -1,0 +1,10 @@
+{
+    "args": ["some_type"],
+    "kwargs": {
+        "query": "_query"
+    },
+    "output": {
+        "type": "some_type",
+        "query": {"_query": {}}
+    }
+}

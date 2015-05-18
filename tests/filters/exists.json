@@ -1,0 +1,6 @@
+{
+    "args": ["missing_field"],
+    "output": {
+        "field": "missing_field"
+    }
+}

@@ -1,0 +1,7 @@
+{
+    "args": ["nested_field", "_filter"],
+    "output": {
+        "path": "nested_field",
+        "filter": {"_filter": {}}
+    }
+}

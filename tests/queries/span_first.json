@@ -1,0 +1,10 @@
+{
+    "args": ["_query"],
+    "kwargs": {
+        "end": 3
+    },
+    "output": {
+        "match": {"_query": {}},
+        "end": 3
+    }
+}

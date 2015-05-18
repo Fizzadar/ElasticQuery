@@ -1,0 +1,6 @@
+{
+    "args": ["type_name"],
+    "output": {
+        "value": "type_name"
+    }
+}

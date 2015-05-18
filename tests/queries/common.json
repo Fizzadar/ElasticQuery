@@ -1,0 +1,10 @@
+{
+    "args": ["_query"],
+    "output": {
+        "body": {
+            "query": {
+                "_query": {}
+            }
+        }
+    }
+}

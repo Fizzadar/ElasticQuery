@@ -1,0 +1,17 @@
+{
+    "args": [
+        "geo_field",
+        [
+            {"lat": 30, "lon": 10},
+            {"lat": 50, "lon": 1}
+        ]
+    ],
+    "output": {
+        "geo_field": {
+            "points": [
+                {"lat": 30, "lon": 10},
+                {"lat": 50, "lon": 1}
+            ]
+        }
+    }
+}

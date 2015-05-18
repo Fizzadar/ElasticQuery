@@ -1,0 +1,8 @@
+{
+    "args": ["prefix_field", "prefix-match-"],
+    "output": {
+        "prefix_field": {
+            "value": "prefix-match-"
+        }
+    }
+}
