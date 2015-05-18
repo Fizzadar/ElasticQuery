@@ -6,14 +6,35 @@ from dictdiffer import diff as dictdiff
 
 from elasticquery import Filter, Query
 
+CLASS_NAMES = {
+    "_filter": Filter,
+    "_query": Query
+}
+
 
 def _test_filterquery(self, filterquery, test_name, test_data):
     method = getattr(filterquery, test_name)
 
+    if test_name.endswith('_'):
+        test_name = test_name[:1]
+
+    def parse_arg(arg):
+        if isinstance(arg, list):
+            return [parse_arg(a) for a in arg]
+        else:
+            return CLASS_NAMES[arg](arg, {}) if (isinstance(arg, basestring) and arg.startswith('_')) else arg
+
     args = test_data.get('args', [])
+    args = parse_arg(args)
+
     kwargs = test_data.get('kwargs', {})
+    kwargs = {
+        k: parse_arg(v) if isinstance(v, list) else parse_arg(v)
+        for k, v in kwargs.iteritems()
+    }
 
     output = method(*args, **kwargs).dict()
+
     try:
         self.assertEqual(output[test_name], test_data['output'])
     except AssertionError as e:
