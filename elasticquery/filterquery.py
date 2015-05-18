@@ -13,6 +13,9 @@ class MetaFilterQuery(type):
         unroll_definitions(cls._definitions)
 
     def __getattr__(cls, key):
+        if key == '__test__':
+            return None
+
         if key not in cls._definitions:
             raise cls._exception(key)
 
@@ -32,8 +35,10 @@ class BaseFilterQuery(object):
         self._dsl_type = dsl_type
 
     def dict(self):
+        dsl_type = self._dsl_type[:1] if self._dsl_type.endswith('_') else self._dsl_type
+
         return {
-            self._dsl_type: unroll_struct(self._struct)
+            dsl_type: unroll_struct(self._struct)
         }
 
     def __str__(self):
