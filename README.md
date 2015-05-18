@@ -1,189 +1,82 @@
 # ElasticQuery
 
-A simple query builder for Elasticsearch. Install with `pip install elasticquery`.
+A simple query builder for Elasticsearch. Install with `pip install elasticquery`. Uses metod calls and their args/kwargs to generate query/filter/aggregate objects. Outputs dict/json represntation to be passed directly to ES.
+
+### API
+
++ [Filters]()
++ [Queries]()
++ [Aggregates]()
++ [ElasticQuery]()
 
 
 ## Synopsis
 
 ```py
-from elasticquery import ElasticQuery, Filter, Query, Aggregate
+from elasticsearch import Elasticsearch
+from elasticquery import ElasticQuery, Filter, Query
 
-q = ElasticQuery()
 
-# Filters & queries
-q.must(
-    Filter.range('field', 0, 500),
-    Filter.terms(my_field=['list', 'of', 'terms']),
-    Filter.or_filter(
-        Query.string(field='matching string'),
-        Query.raw_string('field: another matching string')
-    )
+q = ElasticQuery(
+    es=Elasticsearch(),
+    index='mapping_test',
+    doc_type='doc_mapping'
 )
 
-# Nested filter/query
-q.should(
-    Query.nested('path', must=[
-        Query.term(field='match')
+# -> q.timeout
+q.timeout(10)
+
+# -> q.size
+q.size(1)
+
+# -> q.from
+q.offset(1)
+
+# -> q.filtered_query.filter
+q.filter(
+    # -> q.filtered_query.filter.bool
+    Filter.bool(must=[
+        # -> q.filtered_query.filter.bool.must.nested
+        Filter.nest('parent_field',
+            # -> q.filtered_query.filter.bool.must.nested.term
+            Filter.term('field', 'this')
+        )
+    ], must_not=[
+        # -> q.filtered_query.filter.bool.must_not.or_filter
+        Filter.any(
+            # -> q.filtered_query.filter.bool.must_not.or_filter.term
+            Filter.term('another_field', 'trololol'),
+            # -> q.filtered_query.filter.bool.must_not.or_filter.query.query_string
+            Filter.string('a query string')
+        )
     ])
 )
 
-# Aggregates
-q.aggregate(Aggregate.sum('aggregate_name', 'field_name'))
-
-# Sub aggregates
-q.aggregate(
-    Aggregate.terms('aggregate_name', 'field_name') \
-    .sub(Aggregate.sum('sub_aggregate_name', 'field_name'))
+# -> q.filtered_query.query
+q.query(
+    # -> q.filtered_query.query.prefix_match
+    Query.prefix_match('prefixed_field', 'matching string')
 )
 
-# Print out JSON ready for ES
+# Print the query
 print q.json(indent=4)
+
+# Run & print the result
+print q.get()
 ```
 
 
-## API: ElasticQuery
+## Naming Differences
 
-`q = ElasticQuery()`
+ElasticQuery attempts to keep all names and arguments in-line with their ES coutnerparts. Unfortunately a number of key terms are reserved by Python, so ElasticQuery implements the following alternatives:
 
-### q.json()
++ `from` -> `from_` (eg setting query['from'])
++ `or` -> `or_` (eg or_filters)
++ `and` -> `and_` (eg and_filters)
 
-Return a json string ready to send to Elasticsearch.
 
-### q.fields(fields)
+## Testing
 
-**fields**: list of fields to return
-
-### q.sort(field, order=False)
-
-Sort the result set by a field, order optional.
-
-### q.must(*Query/Filter)
-
-Search where the `Query`/`Filter` object matches.
-
-### q.should(*Query/Filter)
-
-Search where the `Query`/`Filter` object might matches.
-
-### q.must_not(*Query/Filter)
-
-Search where the `Query`/`Filter` object does not match.
-
-### q.aggregate(*Aggregate)
-
-Add some `Aggregate`s to our search query.
-
-
-## Filter
-
-### Filter.nested(path, must=None, should=None, must_not=None)
-
-Adds a nested query.
-
-**musts, shoulds & must_nots**: all lists containing `Query` or `Filter` objects.
-
-### Filter.range(field, gt=None, gte=None, lt=None, lte=None)
-
-### Filter.prefix(**kwargs)
-
-Prefix multiple keys.
-
-### Filter.term(**kwargs)
-
-Search multiple key=>value terms.
-
-### Filter.terms(execution='plain', **kwargs)
-
-Search multiple key=>[values] terms.
-
-### Filter.match(**kwargs)
-
-Search multiple key=>[values].
-
-### Filter.missing(field)
-
-Filter for missing/null fields.
-
-### Filter.raw_string(string, default_operator='AND')
-
-Adds a raw query string to match against.
-
-### Filter.string(default_operator='AND', **kwargs)
-
-This builds a query string based on `kwargs`. Values can be simple (ints/strings) or lists, in which case they are `OR`'d together.
-
-### Filter.or_filter(*args)
-
-Or the arg filters/queries together.
-
-
-## Query
-
-The `Query` class inherits from `Filter`, see above for API details.
-
-### Query.mlt(field, match, min_term_frequency=1, max_query_terms=False)
-
-Searches objects where field is similar to the match.
-
-### Query.constant_score(query_type='filter', must=None, should=None, must_not=None)
-
-Wraps a set of musts, shoulds and should nots under a constant score query.
-
-
-## Aggregate
-
-### Aggregate.sum(name, field)
-
-Get sum of a field.
-
-### Aggregate.avg(name, field)
-
-Get the average value across a field.
-
-### Aggregate.min(name, field)
-
-Get the lowest value of a field.
-
-### Aggregate.max(name, field)
-
-Get the highest value of a field.
-
-### Aggregate.stats(name, field)
-
-Get stats on a field.
-
-### Aggregate.extended_stats(name, field)
-
-Get extended stats on a field.
-
-### Aggregate.missing(name, field)
-
-Count how many documents are missing a given field.
-
-### Aggregate.value_count(name, field)
-
-Count how many documents contain a given field.
-
-### Aggregate.range(name, field, ranges)
-
-Generate multiple buckets based on the input ranges.
-
-### Aggregate.histogram(name, field, interval)
-
-Generate a histogram.
-
-### Aggregate.date_histogram(name, field, interval='day')
-
-Generate a date histogram.
-
-### Aggregate.terms(name, field)
-
-Count number of terms on a field.
-
-### Aggregate.nested(name, path)
-
-Create a nested aggregation (for use with sub aggregates, see Aggregate.sub).
-
-### Aggregate.filter(name, musts=None, shoulds=None, must_nots=None)
-
-Creates a filtered aggregate (for use with sub aggregates, see Aggregate.sub).
++ Create virtualenv
++ `pip install requirements.pip`
++ Run `nosetests`
