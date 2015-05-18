@@ -32,7 +32,8 @@ FILTERS = {
     },
     'geo_shape': {
         'field': True,
-        'process': lambda q: {'shape': q}
+        'kwargs': ('type', {'coordinates': []}),
+        'field_process': lambda q: {'shape': q}
     },
     'geohash_shell': {
         'field': True,
@@ -47,7 +48,7 @@ FILTERS = {
         'kwargs': ({'query': '_query', 'filter': '_filter'},)
     },
     'ids': {
-        'args': ({'values': []}),
+        'args': ({'values': []},),
         'kwargs': ('type',)
     },
     'indices': {
@@ -55,7 +56,7 @@ FILTERS = {
         'kwargs': ({('filter', 'no_match_filter'): '_filter'},)
     },
     'limit': {
-        'args': ('limit',)
+        'args': ('value',)
     },
     'match_all': {},
     'missing': {

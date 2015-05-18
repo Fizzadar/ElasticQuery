@@ -13,14 +13,13 @@ QUERIES = {
         'kwargs': ('operator', 'zero_terms_query', 'cutoff_frequency', 'boost')
     },
     'multi_match': {
-        'args': ({'fields': []}, 'query'),
-        'kwargs': ('type', 'operator', 'tie_breaker', 'minimum_should_match', 'analyzer')
+        'args': ({'fields': []}, 'query')
     },
     'bool': {
         'kwargs': ({('must', 'must_not', 'should'): ['_query']},)
     },
     'boost': {
-        'kwargs': ('positive_boost', 'negative_boost', {('positive', 'negative'): '_query'})
+        'kwargs': ({('positive', 'negative'): '_query'})
     },
     'common': {
         'args': ('query',),
@@ -52,7 +51,8 @@ QUERIES = {
     },
     'geo_shape': {
         'field': True,
-        'process': lambda q: {'shape': q}
+        'kwargs': ('type', {'coordinates': []}),
+        'field_process': lambda q: {'shape': q}
     },
     'has_child': {
         'args': ('type',),
@@ -63,7 +63,7 @@ QUERIES = {
         'kwargs': ({'query': '_query', 'filter': '_filter'},)
     },
     'ids': {
-        'args': ({'values': []}),
+        'args': ({'values': []},),
         'kwargs': ('type',)
     },
     'indices': {
@@ -102,19 +102,19 @@ QUERIES = {
         'kwargs': ('boost', 'flags')
     },
     'span_first': {
-        'args': ({'match': '_query'})
+        'args': ({'match': '_query'},)
     },
     'span_multi': {
-        'args': ({'match': '_query'})
+        'args': ({'match': '_query'},)
     },
     'span_near': {
-        'args': ({'clauses': ['_query']})
+        'args': ({'clauses': ['_query']},)
     },
     'span_not': {
         'kwargs': ({('include', 'exclude'): '_query'},)
     },
     'span_or': {
-        'args': ({'clauses': ['_query']})
+        'args': ({'clauses': ['_query']},)
     },
     'span_term': {
         'field': True,
