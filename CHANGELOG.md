@@ -1,3 +1,7 @@
+# v1.9.7
+
++ Add boost support to filtered query
+
 # v1.9.6
 
 + Add `precision_threshold` to `Aggregate.cardinality`
