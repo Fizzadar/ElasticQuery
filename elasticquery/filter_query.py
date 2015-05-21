@@ -237,7 +237,7 @@ class Query(Filter):
         }
 
     @classmethod
-    def filtered(self, query=None, filter=None):
+    def filtered(self, query=None, filter=None, boost=None):
         settings = {}
 
         if query is not None:
@@ -245,6 +245,9 @@ class Query(Filter):
 
         if filter is not None:
             settings['filter'] = inline_filter_query(filter)
+
+        if boost is not None:
+            settings['boost'] = boost
 
         return self.type, [], {
             'filtered': settings

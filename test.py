@@ -140,7 +140,8 @@ FILTERS = {
             },
             'query': {
                 'match_all': {}
-            }
+            },
+            'boost': 2
         }
     },
     'QUERY_FUZZY_LIKE_THIS': {
@@ -225,7 +226,7 @@ test('Query.string', query, FILTERS['QUERY_STRING'])
 query = Filter.nested('nested_path', must=[Filter.term(field_name1='value_name1')])[2]
 test('Query.raw_string', query, FILTERS['NESTED_FILTER'])
 
-query = Query.filtered(query=Query.match_all(), filter=Filter.match_all())[2]
+query = Query.filtered(query=Query.match_all(), filter=Filter.match_all(), boost=2)[2]
 test('Query.filtered', query, FILTERS['QUERY_FILTERED'])
 
 query = Query.fuzzy_like_this(like_text='test fuzzy', fields=['name', 'foo'])[2]
