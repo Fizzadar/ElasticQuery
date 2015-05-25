@@ -4,10 +4,10 @@ A simple query builder for Elasticsearch. Install with `pip install elasticquery
 
 ### API
 
-+ [Filters]()
-+ [Queries]()
-+ [Aggregates]()
-+ [ElasticQuery]()
++ [Filters](./docs/filters.md)
++ [Queries](./docs/queries.md)
++ [Aggregates](./docs/aggregates.md)
++ [ElasticQuery](./docs/elasticquery.md)
 
 
 ## Synopsis
@@ -23,45 +23,42 @@ q = ElasticQuery(
     doc_type='doc_mapping'
 )
 
-# -> q.timeout
-q.timeout(10)
-
-# -> q.size
-q.size(1)
-
-# -> q.from
-q.offset(1)
-
-# -> q.filtered_query.filter
+# -> query.filtered.filter
 q.filter(
-    # -> q.filtered_query.filter.bool
+    # -> query.filtered.filter.bool
     Filter.bool(must=[
-        # -> q.filtered_query.filter.bool.must.nested
-        Filter.nest('parent_field',
-            # -> q.filtered_query.filter.bool.must.nested.term
-            Filter.term('field', 'this')
-        )
+        # -> query.filtered.filter.bool.must.terms
+        Filter.terms('field', ['this', 'that'])
     ], must_not=[
-        # -> q.filtered_query.filter.bool.must_not.or_filter
-        Filter.any(
-            # -> q.filtered_query.filter.bool.must_not.or_filter.term
-            Filter.term('another_field', 'trololol'),
-            # -> q.filtered_query.filter.bool.must_not.or_filter.query.query_string
-            Filter.string('a query string')
+        # -> query.filtered.filter.bool.must_not.or
+        Filter.or_(
+            # -> query.filtered.filter.bool.must_not.or.term
+            Filter.term('another_field', 'matching-term'),
+            # -> query.filtered.filter.bool.must_not.or.query.query_string
+            Filter.query(
+                Query.query_string('A QUERY STRING', default_operator='OR')
+            )
         )
     ])
 )
 
-# -> q.filtered_query.query
+# -> query.filtered.query
 q.query(
-    # -> q.filtered_query.query.prefix_match
-    Query.prefix_match('prefixed_field', 'matching string')
+    # -> query.filtered.query.prefix
+    Query.prefix('field', 'prefixed-')
 )
 
-# Print the query
-print q.json(indent=4)
+# -> aggregates
+q.aggregate(
+    # -> aggregates.agg_name
+    Aggregate.date_histogram('agg_name', 'date_field', '1d').aggregate(
+        # aggregates.agg_name.aggregates.sub_agg_name
+        Aggregate.terms('sub_agg_name', 'terms_field', size=50)
+    )
+)
 
 # Run & print the result
+print q.json(indent=4)
 print q.get()
 ```
 
