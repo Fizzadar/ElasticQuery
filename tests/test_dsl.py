@@ -1,14 +1,18 @@
+# ElasticQuery
+# File: tests/test_dsl.py
+# Desc: tests for ElasticQuery DSL objects (Filter, Query, Aggregate)
+
 from os import path
 from unittest import TestCase
 
 from jsontest import JsonTest
-from dictdiffer import diff as dictdiff
 
 from elasticquery import Filter, Query, Aggregate
+from .util import assert_equal
 
 CLASS_NAMES = {
-    "_filter": Filter,
-    "_query": Query
+    '_filter': Filter,
+    '_query': Query
 }
 
 
@@ -31,18 +35,7 @@ def _test_filterquery(self, filterquery, test_name, test_data):
     }
 
     output = method(*args, **kwargs).dict()
-
-    try:
-        self.assertEqual(output, test_data['output'])
-    except AssertionError as e:
-        print 'OUTPUT', output
-        print 'EXPECTED', test_data['output']
-
-        diff = list(dictdiff(output, test_data['output']))
-        for d in diff:
-            print d
-
-        raise e
+    assert_equal(self, output, test_data['output'])
 
 
 class TestFilters(TestCase):
