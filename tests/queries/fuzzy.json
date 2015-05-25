@@ -6,11 +6,13 @@
         "prefix_length": 1
     },
     "output": {
-        "fuzzy_field": {
-            "value": "fuzziness",
-            "boost": 1.2,
-            "fuzziness": 3,
-            "prefix_length": 1
+        "fuzzy": {
+            "fuzzy_field": {
+                "value": "fuzziness",
+                "boost": 1.2,
+                "fuzziness": 3,
+                "prefix_length": 1
+            }
         }
     }
 }

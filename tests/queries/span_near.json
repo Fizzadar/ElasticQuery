@@ -1,9 +1,11 @@
 {
     "args": [["_query", "_query"]],
     "output": {
-        "clauses": [
-            {"_query": {}},
-            {"_query": {}}
-        ]
+        "span_near": {
+            "clauses": [
+                {"_query": {}},
+                {"_query": {}}
+            ]
+        }
     }
 }

@@ -4,7 +4,9 @@
         "fields": ["list", "of", "fields"]
     },
     "output": {
-        "query": "a query string",
-        "fields": ["list", "of", "fields"]
+        "query_string": {
+            "query": "a query string",
+           "fields": ["list", "of", "fields"]
+       }
     }
 }

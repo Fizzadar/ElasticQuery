@@ -4,7 +4,9 @@
         "query": "_query"
     },
     "output": {
-        "filter": {"_filter": {}},
-        "query": {"_query": {}}
+        "not": {
+            "filter": {"_filter": {}},
+            "query": {"_query": {}}
+        }
     }
 }

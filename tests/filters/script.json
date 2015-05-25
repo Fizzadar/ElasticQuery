@@ -6,9 +6,11 @@
         }
     },
     "output": {
-        "script": "some script",
-        "params": {
-            "hello": "world"
+        "script": {
+            "script": "some script",
+            "params": {
+                "hello": "world"
+            }
         }
     }
 }

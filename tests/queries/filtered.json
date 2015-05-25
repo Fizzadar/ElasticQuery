@@ -4,11 +4,13 @@
         "query": "_query"
     },
     "output": {
-        "filter": {
-            "_filter": {}
-        },
-        "query": {
-            "_query": {}
+        "filtered": {
+            "filter": {
+                "_filter": {}
+            },
+            "query": {
+                "_query": {}
+            }
         }
     }
 }

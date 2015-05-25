@@ -6,10 +6,12 @@
         "from": "100km"
     },
     "output": {
-        "geo_field": {
-            "lat": 50,
-            "lon": 10
-        },
-        "from": "100km"
+        "geo_distance_range": {
+            "geo_field": {
+                "lat": 50,
+                "lon": 10
+            },
+            "from": "100km"
+        }
     }
 }

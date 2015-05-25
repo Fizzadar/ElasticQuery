@@ -5,8 +5,10 @@
         "negative": "_query"
     },
     "output": {
-        "positive_boost": 2,
-        "positive": {"_query": {}},
-        "negative": {"_query": {}}
+        "boost": {
+            "positive_boost": 2,
+            "positive": {"_query": {}},
+            "negative": {"_query": {}}
+        }
     }
 }

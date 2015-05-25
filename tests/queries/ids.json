@@ -4,7 +4,9 @@
         "type": "type_name"
     },
     "output": {
-        "values": ["id_one", "id_two"],
-        "type": "type_name"
+        "ids": {
+            "values": ["id_one", "id_two"],
+            "type": "type_name"
+        }
     }
 }

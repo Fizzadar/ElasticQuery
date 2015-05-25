@@ -4,9 +4,11 @@
         "boost": 1.2
     },
     "output": {
-        "field": {
-            "value": "term_value",
-            "boost": 1.2
+        "span_term": {
+            "field": {
+                "value": "term_value",
+                "boost": 1.2
+            }
         }
     }
 }

@@ -1,6 +1,8 @@
 {
     "args": ["_query"],
     "output": {
-        "match": {"_query": {}}
+        "span_multi": {
+            "match": {"_query": {}}
+        }
     }
 }

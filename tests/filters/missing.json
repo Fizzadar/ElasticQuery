@@ -1,6 +1,8 @@
 {
-    "args": ["exists_field"],
+    "args": ["missing_field"],
     "output": {
-        "field": "exists_field"
+        "missing": {
+            "field": "missing_field"
+        }
     }
 }

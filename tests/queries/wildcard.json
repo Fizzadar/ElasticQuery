@@ -4,9 +4,11 @@
         "boost": 1.2
     },
     "output": {
-        "wild_field": {
-            "value": "wildcard*",
-            "boost": 1.2
+        "wildcard": {
+                "wild_field": {
+                "value": "wildcard*",
+                "boost": 1.2
+            }
         }
     }
 }

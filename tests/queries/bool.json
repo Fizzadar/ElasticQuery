@@ -5,17 +5,19 @@
         "must_not": ["_query", "_query"]
     },
     "output": {
-        "must": [
-            {"_query": {}}
-        ],
-        "should": [
-            {"_query": {}},
-            {"_query": {}},
-            {"_query": {}}
-        ],
-        "must_not": [
-            {"_query": {}},
-            {"_query": {}}
-        ]
+        "bool": {
+            "must": [
+                {"_query": {}}
+            ],
+            "should": [
+                {"_query": {}},
+                {"_query": {}},
+                {"_query": {}}
+            ],
+            "must_not": [
+                {"_query": {}},
+                {"_query": {}}
+            ]
+        }
     }
 }

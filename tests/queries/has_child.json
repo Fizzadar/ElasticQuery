@@ -5,8 +5,10 @@
         "filter": "_filter"
     },
     "output": {
-        "type": "child_type",
-        "query": {"_query": {}},
-        "filter": {"_filter": {}}
+        "has_child": {
+            "type": "child_type",
+            "query": {"_query": {}},
+            "filter": {"_filter": {}}
+        }
     }
 }

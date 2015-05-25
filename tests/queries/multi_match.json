@@ -4,8 +4,10 @@
         "boost": 1.2
     },
     "output": {
-        "fields": ["field_one", "field_two"],
-        "query": "match_value",
-        "boost": 1.2
+        "multi_match": {
+            "fields": ["field_one", "field_two"],
+            "query": "match_value",
+            "boost": 1.2
+        }
     }
 }

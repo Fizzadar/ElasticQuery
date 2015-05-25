@@ -4,7 +4,9 @@
         "query": "_query"
     },
     "output": {
-        "type": "some_type",
-        "query": {"_query": {}}
+        "top_children": {
+            "type": "some_type",
+            "query": {"_query": {}}
+        }
     }
 }

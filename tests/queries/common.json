@@ -1,9 +1,11 @@
 {
     "args": ["_query"],
     "output": {
-        "body": {
-            "query": {
-                "_query": {}
+        "common": {
+            "body": {
+                "query": {
+                    "_query": {}
+                }
             }
         }
     }

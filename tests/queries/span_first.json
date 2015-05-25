@@ -4,7 +4,9 @@
         "end": 3
     },
     "output": {
-        "match": {"_query": {}},
-        "end": 3
+        "span_first": {
+            "match": {"_query": {}},
+            "end": 3
+        }
     }
 }

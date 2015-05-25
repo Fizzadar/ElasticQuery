@@ -5,9 +5,11 @@
         "lon": "-202"
     },
     "output": {
-        "geo_field": {
-            "lat": 50,
-            "lon": "-202"
+        "geohash_shell": {
+            "geo_field": {
+                "lat": 50,
+                "lon": "-202"
+            }
         }
     }
 }

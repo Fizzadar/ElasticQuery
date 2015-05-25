@@ -4,7 +4,9 @@
         "exclude": "_query"
     },
     "output": {
-        "include": {"_query": {}},
-        "exclude": {"_query": {}}
+        "span_not": {
+            "include": {"_query": {}},
+            "exclude": {"_query": {}}
+        }
     }
 }

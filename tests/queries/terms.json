@@ -1,8 +1,8 @@
 {
-    "args": ["field", ["term_value1", "term_value2"]],
+    "args": ["terms_field", ["term_value1", "term_value2"]],
     "output": {
-        "field": {
-            "value": ["term_value1", "term_value2"]
+        "terms": {
+            "terms_field": ["term_value1", "term_value2"]
         }
     }
 }

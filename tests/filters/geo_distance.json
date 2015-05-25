@@ -5,9 +5,11 @@
         "lon": 10
     },
     "output": {
-        "geo_field": {
-            "lat": 50,
-            "lon": 10
+        "geo_distance": {
+            "geo_field": {
+                "lat": 50,
+                "lon": 10
+            }
         }
     }
 }

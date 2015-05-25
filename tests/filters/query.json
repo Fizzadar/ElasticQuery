@@ -1,6 +1,8 @@
 {
-    "args": ["a query string, yo!"],
+    "args": ["_query"],
     "output": {
-        "query": "a query string, yo!"
+        "query": {
+            "_query": {}
+        }
     }
 }

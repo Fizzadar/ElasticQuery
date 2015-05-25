@@ -1,3 +1,5 @@
 {
-    "output": {}
+    "output": {
+        "match_all": {}
+    }
 }

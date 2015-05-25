@@ -1,6 +1,8 @@
 {
     "args": [100],
     "output": {
-        "value": 100
+        "limit": {
+            "value": 100
+        }
     }
 }

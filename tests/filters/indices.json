@@ -5,8 +5,10 @@
         "no_match_filter": "_filter"
     },
     "output": {
-        "indices": ["index_one", "index_two"],
-        "filter": {"_filter": {}},
-        "no_match_filter": {"_filter": {}}
+        "indices": {
+            "indices": ["index_one", "index_two"],
+            "filter": {"_filter": {}},
+            "no_match_filter": {"_filter": {}}
+        }
     }
 }

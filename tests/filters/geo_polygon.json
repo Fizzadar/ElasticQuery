@@ -7,11 +7,13 @@
         ]
     ],
     "output": {
-        "geo_field": {
-            "points": [
-                {"lat": 30, "lon": 10},
-                {"lat": 50, "lon": 1}
-            ]
+        "geo_polygon": {
+            "geo_field": {
+                "points": [
+                    {"lat": 30, "lon": 10},
+                    {"lat": 50, "lon": 1}
+                ]
+            }
         }
     }
 }

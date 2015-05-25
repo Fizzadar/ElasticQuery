@@ -5,17 +5,19 @@
         "must_not": ["_filter", "_filter"]
     },
     "output": {
-        "must": [
-            {"_filter": {}}
-        ],
-        "should": [
-            {"_filter": {}},
-            {"_filter": {}},
-            {"_filter": {}}
-        ],
-        "must_not": [
-            {"_filter": {}},
-            {"_filter": {}}
-        ]
+        "bool": {
+            "must": [
+                {"_filter": {}}
+            ],
+            "should": [
+                {"_filter": {}},
+                {"_filter": {}},
+                {"_filter": {}}
+            ],
+            "must_not": [
+                {"_filter": {}},
+                {"_filter": {}}
+            ]
+        }
     }
 }
