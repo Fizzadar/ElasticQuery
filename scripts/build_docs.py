@@ -37,18 +37,18 @@ def make_args_string(argspec, cls_name):
 
     args = kwargs = None
 
-    if 'args' in argspec:
-        args = [
-            arg[0] if arg[1] is None else arg_to_string(arg[1])
-            for arg in argspec['args']
-        ]
+    args = [
+        arg[0] if arg[1] is None else arg_to_string(arg[1])
+        for arg in argspec.get('args', [])
+    ]
 
-        if argspec.get('field'):
-            args.insert(0, 'field')
+    if argspec.get('field'):
+        args.insert(0, 'field')
 
-        if cls_name == 'Aggregate':
-            args.insert(0, 'name')
+    if cls_name == 'Aggregate':
+        args.insert(0, 'name')
 
+    if args:
         args = ', '.join(args)
 
     if 'kwargs' in argspec:
@@ -78,7 +78,7 @@ def build_dsl_docs(definitions, title, cls_name, target_file):
 
     for key, argspec in definitions.iteritems():
         args_string = make_args_string(argspec, cls_name)
-        out = '{0}\n### `{1}.{2}({3})`\n'.format(out, cls_name, key, args_string)
+        out = '{0}\n### {1}\n\n`{2}.{3}({4})`\n'.format(out, key, cls_name, key, args_string)
 
     f = open(target_file, 'w')
     f.write(out)

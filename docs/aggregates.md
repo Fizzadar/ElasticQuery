@@ -1,59 +1,117 @@
 # ElasticQuery Aggregates API
 
-### `Aggregate.geo_bounds(name, field)`
+### geo_bounds
 
-### `Aggregate.date_histogram(name, field, interval)`
+`Aggregate.geo_bounds(name, field)`
 
-### `Aggregate.global(None)`
+### date_histogram
 
-### `Aggregate.nested(name, path)`
+`Aggregate.date_histogram(name, field, interval)`
 
-### `Aggregate.ip_range(name, field, [])`
+### global
 
-### `Aggregate.filters(name, [Filter])`
+`Aggregate.global(name)`
 
-### `Aggregate.avg(name, field)`
+### nested
 
-### `Aggregate.children(name, type)`
+`Aggregate.nested(name, path)`
 
-### `Aggregate.stats(name, field)`
+### ip_range
 
-### `Aggregate.scripted_metric(None)`
+`Aggregate.ip_range(name, field, [])`
 
-### `Aggregate.min(name, field)`
+### filters
 
-### `Aggregate.sum(name, field)`
+`Aggregate.filters(name, [Filter])`
 
-### `Aggregate.extended_stats(name, field)`
+### avg
 
-### `Aggregate.value_count(name, field)`
+`Aggregate.avg(name, field)`
 
-### `Aggregate.percentiles(name, field)`
+### children
 
-### `Aggregate.terms(name, field)`
+`Aggregate.children(name, type)`
 
-### `Aggregate.missing(name, field)`
+### stats
 
-### `Aggregate.max(name, field)`
+`Aggregate.stats(name, field)`
 
-### `Aggregate.histogram(name, field, interval)`
+### scripted_metric
 
-### `Aggregate.date_range(name, field, [])`
+`Aggregate.scripted_metric(name)`
 
-### `Aggregate.cardinality(name, field)`
+### min
 
-### `Aggregate.geohash_grid(name, field)`
+`Aggregate.min(name, field)`
 
-### `Aggregate.geo_distance(name, field, origin, [])`
+### sum
 
-### `Aggregate.filter(name, Filter)`
+`Aggregate.sum(name, field)`
 
-### `Aggregate.percentile_ranks(name, field)`
+### extended_stats
 
-### `Aggregate.range(name, field, [])`
+`Aggregate.extended_stats(name, field)`
 
-### `Aggregate.significant_terms(name, field)`
+### value_count
 
-### `Aggregate.top_hits(None)`
+`Aggregate.value_count(name, field)`
 
-### `Aggregate.reverse_nested(None)`
+### percentiles
+
+`Aggregate.percentiles(name, field)`
+
+### terms
+
+`Aggregate.terms(name, field)`
+
+### missing
+
+`Aggregate.missing(name, field)`
+
+### max
+
+`Aggregate.max(name, field)`
+
+### histogram
+
+`Aggregate.histogram(name, field, interval)`
+
+### date_range
+
+`Aggregate.date_range(name, field, [])`
+
+### cardinality
+
+`Aggregate.cardinality(name, field)`
+
+### geohash_grid
+
+`Aggregate.geohash_grid(name, field)`
+
+### geo_distance
+
+`Aggregate.geo_distance(name, field, origin, [])`
+
+### filter
+
+`Aggregate.filter(name, Filter)`
+
+### percentile_ranks
+
+`Aggregate.percentile_ranks(name, field)`
+
+### range
+
+`Aggregate.range(name, field, [])`
+
+### significant_terms
+
+`Aggregate.significant_terms(name, field)`
+
+### top_hits
+
+`Aggregate.top_hits(name)`
+
+### reverse_nested
+
+`Aggregate.reverse_nested(name)`
