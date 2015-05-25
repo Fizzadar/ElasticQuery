@@ -1,0 +1,10 @@
+{
+    "args": ["agg_name", "max_field"],
+    "output": {
+        "agg_name": {
+            "max": {
+                "field": "max_field"
+            }
+        }
+    }
+}

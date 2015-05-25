@@ -1,0 +1,10 @@
+{
+    "args": ["agg_name", "sum_field"],
+    "output": {
+        "agg_name": {
+            "sum": {
+                "field": "sum_field"
+            }
+        }
+    }
+}

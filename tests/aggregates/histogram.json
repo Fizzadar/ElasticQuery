@@ -1,0 +1,11 @@
+{
+    "args": ["agg_name", "field", 50],
+    "output": {
+        "agg_name": {
+            "histogram": {
+                "field": "field",
+                "interval": 50
+            }
+        }
+    }
+}

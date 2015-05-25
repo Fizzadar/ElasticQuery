@@ -1,0 +1,10 @@
+{
+    "args": ["agg_name", "value_field"],
+    "output": {
+        "agg_name": {
+            "value_count": {
+                "field": "value_field"
+            }
+        }
+    }
+}

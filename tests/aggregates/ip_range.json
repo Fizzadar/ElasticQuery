@@ -1,0 +1,11 @@
+{
+    "args": ["agg_name", "ip_field", ["ranges"]],
+    "output": {
+        "agg_name": {
+            "ip_range": {
+                "field": "ip_field",
+                "ranges": ["ranges"]
+            }
+        }
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "args": ["agg_name", "field"],
+    "output": {
+        "agg_name": {
+            "significant_terms": {
+                "field": "field"
+            }
+        }
+    }
+}

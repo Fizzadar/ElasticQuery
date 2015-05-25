@@ -1,0 +1,12 @@
+{
+    "args": ["agg_name", "geo_field", "origin", ["ranges"]],
+    "output": {
+        "agg_name": {
+            "geo_distance": {
+                "field": "geo_field",
+                "origin": "origin",
+                "ranges": ["ranges"]
+            }
+        }
+    }
+}

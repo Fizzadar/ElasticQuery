@@ -1,0 +1,10 @@
+{
+    "args": ["agg_name", "nested_field"],
+    "output": {
+        "agg_name": {
+            "nested": {
+                "path": "nested_field"
+            }
+        }
+    }
+}

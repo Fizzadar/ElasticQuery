@@ -1,0 +1,10 @@
+{
+    "args": ["agg_name", "geo_field"],
+    "output": {
+        "agg_name": {
+            "geohash_grid": {
+                "field": "geo_field"
+            }
+        }
+    }
+}
