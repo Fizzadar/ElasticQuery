@@ -4,7 +4,7 @@ from unittest import TestCase
 from jsontest import JsonTest
 from dictdiffer import diff as dictdiff
 
-from elasticquery import Filter, Query
+from elasticquery import Filter, Query, Aggregate
 
 CLASS_NAMES = {
     "_filter": Filter,
@@ -14,9 +14,6 @@ CLASS_NAMES = {
 
 def _test_filterquery(self, filterquery, test_name, test_data):
     method = getattr(filterquery, test_name)
-
-    if test_name.endswith('_'):
-        test_name = test_name[:1]
 
     def parse_arg(arg):
         if isinstance(arg, list):
@@ -36,12 +33,12 @@ def _test_filterquery(self, filterquery, test_name, test_data):
     output = method(*args, **kwargs).dict()
 
     try:
-        self.assertEqual(output[test_name], test_data['output'])
+        self.assertEqual(output, test_data['output'])
     except AssertionError as e:
-        print 'OUTPUT', output[test_name]
+        print 'OUTPUT', output
         print 'EXPECTED', test_data['output']
 
-        diff = list(dictdiff(output[test_name], test_data['output']))
+        diff = list(dictdiff(output, test_data['output']))
         for d in diff:
             print d
 
@@ -62,4 +59,12 @@ class TestQueries(TestCase):
     jsontest_files = path.join('tests', 'queries')
     jsontest_function = lambda self, test_name, test_data: (
         _test_filterquery(self, Query, test_name, test_data)
+    )
+
+class TestAggregates(TestCase):
+    __metaclass__ = JsonTest
+
+    jsontest_files = path.join('tests', 'aggregates')
+    jsontest_function = lambda self, test_name, test_data: (
+        _test_filterquery(self, Aggregate, test_name, test_data)
     )
