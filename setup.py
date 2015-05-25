@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # ElasticQuery
 # File: setup.py
 # Desc: needed
@@ -9,7 +8,7 @@ except ImportError:
     from distutils.core import setup
 
 setup(
-    version='1.9.6',
+    version='2.0',
     name='ElasticQuery',
     description='A simple query builder for Elasticsearch',
     author='Nick Barrett',
