@@ -1,3 +1,10 @@
+# v2.0
+
++ Complete rewrite, see docs/v1_to_v2.md for breaking changes, summary:
+    * Full support for ES 1.5.2 queries, filters and aggregates
+    * Extensible DSL builder replaces manually handled methods
+    * Proper testing for each query/filter/aggregate and combined queries
+
 # v1.9.6
 
 + Add `precision_threshold` to `Aggregate.cardinality`
@@ -35,7 +42,6 @@
 # v1.8.1
 
 + Fix for timeout: append 's' on the end (changable via `time_type` kwarg)
-+ Start minor versioning for quick fixes(!)
 
 # v1.8
 
