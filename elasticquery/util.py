@@ -27,7 +27,6 @@ def _check_arg(key, expected_type, arg):
 
     else:
         if isinstance(arg, dict) or isinstance(arg, list):
-            print arg
             raise InvalidArg('{} should be a string or integer'.format(key))
 
 def _parse_args(args, argspec):
@@ -51,10 +50,15 @@ def _parse_kwargs(kwargs, kwargspec):
 
     return struct
 
-def make_dsl_object(cls, dsl_type, definition, *args, **kwargs):
+def make_struct(definition, *args, **kwargs):
     '''Generates a Filter or Query object based on it's definition and the input arguments.'''
+    # Single type
+    if isinstance(definition, basestring):
+        _check_arg('', definition, args[0])
+        struct = args[0]
+
     # List type (compound and/or filters)
-    if isinstance(definition, list):
+    elif isinstance(definition, list):
         _check_arg('', definition, list(args))
         struct = args
 
@@ -64,9 +68,12 @@ def make_dsl_object(cls, dsl_type, definition, *args, **kwargs):
 
         # Field type ({field: {args}})
         if definition.get('field'):
-            field_struct = {}
-            field_struct.update(_parse_args(args[1:], definition.get('args', {})))
-            field_struct.update(_parse_kwargs(kwargs, definition.get('kwargs', {})))
+            if definition.get('value'):
+                field_struct = _parse_args(args[1:], definition.get('args', {}))['_value']
+            else:
+                field_struct = {}
+                field_struct.update(_parse_args(args[1:], definition.get('args', {})))
+                field_struct.update(_parse_kwargs(kwargs, definition.get('kwargs', {})))
 
             if 'field_process' in definition:
                 field_struct = definition['field_process'](field_struct)
@@ -84,8 +91,7 @@ def make_dsl_object(cls, dsl_type, definition, *args, **kwargs):
     if 'process' in definition:
         struct = definition['process'](struct)
 
-    # Create a new class object
-    return cls(dsl_type, struct)
+    return struct
 
 
 def unroll_struct(struct):
