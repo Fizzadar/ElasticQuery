@@ -2,9 +2,8 @@
 # File: elasticquery/queries.py
 # Desc: internal ElasticQuery definitions mapping to Elasticsearch query objects
 
-from .filterquery import BaseFilterQuery, MetaFilterQuery
+from .dsl import BaseFilterQuery, MetaFilterQuery
 from .exception import NoQuery
-
 
 QUERIES = {
     'match': {
@@ -37,7 +36,7 @@ QUERIES = {
     'fuzzy_like_this': {
         'args': ({'fields': []}, 'like_text')
     },
-    'fuzz_like_this_field': {
+    'fuzzy_like_this_field': {
         'field': True,
         'args': ('like_text',),
         'kwargs': (
@@ -128,8 +127,8 @@ QUERIES = {
     },
     'terms': {
         'field': True,
-        'args': ({'value': []},),
-        'kwargs': ('boost',)
+        'value': True,
+        'args': ({'_value': []},)
     },
     'top_children': {
         'args': ('type',),

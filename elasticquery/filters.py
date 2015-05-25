@@ -2,9 +2,8 @@
 # File: elasticquery/filters.py
 # Desc: internal ElasticQuery definitions mapping to Elasticsearch filter objects
 
-from .filterquery import BaseFilterQuery, MetaFilterQuery
+from .dsl import BaseFilterQuery, MetaFilterQuery
 from .exception import NoFilter
-
 
 FILTERS = {
     'and_': ['_filter'],
@@ -73,9 +72,7 @@ FILTERS = {
         'field': True,
         'args': ('value',)
     },
-    'query': {
-        'args': ({'query': '_query'})
-    },
+    'query': '_query',
     'range': {
         'field': True,
         'kwargs': ('gte', 'gt', 'lte', 'lt')
@@ -90,13 +87,12 @@ FILTERS = {
     },
     'term': {
         'field': True,
-        'args': ('value',),
-        'kwargs': ('boost',)
+        'args': ('value',)
     },
     'terms': {
         'field': True,
-        'args': ({'value': []},),
-        'kwargs': ('boost',)
+        'value': True,
+        'args': ({'_value': []},)
     },
     'type': {
         'args': ('value',)
