@@ -74,7 +74,9 @@ def make_args_string(argspec, cls_name):
 
 
 def build_dsl_docs(definitions, title, cls_name, target_file):
-    out = '# ElasticQuery {0} API\n'.format(title)
+    out = '''# ElasticQuery {0} API\n
+Note that all {1} calls can also be passed additional keyword arguments not specified here, but no validation of inputs is done on them.
+'''.format(title, cls_name)
 
     for key, argspec in definitions.iteritems():
         args_string = make_args_string(argspec, cls_name)

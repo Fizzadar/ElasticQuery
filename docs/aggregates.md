@@ -1,5 +1,7 @@
 # ElasticQuery Aggregates API
 
+Note that all Aggregate calls can also be passed additional keyword arguments not specified here, but no validation of inputs is done on them.
+
 ### geo_bounds
 
 `Aggregate.geo_bounds(name, field)`
