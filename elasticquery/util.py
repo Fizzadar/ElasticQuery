@@ -34,7 +34,7 @@ def _parse_args(args, argspec):
     arg_length = len(args)
 
     for i, (key, expected_type) in enumerate(argspec):
-        if i <= arg_length:
+        if i <= arg_length and args[i] is not None:
             _check_arg(key, expected_type, args[i])
             struct[key] = args[i]
 
@@ -44,7 +44,7 @@ def _parse_kwargs(kwargs, kwargspec):
     struct = {}
 
     for (key, expected_type) in kwargspec:
-        if key in kwargs:
+        if key in kwargs and kwargs[key] is not None:
             _check_arg(key, expected_type, kwargs[key])
             struct[key] = kwargs.pop(key)
 
@@ -52,13 +52,8 @@ def _parse_kwargs(kwargs, kwargspec):
 
 def make_struct(definition, *args, **kwargs):
     '''Generates a Filter or Query object based on it's definition and the input arguments.'''
-    # Single type
-    if isinstance(definition, basestring):
-        _check_arg('', definition, args[0])
-        struct = args[0]
-
     # List type (compound and/or filters)
-    elif isinstance(definition, list):
+    if isinstance(definition, list):
         _check_arg('', definition, list(args))
         struct = args
 
@@ -68,12 +63,22 @@ def make_struct(definition, *args, **kwargs):
 
         # Field type ({field: {args}})
         if definition.get('field'):
-            if definition.get('value'):
-                field_struct = _parse_args(args[1:], definition.get('args', {}))['_value']
+            field_args = _parse_args(args[1:], definition.get('args', []))
+            field_kwargs = _parse_kwargs(kwargs, definition.get('kwargs', []))
+
+            # Value must be set in definition args, for queries
+            # where no kwargs are allowed
+            if definition.get('value_only'):
+                field_struct = field_args['value']
+
+            # No kwargs and value set?
+            elif (not field_kwargs and 'value' in field_args):
+                field_struct = field_args['value']
+
             else:
                 field_struct = {}
-                field_struct.update(_parse_args(args[1:], definition.get('args', {})))
-                field_struct.update(_parse_kwargs(kwargs, definition.get('kwargs', {})))
+                field_struct.update(field_args)
+                field_struct.update(field_kwargs)
 
             if 'field_process' in definition:
                 field_struct = definition['field_process'](field_struct)
@@ -82,12 +87,16 @@ def make_struct(definition, *args, **kwargs):
 
         # Normal type ({args})
         else:
-            struct.update(_parse_args(args, definition.get('args', {})))
-            struct.update(_parse_kwargs(kwargs, definition.get('kwargs', {})))
+            struct.update(_parse_args(args, definition.get('args', [])))
+            struct.update(_parse_kwargs(kwargs, definition.get('kwargs', [])))
 
-        # Always update with remaining kwargs
-        struct.update(kwargs)
+        # Update any remaining kwargs (excluding Nones)
+        struct.update({
+            k: v for k, v in kwargs.iteritems()
+            if v is not None
+        })
 
+    # Post-process the struct
     if 'process' in definition:
         struct = definition['process'](struct)
 
