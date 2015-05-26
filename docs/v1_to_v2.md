@@ -20,3 +20,13 @@ These keep ElasticQuery true to the Elasticsearch DSL format.
 
 + `ElasticQuery.offset` is now `ElasticQuery.from_`
 + `Filter.or_filter` is now `Filter.or_`
+
+### Query string default operator
+
+Is now the same as Elasticsearch, `OR`. Was previousl defaulted to `AND`.
+
+### Queries
+
++ No more `Filter.string` or `Query.string`
++ No more `Filter.query_string`, wrap `Query.query_string` inside a `Filter.query`
++ The `cache=True` must be included in the `Filter.query` context, not inside `Query.query_string`.
