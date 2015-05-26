@@ -59,16 +59,12 @@ class TestElasticQuery(TestCase):
                 'filtered': {
                     'filter': {
                         'term': {
-                            'field': {
-                                'value': 'term'
-                            }
+                            'field': 'term'
                         }
                     },
                     'query': {
                         'prefix': {
-                            'field': {
-                                'value': 'prefix'
-                            }
+                            'field': 'prefix'
                         }
                     }
                 }

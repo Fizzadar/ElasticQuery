@@ -61,3 +61,34 @@ class TestAggregates(TestCase):
     jsontest_function = lambda self, test_name, test_data: (
         _test_filterquery(self, Aggregate, test_name, test_data)
     )
+
+class TestQueryFilter(TestCase):
+    def test_query_filter_nocache(self):
+        filter_query = Filter.query(
+            Query.term('field', 'value')
+        )
+
+        assert_equal(self, filter_query.dict(), {
+            'query': {
+                'term': {
+                    'field': 'value'
+                }
+            }
+        })
+
+    def test_query_filter_cached(self):
+        filter_query = Filter.query(
+            Query.term('field', 'value'),
+            cache=True
+        )
+
+        assert_equal(self, filter_query.dict(), {
+            'fquery': {
+                'query': {
+                    'term': {
+                        'field': 'value'
+                    }
+                },
+                '_cache': True
+            }
+        })

@@ -2,9 +2,7 @@
     "args": ["regex_field", "regex[string]"],
     "output": {
         "regexp": {
-            "regex_field": {
-                "value": "regex[string]"
-            }
+            "regex_field": "regex[string]"
         }
     }
 }
