@@ -72,7 +72,6 @@ FILTERS = {
         'field': True,
         'args': ('value',)
     },
-    'query': '_query',
     'range': {
         'field': True,
         'kwargs': ('gte', 'gt', 'lte', 'lt')
@@ -91,8 +90,8 @@ FILTERS = {
     },
     'terms': {
         'field': True,
-        'value': True,
-        'args': ({'_value': []},)
+        'value_only': True,
+        'args': ({'value': []},)
     },
     'type': {
         'args': ('value',)
@@ -106,3 +105,13 @@ class Filter(BaseFilterQuery):
     _eq_type = 'filter'
     _definitions = FILTERS
     _exception = NoFilter
+
+    @classmethod
+    def query(cls, query, cache=False):
+        if cache:
+            return cls('fquery', {
+                'query': query,
+                '_cache': True
+            })
+        else:
+            return cls('query', query)
