@@ -1,10 +1,10 @@
 {
-    "args": ["agg_name", "range_field", []],
+    "args": ["agg_name", "range_field", [{}]],
     "output": {
         "agg_name": {
             "range": {
                 "field": "range_field",
-                "ranges": []
+                "ranges": [{}]
             }
         }
     }
