@@ -1,0 +1,12 @@
+{
+    "kwargs": {
+        "include": "_query",
+        "exclude": "_query"
+    },
+    "output": {
+        "span_not": {
+            "include": {"_query": {}},
+            "exclude": {"_query": {}}
+        }
+    }
+}

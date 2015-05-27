@@ -1,0 +1,11 @@
+{
+    "args": ["agg_name", "date_field", [{}]],
+    "output": {
+        "agg_name": {
+            "date_range": {
+                "field": "date_field",
+                "ranges": [{}]
+            }
+        }
+    }
+}

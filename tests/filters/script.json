@@ -1,0 +1,16 @@
+{
+    "args": ["some script"],
+    "kwargs": {
+        "params": {
+            "hello": "world"
+        }
+    },
+    "output": {
+        "script": {
+            "script": "some script",
+            "params": {
+                "hello": "world"
+            }
+        }
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "args": ["agg_name", "date_field", "1d"],
+    "output": {
+        "agg_name": {
+            "date_histogram": {
+                "field": "date_field",
+                "interval": "1d"
+            }
+        }
+    }
+}

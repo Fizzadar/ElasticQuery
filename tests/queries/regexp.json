@@ -1,0 +1,14 @@
+{
+    "args": ["regex_field", "regex[string]"],
+    "kwargs": {
+        "boost": 1.3
+    },
+    "output": {
+        "regexp": {
+            "regex_field": {
+                "value": "regex[string]",
+                "boost": 1.3
+            }
+        }
+    }
+}

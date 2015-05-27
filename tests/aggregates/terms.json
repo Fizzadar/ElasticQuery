@@ -1,0 +1,14 @@
+{
+    "args": ["agg_name", "terms_field"],
+    "kwargs": {
+        "size": 5
+    },
+    "output": {
+        "agg_name": {
+            "terms": {
+                "field": "terms_field",
+                "size": 5
+            }
+        }
+    }
+}

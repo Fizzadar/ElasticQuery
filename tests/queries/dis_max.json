@@ -1,0 +1,11 @@
+{
+    "args": [["_query", "_query"]],
+    "output": {
+        "dis_max": {
+            "queries": [
+                {"_query": {}},
+                {"_query": {}}
+            ]
+        }
+    }
+}

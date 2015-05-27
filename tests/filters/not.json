@@ -1,0 +1,12 @@
+{
+    "kwargs": {
+        "filter": "_filter",
+        "query": "_query"
+    },
+    "output": {
+        "not": {
+            "filter": {"_filter": {}},
+            "query": {"_query": {}}
+        }
+    }
+}

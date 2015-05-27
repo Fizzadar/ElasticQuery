@@ -1,0 +1,19 @@
+{
+    "args": ["range_field"],
+    "kwargs": {
+        "gte": 10,
+        "lte": 5,
+        "lt": 10,
+        "gt": 5
+    },
+    "output": {
+        "range": {
+            "range_field": {
+                "gte": 10,
+                "lte": 5,
+                "lt": 10,
+                "gt": 5
+            }
+        }
+    }
+}

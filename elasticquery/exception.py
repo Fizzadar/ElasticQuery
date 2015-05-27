@@ -7,6 +7,8 @@
 class ElasticQueryException(Exception):
     pass
 
+
+# ES querying exceptions
 class NoESClient(ElasticQueryException):
     pass
 
@@ -16,5 +18,21 @@ class NoDocType(ElasticQueryException):
 class NoIndexName(ElasticQueryException):
     pass
 
-class InvalidField(ElasticQueryException):
+
+# Missing DSL object exceptions
+class DslException(ElasticQueryException):
+    pass
+
+class NoQuery(DslException):
+    pass
+
+class NoFilter(DslException):
+    pass
+
+class NoAggregate(DslException):
+    pass
+
+
+# Invalid DSL argument exception
+class InvalidArg(ElasticQueryException):
     pass

@@ -1,0 +1,12 @@
+{
+    "args": ["a query string"],
+    "kwargs": {
+        "fields": ["list", "of", "fields"]
+    },
+    "output": {
+        "query_string": {
+            "query": "a query string",
+           "fields": ["list", "of", "fields"]
+       }
+    }
+}

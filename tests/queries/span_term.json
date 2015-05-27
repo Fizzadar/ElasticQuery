@@ -1,0 +1,14 @@
+{
+    "args": ["field", "term_value"],
+    "kwargs": {
+        "boost": 1.2
+    },
+    "output": {
+        "span_term": {
+            "field": {
+                "value": "term_value",
+                "boost": 1.2
+            }
+        }
+    }
+}

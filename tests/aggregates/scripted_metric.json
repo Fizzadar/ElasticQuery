@@ -1,0 +1,8 @@
+{
+    "args": ["agg_name"],
+    "output": {
+        "agg_name": {
+            "scripted_metric": {}
+        }
+    }
+}

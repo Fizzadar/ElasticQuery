@@ -1,0 +1,13 @@
+{
+    "args": [["field_one", "field_two"], "match_value"],
+    "kwargs": {
+        "boost": 1.2
+    },
+    "output": {
+        "multi_match": {
+            "fields": ["field_one", "field_two"],
+            "query": "match_value",
+            "boost": 1.2
+        }
+    }
+}

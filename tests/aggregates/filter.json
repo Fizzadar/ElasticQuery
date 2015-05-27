@@ -1,0 +1,10 @@
+{
+    "args": ["agg_name", "_filter"],
+    "output": {
+        "agg_name": {
+            "filter": {
+                "filter": {"_filter": {}}
+            }
+        }
+    }
+}

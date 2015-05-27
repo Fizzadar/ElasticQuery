@@ -1,0 +1,10 @@
+{
+    "args": ["agg_name", "stats_field"],
+    "output": {
+        "agg_name": {
+            "stats": {
+                "field": "stats_field"
+            }
+        }
+    }
+}

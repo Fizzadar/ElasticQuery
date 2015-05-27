@@ -1,0 +1,12 @@
+{
+    "args": [["id_one", "id_two"]],
+    "kwargs": {
+        "type": "type_name"
+    },
+    "output": {
+        "ids": {
+            "values": ["id_one", "id_two"],
+            "type": "type_name"
+        }
+    }
+}

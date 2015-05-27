@@ -1,0 +1,8 @@
+{
+    "args": ["regex_field", "regex[string]"],
+    "output": {
+        "regexp": {
+            "regex_field": "regex[string]"
+        }
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "args": [["list", "of", "fields"], "like text"],
+    "output": {
+        "fuzzy_like_this": {
+            "fields": ["list", "of", "fields"],
+            "like_text": "like text"
+        }
+    }
+}

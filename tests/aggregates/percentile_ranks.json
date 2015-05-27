@@ -1,0 +1,10 @@
+{
+    "args": ["agg_name", "percentile_field"],
+    "output": {
+        "agg_name": {
+            "percentile_ranks": {
+                "field": "percentile_field"
+            }
+        }
+    }
+}

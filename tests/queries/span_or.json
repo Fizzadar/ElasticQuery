@@ -1,0 +1,11 @@
+{
+    "args": [["_query", "_query"]],
+    "output": {
+        "span_or": {
+            "clauses": [
+                {"_query": {}},
+                {"_query": {}}
+            ]
+        }
+    }
+}

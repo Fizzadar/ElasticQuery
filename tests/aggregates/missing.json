@@ -1,0 +1,10 @@
+{
+    "args": ["agg_name", "missing_field"],
+    "output": {
+        "agg_name": {
+            "missing": {
+                "field": "missing_field"
+            }
+        }
+    }
+}

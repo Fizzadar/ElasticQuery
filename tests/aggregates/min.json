@@ -1,0 +1,10 @@
+{
+    "args": ["agg_name", "min_field"],
+    "output": {
+        "agg_name": {
+            "min": {
+                "field": "min_field"
+            }
+        }
+    }
+}

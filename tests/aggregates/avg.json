@@ -1,0 +1,10 @@
+{
+    "args": ["agg_name", "avg_field"],
+    "output": {
+        "agg_name": {
+            "avg": {
+                "field": "avg_field"
+            }
+        }
+    }
+}

@@ -1,3 +1,4 @@
-from .query import ElasticQuery # noqa
-from .filter_query import Filter, Query # noqa
-from .aggregate import Aggregate # noqa
+from .elasticquery import ElasticQuery # noqa
+from .filters import Filter # noqa
+from .queries import Query # noqa
+from .aggregates import Aggregate # noqa

@@ -1,0 +1,14 @@
+{
+    "args": ["parent_type"],
+    "kwargs": {
+        "query": "_query",
+        "filter": "_filter"
+    },
+    "output": {
+        "has_parent": {
+            "parent_type": "parent_type",
+            "query": {"_query": {}},
+            "filter": {"_filter": {}}
+        }
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "args": ["_query"],
+    "kwargs": {
+        "end": 3
+    },
+    "output": {
+        "span_first": {
+            "match": {"_query": {}},
+            "end": 3
+        }
+    }
+}

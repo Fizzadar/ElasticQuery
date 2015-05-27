@@ -1,0 +1,9 @@
+{
+    "args": ["_filter", "_filter"],
+    "output": {
+        "and": [
+            {"_filter": {}},
+            {"_filter": {}}
+        ]
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "kwargs": {
+        "filter": "_filter",
+        "query": "_query"
+    },
+    "output": {
+        "constant_score": {
+            "filter": {
+                "_filter": {}
+            },
+            "query": {
+                "_query": {}
+            }
+        }
+    }
+}

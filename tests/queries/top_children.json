@@ -1,0 +1,12 @@
+{
+    "args": ["some_type"],
+    "kwargs": {
+        "query": "_query"
+    },
+    "output": {
+        "top_children": {
+            "type": "some_type",
+            "query": {"_query": {}}
+        }
+    }
+}

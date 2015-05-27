@@ -1,0 +1,23 @@
+{
+    "kwargs": {
+        "must": ["_query"],
+        "should": ["_query", "_query", "_query"],
+        "must_not": ["_query", "_query"]
+    },
+    "output": {
+        "bool": {
+            "must": [
+                {"_query": {}}
+            ],
+            "should": [
+                {"_query": {}},
+                {"_query": {}},
+                {"_query": {}}
+            ],
+            "must_not": [
+                {"_query": {}},
+                {"_query": {}}
+            ]
+        }
+    }
+}

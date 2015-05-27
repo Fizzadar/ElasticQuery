@@ -1,0 +1,18 @@
+{
+    "args": ["fuzzy_field", "fuzziness"],
+    "kwargs": {
+        "boost": 1.2,
+        "fuzziness": 3,
+        "prefix_length": 1
+    },
+    "output": {
+        "fuzzy": {
+            "fuzzy_field": {
+                "value": "fuzziness",
+                "boost": 1.2,
+                "fuzziness": 3,
+                "prefix_length": 1
+            }
+        }
+    }
+}

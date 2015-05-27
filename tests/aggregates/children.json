@@ -1,0 +1,10 @@
+{
+    "args": ["agg_name", "type"],
+    "output": {
+        "agg_name": {
+            "children": {
+                "type": "type"
+            }
+        }
+    }
+}

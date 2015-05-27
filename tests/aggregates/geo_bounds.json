@@ -1,0 +1,10 @@
+{
+    "args": ["agg_name", "geo_field"],
+    "output": {
+        "agg_name": {
+            "geo_bounds": {
+                "field": "geo_field"
+            }
+        }
+    }
+}

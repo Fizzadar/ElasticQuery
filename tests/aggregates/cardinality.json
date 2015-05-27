@@ -1,0 +1,10 @@
+{
+    "args": ["agg_name", "cardinality_field"],
+    "output": {
+        "agg_name": {
+            "cardinality": {
+                "field": "cardinality_field"
+            }
+        }
+    }
+}

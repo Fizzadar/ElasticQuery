@@ -1,0 +1,14 @@
+{
+    "args": ["wild_field", "wildcard*"],
+    "kwargs": {
+        "boost": 1.2
+    },
+    "output": {
+        "wildcard": {
+                "wild_field": {
+                "value": "wildcard*",
+                "boost": 1.2
+            }
+        }
+    }
+}
