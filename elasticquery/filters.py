@@ -108,6 +108,7 @@ class Filter(BaseFilterQuery):
 
     @classmethod
     def query(cls, query, cache=False):
+        '''The query filter is manually defined because of it's unusual syntax when caching.'''
         if cache:
             return cls('fquery', {
                 'query': query,
