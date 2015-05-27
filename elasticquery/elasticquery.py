@@ -5,7 +5,7 @@
 import json
 
 from .queries import Query
-from .util import unroll_struct
+from .dsl_util import unroll_struct
 from .exception import NoESClient, NoIndexName, NoDocType
 
 
