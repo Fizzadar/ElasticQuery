@@ -57,7 +57,7 @@ q.aggregate(
     )
 )
 
-# Run & print the result
+# Print the query, then run on ES and print it's output
 print q.json(indent=4)
 print q.get()
 ```
