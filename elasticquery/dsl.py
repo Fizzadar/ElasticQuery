@@ -4,7 +4,7 @@
 
 import json
 
-from .util import make_struct, unroll_definitions, unroll_struct
+from .dsl_util import make_struct, unroll_definitions, unroll_struct
 
 
 class MetaFilterQuery(type):
@@ -26,6 +26,22 @@ class MetaFilterQuery(type):
             make_struct(cls._definitions[key], *args, **kwargs)
         )
 
+class MetaAggregate(MetaFilterQuery):
+    '''Modified MetaFilterQuery.MetaAggregate getattr to handle aggregate names.'''
+    def __getattr__(cls, key):
+        if key == '__test__':
+            return None
+
+        if key not in cls._definitions:
+            raise cls._exception(key)
+
+        return lambda *args, **kwargs: cls(
+            key,
+            args[0],
+            make_struct(cls._definitions[key], *args[1:], **kwargs)
+        )
+
+
 class BaseFilterQuery(object):
     '''The base class which represents a Filter/Query struct.'''
     _struct = None
@@ -45,22 +61,6 @@ class BaseFilterQuery(object):
 
     def __str__(self):
         return json.dumps(self.dict(), indent=4)
-
-
-class MetaAggregate(MetaFilterQuery):
-    '''Modified MetaFilterQuery.MetaAggregate getattr to handle aggregate names.'''
-    def __getattr__(cls, key):
-        if key == '__test__':
-            return None
-
-        if key not in cls._definitions:
-            raise cls._exception(key)
-
-        return lambda *args, **kwargs: cls(
-            key,
-            args[0],
-            make_struct(cls._definitions[key], *args[1:], **kwargs)
-        )
 
 class BaseAggregate(BaseFilterQuery):
     '''Modified BaseFilterQuery to handle aggregate name storage.'''
