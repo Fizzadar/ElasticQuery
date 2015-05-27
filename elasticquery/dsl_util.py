@@ -1,9 +1,18 @@
 # ElasticQuery
-# File: elasticquery/util.py
+# File: elasticquery/dsl_util.py
 # Desc: utility functions for converting args/kwargs to Elasticsearch DSL
 
 from .exception import InvalidArg
 
+
+def _check_input(arg):
+    if arg is None:
+        return False
+
+    if type(arg) in (list, dict, tuple) and len(arg) == 0:
+        return False
+
+    return True
 
 def _check_type(key, expected_type, arg):
     if isinstance(expected_type, basestring):
@@ -34,7 +43,7 @@ def _parse_args(args, argspec):
     arg_length = len(args)
 
     for i, (key, expected_type) in enumerate(argspec):
-        if i <= arg_length and args[i] is not None:
+        if i <= arg_length and _check_input(args[i]):
             _check_arg(key, expected_type, args[i])
             struct[key] = args[i]
 
@@ -44,14 +53,14 @@ def _parse_kwargs(kwargs, kwargspec):
     struct = {}
 
     for (key, expected_type) in kwargspec:
-        if key in kwargs and kwargs[key] is not None:
+        if key in kwargs and _check_input(kwargs[key]):
             _check_arg(key, expected_type, kwargs[key])
             struct[key] = kwargs.pop(key)
 
     return struct
 
 def make_struct(definition, *args, **kwargs):
-    '''Generates a Filter or Query object based on it's definition and the input arguments.'''
+    '''Generates a dict based the definition and the input arguments.'''
     # List type (compound and/or filters)
     if isinstance(definition, list):
         _check_arg('', definition, list(args))
@@ -93,7 +102,7 @@ def make_struct(definition, *args, **kwargs):
         # Update any remaining kwargs (excluding Nones)
         struct.update({
             k: v for k, v in kwargs.iteritems()
-            if v is not None
+            if _check_input(v)
         })
 
     # Post-process the struct
