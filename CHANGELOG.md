@@ -1,3 +1,7 @@
+# v2.0.1 - That didn't take long!
+
++ Fix import in elasticquery
+
 # v2.0
 
 + Complete rewrite, see docs/v1_to_v2.md for breaking changes, summary:
