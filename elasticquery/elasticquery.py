@@ -90,7 +90,7 @@ class ElasticQuery(object):
             for agg in self._aggs:
                 aggs.update(agg.dict())
 
-            self._struct['aggregates'] = aggs
+            self._struct['aggregations'] = aggs
 
         return unroll_struct(self._struct)
 

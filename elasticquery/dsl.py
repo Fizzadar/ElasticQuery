@@ -81,7 +81,12 @@ class BaseAggregate(BaseFilterQuery):
         }
 
         if self._aggs:
-            struct['aggregates'] = [agg.dict() for agg in self._aggs]
+            aggregates = {}
+
+            for agg in self._aggs:
+                aggregates.update(agg.dict())
+
+            struct[self._name]['aggregations'] = aggregates
 
         return struct
 
