@@ -1,3 +1,7 @@
+# v2.0.2
+
++ Fix bug with all aggregations
+
 # v2.0.1 - That didn't take long!
 
 + Fix import in elasticquery
