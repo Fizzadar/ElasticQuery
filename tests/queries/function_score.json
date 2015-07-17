@@ -1,0 +1,21 @@
+{
+    "args": [["function_template", "function_template"]],
+    "kwargs": {
+        "filter": "_filter",
+        "query": "_query"
+    },
+    "output": {
+        "function_score": {
+            "functions": [
+                "function_template",
+                "function_template"
+            ],
+            "filter": {
+                "_filter": {}
+            },
+            "query": {
+                "_query": {}
+            }
+        }
+    }
+}

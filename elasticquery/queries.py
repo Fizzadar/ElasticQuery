@@ -43,6 +43,10 @@ QUERIES = {
             'max_query_terms', 'ignore_tf', 'fuzziness', 'prefix_length', 'boost', 'analyzer'
         )
     },
+    'function_score': {
+        'args': ({'functions': []},),
+        'kwargs': ({'query': '_query', 'filter': '_filter'},)
+    },
     'fuzzy': {
         'field': True,
         'args': ('value',),
