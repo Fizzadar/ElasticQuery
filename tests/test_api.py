@@ -76,7 +76,7 @@ class TestElasticQuery(TestCase):
         q.aggregate(Aggregate.terms('agg_name', 'field'))
 
         assert_equal(self, q.dict(), {
-            'aggregates': {
+            'aggregations': {
                 'agg_name': {
                     'terms': {
                         'field': 'field'
@@ -108,7 +108,7 @@ class TestElasticQuery(TestCase):
                     }
                 }
             },
-            'aggregates': {
+            'aggregations': {
                 'agg_name': {
                     'max': {
                         'field': 'field'
