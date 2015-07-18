@@ -1,3 +1,10 @@
+# v2.1
+
++ Fix not filter(!)
++ Add `Query.function_score`
++ Add dsl support for lists of strings
++ Large documentation update
+
 # v2.0.2
 
 + Fix bug with all aggregations
