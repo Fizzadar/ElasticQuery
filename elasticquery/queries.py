@@ -132,7 +132,7 @@ QUERIES = {
     'terms': {
         'field': True,
         'value_only': True,
-        'args': ({'value': []},)
+        'args': ({'value': ['']},)
     },
     'top_children': {
         'args': ('type',),

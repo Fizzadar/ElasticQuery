@@ -14,13 +14,18 @@ def _check_input(arg):
 
     return True
 
-def _check_type(key, expected_type, arg):
-    if isinstance(expected_type, basestring):
-        if arg._eq_type != expected_type[1:]:
-            raise InvalidArg('{} should be a {}'.format(key, expected_type[1:].title()))
+def _check_type(key, type_, arg):
+    if isinstance(type_, basestring):
+        # Empty string means string type
+        if not type_:
+            type_ = str
 
-    elif not isinstance(arg, expected_type):
-        raise InvalidArg('{} should be a list of {}'.format(key, expected_type))
+        # '_filter' or '_query' list
+        elif arg._eq_type != type_[1:]:
+            raise InvalidArg('{} should be a {}'.format(key, type_[1:].title()))
+
+    elif not isinstance(arg, type_):
+        raise InvalidArg('{} should be a list of {}'.format(key, type_))
 
 def _check_arg(key, expected_type, arg):
     if isinstance(expected_type, list):
@@ -28,6 +33,7 @@ def _check_arg(key, expected_type, arg):
             raise InvalidArg('{} should be a list'.format(key))
 
         if expected_type:
+            # Loop the list and check all it's args
             for arg in arg:
                 _check_type(key, expected_type[0], arg)
 
