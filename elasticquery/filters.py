@@ -64,7 +64,7 @@ FILTERS = {
     'nested': {
         'args': ('path', {'filter': '_filter'}),
     },
-    'not': {
+    'not_': {
         'kwargs': ({'query': '_query', 'filter': '_filter'},)
     },
     'or_': ['_filter'],
