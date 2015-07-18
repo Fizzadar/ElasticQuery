@@ -14,12 +14,18 @@ STRING_TO_CLASS = {
 }
 
 
-def arg_to_string(arg):
+def arg_to_string(arg, field=None):
     if isinstance(arg, list):
         if not arg:
-            return '[]'
+            if field:
+                return '[{0}]'.format(field)
+            else:
+                return '[]'
 
         if isinstance(arg[0], basestring):
+            if arg[0] not in STRING_TO_CLASS:
+                return '[{0}]'.format(field)
+
             return '[{0}]'.format(STRING_TO_CLASS[arg[0]])
 
     if isinstance(arg, basestring):
@@ -27,6 +33,7 @@ def arg_to_string(arg):
             return STRING_TO_CLASS[arg]
 
     return str(arg)
+
 
 def make_args_string(argspec, cls_name):
     if isinstance(argspec, basestring):
@@ -38,7 +45,7 @@ def make_args_string(argspec, cls_name):
     args = kwargs = None
 
     args = [
-        arg[0] if arg[1] is None else arg_to_string(arg[1])
+        arg[0] if arg[1] is None else arg_to_string(arg[1], field=arg[0])
         for arg in argspec.get('args', [])
     ]
 
@@ -49,7 +56,7 @@ def make_args_string(argspec, cls_name):
         args.insert(0, 'name')
 
     if args:
-        args = ', '.join(args)
+        args = ',\n    '.join(args)
 
     if 'kwargs' in argspec:
         kwargs = []
@@ -61,10 +68,10 @@ def make_args_string(argspec, cls_name):
             else:
                 kwargs.append('{0}={1}'.format(kwarg[0], arg_to_string(kwarg[1])))
 
-        kwargs = ', '.join(kwargs)
+        kwargs = ',\n    '.join(kwargs)
 
     if args and kwargs:
-        return '{0}, {1}'.format(args, kwargs)
+        return '{0},\n    {1}'.format(args, kwargs)
 
     if args:
         return args
@@ -76,11 +83,20 @@ def make_args_string(argspec, cls_name):
 def build_dsl_docs(definitions, title, cls_name, target_file):
     out = '''# ElasticQuery {0} API\n
 Note that all {1} calls can also be passed additional keyword arguments not specified here, but no validation of inputs is done on them.
+
 '''.format(title, cls_name)
+
+    keys = definitions.keys()
+    out += '\n'.join(
+        '+ [{0}](#method-{1}{0})'.format(key, cls_name.lower())
+        for key in keys
+    )
+
+    out += '\n\n### class: {0}\n'.format(cls_name)
 
     for key, argspec in definitions.iteritems():
         args_string = make_args_string(argspec, cls_name)
-        out = '{0}\n### {1}\n\n`{2}.{3}({4})`\n'.format(out, key, cls_name, key, args_string)
+        out += '\n##### method: {0}.{1}\n\n```py\n{0}.{1}(\n    {2}\n)\n```\n'.format(cls_name, key, args_string)
 
     f = open(target_file, 'w')
     f.write(out)

@@ -2,118 +2,298 @@
 
 Note that all Aggregate calls can also be passed additional keyword arguments not specified here, but no validation of inputs is done on them.
 
-### geo_bounds
++ [geo_bounds](#method-aggregategeo_bounds)
++ [date_histogram](#method-aggregatedate_histogram)
++ [global](#method-aggregateglobal)
++ [nested](#method-aggregatenested)
++ [ip_range](#method-aggregateip_range)
++ [filters](#method-aggregatefilters)
++ [avg](#method-aggregateavg)
++ [children](#method-aggregatechildren)
++ [stats](#method-aggregatestats)
++ [scripted_metric](#method-aggregatescripted_metric)
++ [min](#method-aggregatemin)
++ [sum](#method-aggregatesum)
++ [extended_stats](#method-aggregateextended_stats)
++ [value_count](#method-aggregatevalue_count)
++ [percentiles](#method-aggregatepercentiles)
++ [terms](#method-aggregateterms)
++ [missing](#method-aggregatemissing)
++ [max](#method-aggregatemax)
++ [histogram](#method-aggregatehistogram)
++ [date_range](#method-aggregatedate_range)
++ [cardinality](#method-aggregatecardinality)
++ [geohash_grid](#method-aggregategeohash_grid)
++ [geo_distance](#method-aggregategeo_distance)
++ [filter](#method-aggregatefilter)
++ [percentile_ranks](#method-aggregatepercentile_ranks)
++ [range](#method-aggregaterange)
++ [significant_terms](#method-aggregatesignificant_terms)
++ [top_hits](#method-aggregatetop_hits)
++ [reverse_nested](#method-aggregatereverse_nested)
 
-`Aggregate.geo_bounds(name, field)`
+### class: Aggregate
 
-### date_histogram
+##### method: Aggregate.geo_bounds
 
-`Aggregate.date_histogram(name, field, interval)`
+```py
+Aggregate.geo_bounds(
+    name,
+    field
+)
+```
 
-### global
+##### method: Aggregate.date_histogram
 
-`Aggregate.global(name)`
+```py
+Aggregate.date_histogram(
+    name,
+    field,
+    interval
+)
+```
 
-### nested
+##### method: Aggregate.global
 
-`Aggregate.nested(name, path)`
+```py
+Aggregate.global(
+    name
+)
+```
 
-### ip_range
+##### method: Aggregate.nested
 
-`Aggregate.ip_range(name, field, [])`
+```py
+Aggregate.nested(
+    name,
+    path
+)
+```
 
-### filters
+##### method: Aggregate.ip_range
 
-`Aggregate.filters(name, [Filter])`
+```py
+Aggregate.ip_range(
+    name,
+    field,
+    [ranges]
+)
+```
 
-### avg
+##### method: Aggregate.filters
 
-`Aggregate.avg(name, field)`
+```py
+Aggregate.filters(
+    name,
+    [Filter]
+)
+```
 
-### children
+##### method: Aggregate.avg
 
-`Aggregate.children(name, type)`
+```py
+Aggregate.avg(
+    name,
+    field
+)
+```
 
-### stats
+##### method: Aggregate.children
 
-`Aggregate.stats(name, field)`
+```py
+Aggregate.children(
+    name,
+    type
+)
+```
 
-### scripted_metric
+##### method: Aggregate.stats
 
-`Aggregate.scripted_metric(name)`
+```py
+Aggregate.stats(
+    name,
+    field
+)
+```
 
-### min
+##### method: Aggregate.scripted_metric
 
-`Aggregate.min(name, field)`
+```py
+Aggregate.scripted_metric(
+    name
+)
+```
 
-### sum
+##### method: Aggregate.min
 
-`Aggregate.sum(name, field)`
+```py
+Aggregate.min(
+    name,
+    field
+)
+```
 
-### extended_stats
+##### method: Aggregate.sum
 
-`Aggregate.extended_stats(name, field)`
+```py
+Aggregate.sum(
+    name,
+    field
+)
+```
 
-### value_count
+##### method: Aggregate.extended_stats
 
-`Aggregate.value_count(name, field)`
+```py
+Aggregate.extended_stats(
+    name,
+    field
+)
+```
 
-### percentiles
+##### method: Aggregate.value_count
 
-`Aggregate.percentiles(name, field)`
+```py
+Aggregate.value_count(
+    name,
+    field
+)
+```
 
-### terms
+##### method: Aggregate.percentiles
 
-`Aggregate.terms(name, field)`
+```py
+Aggregate.percentiles(
+    name,
+    field
+)
+```
 
-### missing
+##### method: Aggregate.terms
 
-`Aggregate.missing(name, field)`
+```py
+Aggregate.terms(
+    name,
+    field
+)
+```
 
-### max
+##### method: Aggregate.missing
 
-`Aggregate.max(name, field)`
+```py
+Aggregate.missing(
+    name,
+    field
+)
+```
 
-### histogram
+##### method: Aggregate.max
 
-`Aggregate.histogram(name, field, interval)`
+```py
+Aggregate.max(
+    name,
+    field
+)
+```
 
-### date_range
+##### method: Aggregate.histogram
 
-`Aggregate.date_range(name, field, [])`
+```py
+Aggregate.histogram(
+    name,
+    field,
+    interval
+)
+```
 
-### cardinality
+##### method: Aggregate.date_range
 
-`Aggregate.cardinality(name, field)`
+```py
+Aggregate.date_range(
+    name,
+    field,
+    [ranges]
+)
+```
 
-### geohash_grid
+##### method: Aggregate.cardinality
 
-`Aggregate.geohash_grid(name, field)`
+```py
+Aggregate.cardinality(
+    name,
+    field
+)
+```
 
-### geo_distance
+##### method: Aggregate.geohash_grid
 
-`Aggregate.geo_distance(name, field, origin, [])`
+```py
+Aggregate.geohash_grid(
+    name,
+    field
+)
+```
 
-### filter
+##### method: Aggregate.geo_distance
 
-`Aggregate.filter(name, Filter)`
+```py
+Aggregate.geo_distance(
+    name,
+    field,
+    origin,
+    [ranges]
+)
+```
 
-### percentile_ranks
+##### method: Aggregate.filter
 
-`Aggregate.percentile_ranks(name, field)`
+```py
+Aggregate.filter(
+    name,
+    Filter
+)
+```
 
-### range
+##### method: Aggregate.percentile_ranks
 
-`Aggregate.range(name, field, [])`
+```py
+Aggregate.percentile_ranks(
+    name,
+    field
+)
+```
 
-### significant_terms
+##### method: Aggregate.range
 
-`Aggregate.significant_terms(name, field)`
+```py
+Aggregate.range(
+    name,
+    field,
+    [ranges]
+)
+```
 
-### top_hits
+##### method: Aggregate.significant_terms
 
-`Aggregate.top_hits(name)`
+```py
+Aggregate.significant_terms(
+    name,
+    field
+)
+```
 
-### reverse_nested
+##### method: Aggregate.top_hits
 
-`Aggregate.reverse_nested(name)`
+```py
+Aggregate.top_hits(
+    name
+)
+```
+
+##### method: Aggregate.reverse_nested
+
+```py
+Aggregate.reverse_nested(
+    name
+)
+```

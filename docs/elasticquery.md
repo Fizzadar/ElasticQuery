@@ -1,27 +1,127 @@
-# ElasticQuery API
+## elasticquery.elasticquery
 
-### `ElasticQuery(es=None, index=None, doc_type=None)`
 
-### `ElasticQuery.query(Query)`
+### class: ElasticQuery
 
-### `ElasticQuery.filter(Filter)`
+##### method: ElasticQuery.__init__
 
-### `ElasticQuery.aggregate(*Aggregates)`
+```py
+ElasticQuery.__init__(
+    self,
+    es=None,
+    index=None,
+    doc_type=None
+)
+```
 
-### `ElasticQuery.set(key, value)`
+##### method: ElasticQuery.aggregate
 
-### `ElasticQuery.from_(from)`
+```py
+ElasticQuery.aggregate(
+    self,
+    *aggregates
+)
+```
 
-### `ElasticQuery.size(size)`
+##### method: ElasticQuery.dict
 
-### `ElasticQuery.timeout(timeout)`
+```py
+ElasticQuery.dict(
+    self
+)
+```
 
-### `ElasticQuery.fields(fields)`
+##### method: ElasticQuery.fields
 
-### `ElasticQuery.sort(field, order=None)`
+```py
+ElasticQuery.fields(
+    self,
+    fields
+)
+```
 
-### `ElasticQuery.dict()`
+##### method: ElasticQuery.filter
 
-### `ElasticQuery.get()`
+```py
+ElasticQuery.filter(
+    self,
+    filter_
+)
+```
 
-### `ElasticQuery.json()`
+##### method: ElasticQuery.from_
+
+```py
+ElasticQuery.from_(
+    self,
+    from_
+)
+```
+
+##### method: ElasticQuery.get
+
+Execute the current query (requires _es, _index & _doc_type).
+
+```py
+ElasticQuery.get(
+    self
+)
+```
+
+##### method: ElasticQuery.json
+
+```py
+ElasticQuery.json(
+    self,
+    **kwargs
+)
+```
+
+##### method: ElasticQuery.query
+
+```py
+ElasticQuery.query(
+    self,
+    query
+)
+```
+
+##### method: ElasticQuery.set
+
+Set an arbitrary attribute on this query.
+
+```py
+ElasticQuery.set(
+    self,
+    key,
+    value
+)
+```
+
+##### method: ElasticQuery.size
+
+```py
+ElasticQuery.size(
+    self,
+    size
+)
+```
+
+##### method: ElasticQuery.sort
+
+```py
+ElasticQuery.sort(
+    self,
+    field,
+    order=None
+)
+```
+
+##### method: ElasticQuery.timeout
+
+```py
+ElasticQuery.timeout(
+    self,
+    timeout
+)
+```

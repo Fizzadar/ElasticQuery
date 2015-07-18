@@ -2,110 +2,271 @@
 
 Note that all Filter calls can also be passed additional keyword arguments not specified here, but no validation of inputs is done on them.
 
-### geohash_shell
++ [geohash_shell](#method-filtergeohash_shell)
++ [geo_polygon](#method-filtergeo_polygon)
++ [exists](#method-filterexists)
++ [not_](#method-filternot_)
++ [nested](#method-filternested)
++ [prefix](#method-filterprefix)
++ [has_parent](#method-filterhas_parent)
++ [geo_distance_range](#method-filtergeo_distance_range)
++ [script](#method-filterscript)
++ [bool](#method-filterbool)
++ [type](#method-filtertype)
++ [terms](#method-filterterms)
++ [has_child](#method-filterhas_child)
++ [missing](#method-filtermissing)
++ [term](#method-filterterm)
++ [geo_shape](#method-filtergeo_shape)
++ [regexp](#method-filterregexp)
++ [or_](#method-filteror_)
++ [match_all](#method-filtermatch_all)
++ [geo_distance](#method-filtergeo_distance)
++ [geo_bounding_box](#method-filtergeo_bounding_box)
++ [and_](#method-filterand_)
++ [ids](#method-filterids)
++ [range](#method-filterrange)
++ [limit](#method-filterlimit)
++ [indices](#method-filterindices)
 
-`Filter.geohash_shell(field, lat=None, lon=None)`
+### class: Filter
 
-### geo_polygon
+##### method: Filter.geohash_shell
 
-`Filter.geo_polygon(field, [])`
+```py
+Filter.geohash_shell(
+    field,
+    lat=None,
+    lon=None
+)
+```
 
-### exists
+##### method: Filter.geo_polygon
 
-`Filter.exists(field)`
+```py
+Filter.geo_polygon(
+    field,
+    [points]
+)
+```
 
-### nested
+##### method: Filter.exists
 
-`Filter.nested(path, Filter)`
+```py
+Filter.exists(
+    field
+)
+```
 
-### geo_shape
+##### method: Filter.not_
 
-`Filter.geo_shape(field, type=None, coordinates=[])`
+```py
+Filter.not_(
+    filter=Filter,
+    query=Query
+)
+```
 
-### prefix
+##### method: Filter.nested
 
-`Filter.prefix(field, value)`
+```py
+Filter.nested(
+    path,
+    Filter
+)
+```
 
-### has_parent
+##### method: Filter.prefix
 
-`Filter.has_parent(parent_type, filter=Filter, query=Query)`
+```py
+Filter.prefix(
+    field,
+    value
+)
+```
 
-### query
+##### method: Filter.has_parent
 
-`Filter.query(Query)`
+```py
+Filter.has_parent(
+    parent_type,
+    filter=Filter,
+    query=Query
+)
+```
 
-### geo_distance_range
+##### method: Filter.geo_distance_range
 
-`Filter.geo_distance_range(field, lat=None, lon=None)`
+```py
+Filter.geo_distance_range(
+    field,
+    lat=None,
+    lon=None
+)
+```
 
-### script
+##### method: Filter.script
 
-`Filter.script(script)`
+```py
+Filter.script(
+    script
+)
+```
 
-### bool
+##### method: Filter.bool
 
-`Filter.bool(must=[Filter], must_not=[Filter], should=[Filter])`
+```py
+Filter.bool(
+    must=[Filter],
+    must_not=[Filter],
+    should=[Filter]
+)
+```
 
-### type
+##### method: Filter.type
 
-`Filter.type(value)`
+```py
+Filter.type(
+    value
+)
+```
 
-### terms
+##### method: Filter.terms
 
-`Filter.terms(field, [])`
+```py
+Filter.terms(
+    field,
+    [value]
+)
+```
 
-### has_child
+##### method: Filter.has_child
 
-`Filter.has_child(type, filter=Filter, query=Query)`
+```py
+Filter.has_child(
+    type,
+    filter=Filter,
+    query=Query
+)
+```
 
-### missing
+##### method: Filter.missing
 
-`Filter.missing(field)`
+```py
+Filter.missing(
+    field
+)
+```
 
-### term
+##### method: Filter.term
 
-`Filter.term(field, value)`
+```py
+Filter.term(
+    field,
+    value
+)
+```
 
-### not
+##### method: Filter.geo_shape
 
-`Filter.not(filter=Filter, query=Query)`
+```py
+Filter.geo_shape(
+    field,
+    type=None,
+    coordinates=[]
+)
+```
 
-### regexp
+##### method: Filter.regexp
 
-`Filter.regexp(field, value, flags=None, max_determinized_states=None)`
+```py
+Filter.regexp(
+    field,
+    value,
+    flags=None,
+    max_determinized_states=None
+)
+```
 
-### or_
+##### method: Filter.or_
 
-`Filter.or_([Filter])`
+```py
+Filter.or_(
+    [Filter]
+)
+```
 
-### match_all
+##### method: Filter.match_all
 
-`Filter.match_all(None)`
+```py
+Filter.match_all(
+    None
+)
+```
 
-### geo_distance
+##### method: Filter.geo_distance
 
-`Filter.geo_distance(field, lat=None, lon=None)`
+```py
+Filter.geo_distance(
+    field,
+    lat=None,
+    lon=None
+)
+```
 
-### geo_bounding_box
+##### method: Filter.geo_bounding_box
 
-`Filter.geo_bounding_box(field, top_left=None, bottom_right=None)`
+```py
+Filter.geo_bounding_box(
+    field,
+    top_left=None,
+    bottom_right=None
+)
+```
 
-### and_
+##### method: Filter.and_
 
-`Filter.and_([Filter])`
+```py
+Filter.and_(
+    [Filter]
+)
+```
 
-### ids
+##### method: Filter.ids
 
-`Filter.ids([], type=None)`
+```py
+Filter.ids(
+    [values],
+    type=None
+)
+```
 
-### range
+##### method: Filter.range
 
-`Filter.range(field, gte=None, gt=None, lte=None, lt=None)`
+```py
+Filter.range(
+    field,
+    gte=None,
+    gt=None,
+    lte=None,
+    lt=None
+)
+```
 
-### limit
+##### method: Filter.limit
 
-`Filter.limit(value)`
+```py
+Filter.limit(
+    value
+)
+```
 
-### indices
+##### method: Filter.indices
 
-`Filter.indices([], filter=Filter, no_match_filter=Filter)`
+```py
+Filter.indices(
+    [indices],
+    filter=Filter,
+    no_match_filter=Filter
+)
+```
