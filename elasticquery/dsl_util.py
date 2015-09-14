@@ -2,7 +2,7 @@
 # File: elasticquery/dsl_util.py
 # Desc: utility functions for converting args/kwargs to Elasticsearch DSL
 
-from .exception import InvalidArg
+from .exception import InvalidArg, MissingArg
 
 
 def _check_input(arg):
@@ -22,15 +22,15 @@ def _check_type(key, type_, arg):
 
         # '_filter' or '_query' list
         elif arg._eq_type != type_[1:]:
-            raise InvalidArg('{} should be a {}'.format(key, type_[1:].title()))
+            raise InvalidArg('{0} should be a {1}'.format(key, type_[1:].title()))
 
     elif not isinstance(arg, type_):
-        raise InvalidArg('{} should be a list of {}'.format(key, type_))
+        raise InvalidArg('{0} should be a list of {1}'.format(key, type_))
 
 def _check_arg(key, expected_type, arg):
     if isinstance(expected_type, list):
         if not isinstance(arg, list):
-            raise InvalidArg('{} should be a list'.format(key))
+            raise InvalidArg('{0} should be a list'.format(key))
 
         if expected_type:
             # Loop the list and check all it's args
@@ -42,14 +42,17 @@ def _check_arg(key, expected_type, arg):
 
     else:
         if isinstance(arg, dict) or isinstance(arg, list):
-            raise InvalidArg('{} should be a string or integer'.format(key))
+            raise InvalidArg('{0} should be a string or integer'.format(key))
 
 def _parse_args(args, argspec):
     struct = {}
     arg_length = len(args)
 
     for i, (key, expected_type) in enumerate(argspec):
-        if i <= arg_length and _check_input(args[i]):
+        if i >= arg_length:
+            raise MissingArg('Missing {0} argument'.format(key))
+
+        if _check_input(args[i]):
             _check_arg(key, expected_type, args[i])
             struct[key] = args[i]
 
