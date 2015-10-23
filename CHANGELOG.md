@@ -1,3 +1,7 @@
+# v2.1.1
+
++ Raise a `MissingArg` exception for missing fields
+
 # v2.1
 
 + Fix not filter(!)

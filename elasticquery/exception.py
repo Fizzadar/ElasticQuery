@@ -33,6 +33,9 @@ class NoAggregate(DslException):
     pass
 
 
-# Invalid DSL argument exception
-class InvalidArg(ElasticQueryException):
+# Invalid DSL argument exceptions
+class InvalidArg(DslException):
+    pass
+
+class MissingArg(DslException):
     pass

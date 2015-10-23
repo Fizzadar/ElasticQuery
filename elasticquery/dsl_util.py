@@ -2,7 +2,7 @@
 # File: elasticquery/dsl_util.py
 # Desc: utility functions for converting args/kwargs to Elasticsearch DSL
 
-from .exception import InvalidArg
+from .exception import InvalidArg, MissingArg
 
 
 def _check_input(arg):
@@ -49,7 +49,10 @@ def _parse_args(args, argspec):
     arg_length = len(args)
 
     for i, (key, expected_type) in enumerate(argspec):
-        if i <= arg_length and _check_input(args[i]):
+        if i >= arg_length:
+            raise MissingArg('Missing {0} argument'.format(key))
+
+        if _check_input(args[i]):
             _check_arg(key, expected_type, args[i])
             struct[key] = args[i]
 
