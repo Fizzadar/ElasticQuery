@@ -21,16 +21,16 @@ def _check_type(key, type_, arg):
             type_ = str
 
         # '_filter' or '_query' list
-        elif arg._eq_type != type_[1:]:
-            raise InvalidArg('{} should be a {}'.format(key, type_[1:].title()))
+        elif not hasattr(arg, '_eq_type') or arg._eq_type != type_[1:]:
+            raise InvalidArg('{0} should be a {1}'.format(key, type_[1:].title()))
 
     elif not isinstance(arg, type_):
-        raise InvalidArg('{} should be a list of {}'.format(key, type_))
+        raise InvalidArg('{0} should be a list of {1}'.format(key, type_))
 
 def _check_arg(key, expected_type, arg):
     if isinstance(expected_type, list):
         if not isinstance(arg, list):
-            raise InvalidArg('{} should be a list'.format(key))
+            raise InvalidArg('{0} should be a list'.format(key))
 
         if expected_type:
             # Loop the list and check all it's args
@@ -42,7 +42,7 @@ def _check_arg(key, expected_type, arg):
 
     else:
         if isinstance(arg, dict) or isinstance(arg, list):
-            raise InvalidArg('{} should be a string or integer'.format(key))
+            raise InvalidArg('{0} should be a string or integer'.format(key))
 
 def _parse_args(args, argspec):
     struct = {}
