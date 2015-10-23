@@ -9,6 +9,13 @@ from .dsl_util import unroll_struct
 from .exception import NoESClient, NoIndexName, NoDocType
 
 
+def _json_date(obj):
+    if hasattr(obj, 'isoformat'):
+        return obj.isoformat()
+    else:
+        raise TypeError('{0} is not JSON serializable'.format(obj))
+
+
 class ElasticQuery(object):
     '''A class for building ES queries'''
     _es = None
@@ -110,7 +117,7 @@ class ElasticQuery(object):
         )
 
     def json(self, **kwargs):
-        return json.dumps(self.dict(), **kwargs)
+        return json.dumps(self.dict(), default=_json_date, **kwargs)
 
     def __str__(self):
         return self.json(indent=4)
