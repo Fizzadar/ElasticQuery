@@ -1,3 +1,8 @@
+# v2.2
+
++ Format dates as isoformat when JSON encoding
++ Capture where non-EQ types are passed incorrectly
+
 # v2.1.1
 
 + Raise a `MissingArg` exception for missing fields
