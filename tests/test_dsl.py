@@ -7,7 +7,7 @@ from unittest import TestCase
 
 from jsontest import JsonTest
 
-from elasticquery import Filter, Query, Aggregate
+from elasticquery import Filter, Query, Aggregate, Suggester
 from .util import assert_equal
 
 CLASS_NAMES = {
@@ -60,6 +60,14 @@ class TestAggregates(TestCase):
     jsontest_files = path.join('tests', 'aggregates')
     jsontest_function = lambda self, test_name, test_data: (
         _test_filterquery(self, Aggregate, test_name, test_data)
+    )
+
+class TestSuggesters(TestCase):
+    __metaclass__ = JsonTest
+
+    jsontest_files = path.join('tests', 'suggesters')
+    jsontest_function = lambda self, test_name, test_data: (
+        _test_filterquery(self, Suggester, test_name, test_data)
     )
 
 class TestQueryFilter(TestCase):

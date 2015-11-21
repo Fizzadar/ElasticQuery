@@ -1,0 +1,15 @@
+{
+    "args": ["sugg_name", "term_text", "term_field"],
+    "kwargs": {
+        "size": 3
+    },
+    "output": {
+        "sugg_name": {
+            "text": "term_text",
+            "term": {
+                "field": "term_field",
+                "size": 3
+            }
+        }
+    }
+}

@@ -1,0 +1,19 @@
+{
+    "args": ["sugg_name", "term_text", "term_field"],
+    "kwargs": {
+        "fuzzy" : {
+            "fuzziness" : 2
+        }
+    },
+    "output": {
+        "sugg_name": {
+            "text": "term_text",
+            "completion": {
+                "field": "term_field",
+                "fuzzy" : {
+                    "fuzziness" : 2
+                }
+            }
+        }
+    }
+}
