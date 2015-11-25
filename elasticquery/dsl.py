@@ -134,7 +134,3 @@ class BaseSuggester(BaseFilterQuery):
                 struct.update(sugg.dict())
 
         return struct
-
-    def suggest(self, *suggesters):
-        self._suggs.extend(suggesters)
-        return self
