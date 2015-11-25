@@ -13,10 +13,7 @@ Note that all Suggester calls can also be passed additional keyword arguments no
 ```py
 Suggester.completion(
     field,
-    s=None,
-    i=None,
-    z=None,
-    e=None
+    size=None
 )
 ```
 

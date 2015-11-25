@@ -12,12 +12,14 @@ SUGGESTERS = {
     },
     'phrase': {
         'args': ('field', ),
-        'kwargs': ('gram_size', 'real_word_error_likelihood', 'confidence', 'max_errors',
-                'separator', 'size', 'analyzer', 'shard_size', 'collate')
+        'kwargs': (
+            'gram_size', 'real_word_error_likelihood', 'confidence', 'max_errors',
+            'separator', 'size', 'analyzer', 'shard_size', 'collate'
+        )
     },
     'completion': {
         'args': ('field', ),
-        'kwargs': ('size')
+        'kwargs': ('size', )
     }
 }
 
