@@ -30,6 +30,7 @@ class ElasticQuery(object):
         self._doc_type = doc_type
 
         self._aggs = []
+        self._suggesters = []
 
         # An empty query
         self._struct = {}
@@ -42,6 +43,9 @@ class ElasticQuery(object):
 
     def aggregate(self, *aggregates):
         self._aggs.extend(aggregates)
+
+    def suggest(self, *suggesters):
+        self._suggesters.extend(suggesters)
 
     def set(self, key, value):
         '''Set an arbitrary attribute on this query.'''
@@ -98,6 +102,13 @@ class ElasticQuery(object):
                 aggs.update(agg.dict())
 
             self._struct['aggregations'] = aggs
+
+        if self._suggesters:
+            suggs = {}
+            for sugg in self._suggesters:
+                suggs.update(sugg.dict())
+
+            self._struct['suggest'] = suggs
 
         return unroll_struct(self._struct)
 
