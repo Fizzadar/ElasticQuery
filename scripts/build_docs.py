@@ -57,7 +57,7 @@ def make_args_string(argspec, cls_name):
         args.insert(0, 'name')
 
     if args:
-        args = ',\n    '.join(args)
+        args = ', '.join(args)
 
     if 'kwargs' in argspec:
         kwargs = []
@@ -69,10 +69,10 @@ def make_args_string(argspec, cls_name):
             else:
                 kwargs.append('{0}={1}'.format(kwarg[0], arg_to_string(kwarg[1])))
 
-        kwargs = ',\n    '.join(kwargs)
+        kwargs = ', '.join(kwargs)
 
     if args and kwargs:
-        return '{0},\n    {1}'.format(args, kwargs)
+        return '{0}, {1}'.format(args, kwargs)
 
     if args:
         return args
@@ -81,23 +81,37 @@ def make_args_string(argspec, cls_name):
         return kwargs
 
 
+def gen_title_underline(char, string):
+    return ''.join(char for _ in xrange(0, len(string)))
+
+
 def build_dsl_docs(definitions, title, cls_name, target_file):
-    out = '''# ElasticQuery {0} API\n
+    title = '{0} API'.format(title)
+    out = '{0}\n{1}\n'.format(title, gen_title_underline('=', title))
+
+    out += '''
 Note that all {1} calls can also be passed additional keyword arguments not specified here, but no validation of inputs is done on them.
 
 '''.format(title, cls_name)
 
-    keys = definitions.keys()
-    out += '\n'.join(
-        '+ [{0}](#method-{1}{0})'.format(key, cls_name.lower())
-        for key in keys
-    )
-
-    out += '\n\n### class: {0}\n'.format(cls_name)
+    out += '\n\n'
 
     for key, argspec in definitions.iteritems():
         args_string = make_args_string(argspec, cls_name)
-        out += '\n##### method: {0}.{1}\n\n```py\n{0}.{1}(\n    {2}\n)\n```\n'.format(cls_name, key, args_string)
+
+        title_key = key
+        if key.endswith('_'):
+            title_key = '{0}\_'.format(key[:-1])
+
+        method_title = '{0}.{1}'.format(cls_name, title_key)
+        out += '\n{0}\n{1}\n'.format(method_title, gen_title_underline('~', method_title))
+
+        out += '''
+.. code:: python
+
+    {0}.{1}({2})
+
+'''.format(cls_name, key, args_string)
 
     f = open(target_file, 'w')
     f.write(out)

@@ -5,3 +5,5 @@
 *.pyc
 ElasticQuery.egg-info/
 dist/
+
+docs/build/
