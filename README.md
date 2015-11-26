@@ -1,13 +1,14 @@
-# ElasticQuery v2.2
+# ElasticQuery v2.3 [![PyPI version](https://badge.fury.io/py/ElasticQuery.svg)](https://pypi.python.org/pypi/ElasticQuery)
 
 A simple query builder for Elasticsearch. Install with `pip install elasticquery`. Uses metod calls and their args/kwargs to generate query/filter/aggregate objects. Outputs dict/json represntation to be passed directly to ES.
 
 ### API
 
-+ [Filters](./docs/filters.md)
-+ [Queries](./docs/queries.md)
-+ [Aggregates](./docs/aggregates.md)
-+ [ElasticQuery](./docs/elasticquery.md)
++ [ElasticQuery](./docs/client.rst)
++ [Filters](./docs/filters.rst)
++ [Queries](./docs/queries.rst)
++ [Aggregates](./docs/aggregates.rst)
++ [Suggesters](./docs/suggesters.rst)
 
 
 ## Synopsis
