@@ -1,3 +1,8 @@
+# v2.3
+
++ Add suggesters support with `ElasticQuery.Suggester`
++ Move docs to rst based/move to ReadTheDocs (when they fix their shit)
+
 # v2.2
 
 + Format dates as isoformat when JSON encoding
