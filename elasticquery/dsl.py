@@ -41,6 +41,21 @@ class MetaAggregate(MetaFilterQuery):
             make_struct(cls._definitions[key], *args[1:], **kwargs)
         )
 
+class MetaSuggester(MetaFilterQuery):
+    '''Modified MetaFilterQuery.MetaSuggester getattr to handle suggester names and text.'''
+    def __getattr__(cls, key):
+        if key == '__test__':
+            return None
+
+        if key not in cls._definitions:
+            raise cls._exception(key)
+
+        return lambda *args, **kwargs: cls(
+            key,
+            args[0],
+            args[1],
+            make_struct(cls._definitions[key], *args[2:], **kwargs)
+        )
 
 class BaseFilterQuery(object):
     '''The base class which represents a Filter/Query struct.'''
@@ -93,3 +108,29 @@ class BaseAggregate(BaseFilterQuery):
     def aggregate(self, *aggregates):
         self._aggs.extend(aggregates)
         return self
+
+class BaseSuggester(BaseFilterQuery):
+    '''Modified BaseFilterQuery to handle suggester name & text storage.'''
+    _name = None
+
+    def __init__(self, dsl_type, name, text, struct):
+        self._dsl_type = dsl_type
+        self._struct = struct
+        self._name = name
+        self._text = text
+
+        self._suggs = []
+
+    def dict(self):
+        struct = {
+            self._name: {
+                "text": self._text,
+                self._dsl_type: unroll_struct(self._struct)
+            }
+        }
+
+        if self._suggs:
+            for sugg in self._suggs:
+                struct.update(sugg.dict())
+
+        return struct

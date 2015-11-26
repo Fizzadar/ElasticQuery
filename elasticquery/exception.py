@@ -32,6 +32,9 @@ class NoFilter(DslException):
 class NoAggregate(DslException):
     pass
 
+class NoSuggester(DslException):
+    pass
+
 
 # Invalid DSL argument exceptions
 class InvalidArg(DslException):
