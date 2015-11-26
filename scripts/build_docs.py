@@ -118,9 +118,9 @@ Note that all {1} calls can also be passed additional keyword arguments not spec
     f.close()
 
 
-build_dsl_docs(AGGREGATES, 'Aggregates', 'Aggregate', 'docs/aggregates.md')
-build_dsl_docs(FILTERS, 'Filters', 'Filter', 'docs/filters.md')
-build_dsl_docs(QUERIES, 'Queries', 'Query', 'docs/queries.md')
-build_dsl_docs(SUGGESTERS, 'Suggesters', 'Suggester', 'docs/suggesters.md')
+build_dsl_docs(AGGREGATES, 'Aggregates', 'Aggregate', 'docs/aggregates.rst')
+build_dsl_docs(FILTERS, 'Filters', 'Filter', 'docs/filters.rst')
+build_dsl_docs(QUERIES, 'Queries', 'Query', 'docs/queries.rst')
+build_dsl_docs(SUGGESTERS, 'Suggesters', 'Suggester', 'docs/suggesters.rst')
 
 print 'Docs built!'
