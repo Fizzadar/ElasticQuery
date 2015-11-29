@@ -17,7 +17,8 @@ def _json_date(obj):
 
 
 class ElasticQuery(object):
-    '''A class for building ES queries'''
+    '''A class for building ES queries.'''
+
     _es = None
     _index = None
     _doc_type = None
@@ -25,6 +26,8 @@ class ElasticQuery(object):
     _filter = _query = None
 
     def __init__(self, es=None, index=None, doc_type=None):
+        '''Creates a new query object.'''
+
         self._es = es
         self._index = index
         self._doc_type = doc_type
@@ -36,39 +39,58 @@ class ElasticQuery(object):
         self._struct = {}
 
     def query(self, query):
+        '''Set the query for this query.'''
+
         self._query = query
 
     def filter(self, filter_):
+        '''Set the filter for this query.'''
+
         self._filter = filter_
 
     def aggregate(self, *aggregates):
+        '''Add one or more aggregates to this query.'''
+
         self._aggs.extend(aggregates)
 
     def suggest(self, *suggesters):
+        '''Add one or more suggesters to this query.'''
+
         self._suggesters.extend(suggesters)
 
     def set(self, key, value):
         '''Set an arbitrary attribute on this query.'''
+
         self._struct[key] = value
         return self
 
     def from_(self, from_):
+        '''Set the from/offset for this query.'''
+
         self._struct['from'] = from_
         return self
 
     def size(self, size):
+        '''Set the size of this query.'''
+
         self._struct['size'] = size
         return self
 
     def timeout(self, timeout):
+        '''Set the timeout for this query.'''
+
         self._struct['timeout'] = timeout
         return self
 
     def fields(self, fields):
+        '''Set the fields/_source for this query.'''
+
         self._struct['_source'] = fields
         return self
 
     def sort(self, field, order=None):
+        '''Sort this query.'''
+
         if 'sort' not in self._struct:
             self._struct['sort'] = []
 
@@ -84,15 +106,22 @@ class ElasticQuery(object):
         return self
 
     def dict(self):
+        '''Returns the current query in dict format.'''
+
+        # If filter & query, use filtered query
         if self._filter and self._query:
             self._struct['query'] = Query.filtered(
                 filter=self._filter,
                 query=self._query
             )
+
+        # Just filter? Use filtered query
         elif self._filter:
             self._struct['query'] = Query.filtered(
                 filter=self._filter
             )
+
+        # Just query? Use as-is
         elif self._query:
             self._struct['query'] = self._query
 
@@ -114,6 +143,7 @@ class ElasticQuery(object):
 
     def get(self):
         '''Execute the current query (requires _es, _index & _doc_type).'''
+
         if self._es is None:
             raise NoESClient()
         if self._index is None:
@@ -128,6 +158,10 @@ class ElasticQuery(object):
         )
 
     def json(self, **kwargs):
+        '''
+        Returns a JSON representation of the current query. Kwargs are passed to
+        ``json.dumps``.
+        '''
         return json.dumps(self.dict(), default=_json_date, **kwargs)
 
     def __str__(self):

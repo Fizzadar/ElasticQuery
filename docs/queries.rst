@@ -1,5 +1,5 @@
-Queries API
-===========
+Queries
+=======
 
 Note that all Query calls can also be passed additional keyword arguments not specified here, but no validation of inputs is done on them.
 

@@ -4,11 +4,11 @@ A simple query builder for Elasticsearch. Install with `pip install elasticquery
 
 ### API
 
-+ [ElasticQuery](./docs/client.rst)
-+ [Filters](./docs/filters.rst)
-+ [Queries](./docs/queries.rst)
-+ [Aggregates](./docs/aggregates.rst)
-+ [Suggesters](./docs/suggesters.rst)
++ [ElasticQuery](https://elasticquery.readthedocs.org/client.html)
++ [Queries](https://elasticquery.readthedocs.org/queries.html)
++ [Aggregates](https://elasticquery.readthedocs.org/aggregates.html)
++ [Suggesters](https://elasticquery.readthedocs.org/suggesters.html)
++ [Filters](https://elasticquery.readthedocs.org/filters.html)
 
 
 ## Synopsis

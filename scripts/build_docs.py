@@ -86,7 +86,7 @@ def gen_title_underline(char, string):
 
 
 def build_dsl_docs(definitions, title, cls_name, target_file):
-    title = '{0} API'.format(title)
+    title = '{0}'.format(title)
     out = '{0}\n{1}\n'.format(title, gen_title_underline('=', title))
 
     out += '''

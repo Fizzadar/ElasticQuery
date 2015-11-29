@@ -10,7 +10,7 @@ extensions = [
 source_suffix = '.rst'
 master_doc = 'index'
 
-project = 'Elastic Query'
+project = 'ElasticQuery'
 copyright = '2015, Nick Barrett (Fizzadar)'
 author = 'Nick Barrett (Fizzadar)'
 
