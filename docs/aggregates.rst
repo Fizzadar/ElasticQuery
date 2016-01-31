@@ -51,7 +51,7 @@ Aggregate.filters
 
 .. code:: python
 
-    Aggregate.filters(name, [Filter])
+    Aggregate.filters(name, [Query])
 
 
 Aggregate.avg
@@ -195,7 +195,7 @@ Aggregate.filter
 
 .. code:: python
 
-    Aggregate.filter(name, Filter)
+    Aggregate.filter(name, Query)
 
 
 Aggregate.percentile_ranks

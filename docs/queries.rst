@@ -27,7 +27,7 @@ Query.has_child
 
 .. code:: python
 
-    Query.has_child(type, filter=Filter, query=Query)
+    Query.has_child(type, query=Query)
 
 
 Query.span_first
@@ -62,12 +62,12 @@ Query.fuzzy
     Query.fuzzy(field, value, boost=None, fuzziness=None, prefix_length=None, max_expansions=None)
 
 
-Query.nested
-~~~~~~~~~~~~
+Query.ids
+~~~~~~~~~
 
 .. code:: python
 
-    Query.nested(path, Query)
+    Query.ids([values], type=None)
 
 
 Query.dis_max
@@ -86,12 +86,12 @@ Query.query_string
     Query.query_string(query, fields=[])
 
 
-Query.fuzzy_like_this
-~~~~~~~~~~~~~~~~~~~~~
+Query.and\_
+~~~~~~~~~~~
 
 .. code:: python
 
-    Query.fuzzy_like_this([fields], like_text)
+    Query.and_([Query])
 
 
 Query.has_parent
@@ -99,7 +99,7 @@ Query.has_parent
 
 .. code:: python
 
-    Query.has_parent(parent_type, filter=Filter, query=Query)
+    Query.has_parent(parent_type, query=Query)
 
 
 Query.function_score
@@ -107,7 +107,7 @@ Query.function_score
 
 .. code:: python
 
-    Query.function_score([functions], filter=Filter, query=Query)
+    Query.function_score([functions], query=Query)
 
 
 Query.geo_shape
@@ -126,12 +126,12 @@ Query.fuzzy_like_this_field
     Query.fuzzy_like_this_field(field, like_text, max_query_terms=None, ignore_tf=None, fuzziness=None, prefix_length=None, boost=None, analyzer=None)
 
 
-Query.span_multi
-~~~~~~~~~~~~~~~~
+Query.nested
+~~~~~~~~~~~~
 
 .. code:: python
 
-    Query.span_multi(Query)
+    Query.nested(path, Query)
 
 
 Query.match_all
@@ -182,12 +182,12 @@ Query.regexp
     Query.regexp(field, value, boost=None, flags=None)
 
 
-Query.ids
-~~~~~~~~~
+Query.fuzzy_like_this
+~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: python
 
-    Query.ids([values], type=None)
+    Query.fuzzy_like_this([fields], like_text)
 
 
 Query.more_like_this
@@ -238,12 +238,12 @@ Query.indices
     Query.indices([indices], query=Query, no_match_query=Query)
 
 
-Query.filtered
-~~~~~~~~~~~~~~
+Query.span_multi
+~~~~~~~~~~~~~~~~
 
 .. code:: python
 
-    Query.filtered(filter=Filter, query=Query)
+    Query.span_multi(Query)
 
 
 Query.span_not
@@ -267,7 +267,7 @@ Query.constant_score
 
 .. code:: python
 
-    Query.constant_score(filter=Filter, query=Query)
+    Query.constant_score(query=Query)
 
 
 Query.match
