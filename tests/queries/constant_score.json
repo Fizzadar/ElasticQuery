@@ -1,12 +1,12 @@
 {
     "kwargs": {
-        "filter": "_filter",
+        "filter": "_query",
         "query": "_query"
     },
     "output": {
         "constant_score": {
             "filter": {
-                "_filter": {}
+                "_query": {}
             },
             "query": {
                 "_query": {}

@@ -1,11 +1,11 @@
 {
-    "args": ["agg_name", ["_filter", "_filter"]],
+    "args": ["agg_name", ["_query", "_query"]],
     "output": {
         "agg_name": {
             "filters": {
                 "filters": [
-                    {"_filter": {}},
-                    {"_filter": {}}
+                    {"_query": {}},
+                    {"_query": {}}
                 ]
             }
         }

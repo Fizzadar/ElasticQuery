@@ -46,10 +46,10 @@ AGGREGATES = {
     'global': {
     },
     'filter': {
-        'args': ({'filter': '_filter'},)
+        'args': ({'filter': '_query'},)
     },
     'filters': {
-        'args': ({'filters': ['_filter']},)
+        'args': ({'filters': ['_query']},)
     },
     'missing': {
         'args': ('field',)

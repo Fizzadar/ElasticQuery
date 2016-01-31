@@ -7,17 +7,16 @@ from unittest import TestCase
 
 from jsontest import JsonTest
 
-from elasticquery import Filter, Query, Aggregate, Suggester
+from elasticquery import Query, Aggregate, Suggester
 from .util import assert_equal
 
 CLASS_NAMES = {
-    '_filter': Filter,
     '_query': Query
 }
 
 
-def _test_filterquery(self, filterquery, test_name, test_data):
-    method = getattr(filterquery, test_name)
+def _test_query(self, query, test_name, test_data):
+    method = getattr(query, test_name)
 
     def parse_arg(arg):
         if isinstance(arg, list):
@@ -38,65 +37,28 @@ def _test_filterquery(self, filterquery, test_name, test_data):
     assert_equal(self, output, test_data['output'])
 
 
-class TestFilters(TestCase):
-    __metaclass__ = JsonTest
-
-    jsontest_files = path.join('tests', 'filters')
-    jsontest_function = lambda self, test_name, test_data: (
-        _test_filterquery(self, Filter, test_name, test_data)
-    )
-
 class TestQueries(TestCase):
     __metaclass__ = JsonTest
 
     jsontest_files = path.join('tests', 'queries')
     jsontest_function = lambda self, test_name, test_data: (
-        _test_filterquery(self, Query, test_name, test_data)
+        _test_query(self, Query, test_name, test_data)
     )
+
 
 class TestAggregates(TestCase):
     __metaclass__ = JsonTest
 
     jsontest_files = path.join('tests', 'aggregates')
     jsontest_function = lambda self, test_name, test_data: (
-        _test_filterquery(self, Aggregate, test_name, test_data)
+        _test_query(self, Aggregate, test_name, test_data)
     )
+
 
 class TestSuggesters(TestCase):
     __metaclass__ = JsonTest
 
     jsontest_files = path.join('tests', 'suggesters')
     jsontest_function = lambda self, test_name, test_data: (
-        _test_filterquery(self, Suggester, test_name, test_data)
+        _test_query(self, Suggester, test_name, test_data)
     )
-
-class TestQueryFilter(TestCase):
-    def test_query_filter_nocache(self):
-        filter_query = Filter.query(
-            Query.term('field', 'value')
-        )
-
-        assert_equal(self, filter_query.dict(), {
-            'query': {
-                'term': {
-                    'field': 'value'
-                }
-            }
-        })
-
-    def test_query_filter_cached(self):
-        filter_query = Filter.query(
-            Query.term('field', 'value'),
-            cache=True
-        )
-
-        assert_equal(self, filter_query.dict(), {
-            'fquery': {
-                'query': {
-                    'term': {
-                        'field': 'value'
-                    }
-                },
-                '_cache': True
-            }
-        })

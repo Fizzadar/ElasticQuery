@@ -21,7 +21,7 @@ def _check_type(key, type_, arg):
         if not type_:
             type_ = str
 
-        # '_filter' or '_query' list
+        # '_query' list
         elif not hasattr(arg, '_eq_type') or arg._eq_type != type_[1:]:
             raise InvalidArg('{0} should be a {1}'.format(key, type_[1:].title()))
 

@@ -1,7 +1,7 @@
 {
     "args": [["function_template", "function_template"]],
     "kwargs": {
-        "filter": "_filter",
+        "filter": "_query",
         "query": "_query"
     },
     "output": {
@@ -11,7 +11,7 @@
                 "function_template"
             ],
             "filter": {
-                "_filter": {}
+                "_query": {}
             },
             "query": {
                 "_query": {}

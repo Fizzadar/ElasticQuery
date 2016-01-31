@@ -1,9 +1,9 @@
 {
-    "args": ["agg_name", "_filter"],
+    "args": ["agg_name", "_query"],
     "output": {
         "agg_name": {
             "filter": {
-                "filter": {"_filter": {}}
+                "filter": {"_query": {}}
             }
         }
     }

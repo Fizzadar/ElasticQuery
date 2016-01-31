@@ -2,13 +2,13 @@
     "args": ["child_type"],
     "kwargs": {
         "query": "_query",
-        "filter": "_filter"
+        "filter": "_query"
     },
     "output": {
         "has_child": {
             "type": "child_type",
             "query": {"_query": {}},
-            "filter": {"_filter": {}}
+            "filter": {"_query": {}}
         }
     }
 }
