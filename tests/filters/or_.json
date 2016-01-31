@@ -1,9 +1,0 @@
-{
-    "args": ["_filter", "_filter"],
-    "output": {
-        "or": [
-            {"_filter": {}},
-            {"_filter": {}}
-        ]
-    }
-}

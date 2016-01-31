@@ -12,8 +12,10 @@ class ElasticQueryException(Exception):
 class NoESClient(ElasticQueryException):
     pass
 
+
 class NoDocType(ElasticQueryException):
     pass
+
 
 class NoIndexName(ElasticQueryException):
     pass
@@ -23,14 +25,14 @@ class NoIndexName(ElasticQueryException):
 class DslException(ElasticQueryException):
     pass
 
+
 class NoQuery(DslException):
     pass
 
-class NoFilter(DslException):
-    pass
 
 class NoAggregate(DslException):
     pass
+
 
 class NoSuggester(DslException):
     pass
@@ -39,6 +41,7 @@ class NoSuggester(DslException):
 # Invalid DSL argument exceptions
 class InvalidArg(DslException):
     pass
+
 
 class MissingArg(DslException):
     pass

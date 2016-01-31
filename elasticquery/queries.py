@@ -2,10 +2,11 @@
 # File: elasticquery/queries.py
 # Desc: internal ElasticQuery definitions mapping to Elasticsearch query objects
 
-from .dsl import BaseFilterQuery, MetaFilterQuery
+from .dsl import BaseQuery, MetaQuery
 from .exception import NoQuery
 
 QUERIES = {
+    'and_': ['_query'],
     'match': {
         'field': True,
         'args': ('query',),
@@ -25,13 +26,10 @@ QUERIES = {
         'process': lambda q: {'body': q}
     },
     'constant_score': {
-        'kwargs': ({'query': '_query', 'filter': '_filter'},)
+        'kwargs': ({'query': '_query'},)
     },
     'dis_max': {
         'args': ({'queries': ['_query']},)
-    },
-    'filtered': {
-        'kwargs': ({'query': '_query', 'filter': '_filter'},)
     },
     'fuzzy_like_this': {
         'args': ({'fields': []}, 'like_text')
@@ -45,7 +43,7 @@ QUERIES = {
     },
     'function_score': {
         'args': ({'functions': []},),
-        'kwargs': ({'query': '_query', 'filter': '_filter'},)
+        'kwargs': ({'query': '_query'},)
     },
     'fuzzy': {
         'field': True,
@@ -59,11 +57,11 @@ QUERIES = {
     },
     'has_child': {
         'args': ('type',),
-        'kwargs': ({'query': '_query', 'filter': '_filter'},)
+        'kwargs': ({'query': '_query'},)
     },
     'has_parent': {
         'args': ('parent_type',),
-        'kwargs': ({'query': '_query', 'filter': '_filter'},)
+        'kwargs': ({'query': '_query'},)
     },
     'ids': {
         'args': ({'values': []},),
@@ -146,8 +144,8 @@ QUERIES = {
 }
 
 
-class Query(BaseFilterQuery):
-    __metaclass__ = MetaFilterQuery
+class Query(BaseQuery):
+    __metaclass__ = MetaQuery
 
     _eq_type = 'query'
     _definitions = QUERIES
