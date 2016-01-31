@@ -1,3 +1,9 @@
+# v3 (WIP)
+
++ Full ES 2 support
++ Removed `Filter` & ES 1 support
++ Exceptions renamed/reduced in favour of `ValueError` where possible
+
 # v2.3
 
 + Add suggesters support with `ElasticQuery.Suggester`
