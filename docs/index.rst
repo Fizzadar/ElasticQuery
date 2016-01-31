@@ -11,7 +11,6 @@ A simple query builder for Elasticsearch. Install with ``pip install elasticquer
    queries
    aggregates
    suggesters
-   filters
 
 
 Meta
