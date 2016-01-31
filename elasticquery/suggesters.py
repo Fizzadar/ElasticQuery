@@ -23,6 +23,7 @@ SUGGESTERS = {
     }
 }
 
+
 class Suggester(BaseSuggester):
     __metaclass__ = MetaSuggester
 

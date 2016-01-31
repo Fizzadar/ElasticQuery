@@ -7,10 +7,13 @@ import json
 from .dsl_util import make_struct, unroll_definitions, unroll_struct
 
 
-class MetaFilterQuery(type):
-    '''Metaclass mapping attributes to dsl objects on Filter/Query getattr.'''
+class MetaQuery(type):
+    '''
+    Metaclass mapping attributes to dsl objects on Filter/Query getattr.
+    '''
+
     def __init__(cls, name, bases, d):
-        super(MetaFilterQuery, cls).__init__(name, bases, d)
+        super(MetaQuery, cls).__init__(name, bases, d)
         unroll_definitions(cls._definitions)
 
     def __getattr__(cls, key):
@@ -26,8 +29,12 @@ class MetaFilterQuery(type):
             make_struct(cls._definitions[key], *args, **kwargs)
         )
 
-class MetaAggregate(MetaFilterQuery):
-    '''Modified MetaFilterQuery.MetaAggregate getattr to handle aggregate names.'''
+
+class MetaAggregate(MetaQuery):
+    '''
+    Modified MetaQuery.MetaAggregate getattr to handle aggregate names.
+    '''
+
     def __getattr__(cls, key):
         if key == '__test__':
             return None
@@ -41,8 +48,12 @@ class MetaAggregate(MetaFilterQuery):
             make_struct(cls._definitions[key], *args[1:], **kwargs)
         )
 
-class MetaSuggester(MetaFilterQuery):
-    '''Modified MetaFilterQuery.MetaSuggester getattr to handle suggester names and text.'''
+
+class MetaSuggester(MetaQuery):
+    '''
+    Modified MetaQuery.MetaSuggester getattr to handle suggester names and text.
+    '''
+
     def __getattr__(cls, key):
         if key == '__test__':
             return None
@@ -57,8 +68,12 @@ class MetaSuggester(MetaFilterQuery):
             make_struct(cls._definitions[key], *args[2:], **kwargs)
         )
 
-class BaseFilterQuery(object):
-    '''The base class which represents a Filter/Query struct.'''
+
+class BaseQuery(object):
+    '''
+    The base class which represents a Filter/Query struct.
+    '''
+
     _struct = None
     _dsl_type = None
 
@@ -77,8 +92,12 @@ class BaseFilterQuery(object):
     def __str__(self):
         return json.dumps(self.dict(), indent=4)
 
-class BaseAggregate(BaseFilterQuery):
-    '''Modified BaseFilterQuery to handle aggregate name storage.'''
+
+class BaseAggregate(BaseQuery):
+    '''
+    Modified BaseQuery to handle aggregate name storage.
+    '''
+
     _name = None
 
     def __init__(self, dsl_type, name, struct):
@@ -109,8 +128,12 @@ class BaseAggregate(BaseFilterQuery):
         self._aggs.extend(aggregates)
         return self
 
-class BaseSuggester(BaseFilterQuery):
-    '''Modified BaseFilterQuery to handle suggester name & text storage.'''
+
+class BaseSuggester(BaseQuery):
+    '''
+    Modified BaseQuery to handle suggester name & text storage.
+    '''
+
     _name = None
 
     def __init__(self, dsl_type, name, text, struct):

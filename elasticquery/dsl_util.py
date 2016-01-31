@@ -14,6 +14,7 @@ def _check_input(arg):
 
     return True
 
+
 def _check_type(key, type_, arg):
     if isinstance(type_, basestring):
         # Empty string means string type
@@ -26,6 +27,7 @@ def _check_type(key, type_, arg):
 
     elif not isinstance(arg, type_):
         raise InvalidArg('{0} should be a list of {1}'.format(key, type_))
+
 
 def _check_arg(key, expected_type, arg):
     if isinstance(expected_type, list):
@@ -44,6 +46,7 @@ def _check_arg(key, expected_type, arg):
         if isinstance(arg, dict) or isinstance(arg, list):
             raise InvalidArg('{0} should be a string or integer'.format(key))
 
+
 def _parse_args(args, argspec):
     struct = {}
     arg_length = len(args)
@@ -58,6 +61,7 @@ def _parse_args(args, argspec):
 
     return struct
 
+
 def _parse_kwargs(kwargs, kwargspec):
     struct = {}
 
@@ -68,8 +72,12 @@ def _parse_kwargs(kwargs, kwargspec):
 
     return struct
 
+
 def make_struct(definition, *args, **kwargs):
-    '''Generates a dict based the definition and the input arguments.'''
+    '''
+    Generates a dict based the definition and the input arguments.
+    '''
+
     # List type (compound and/or filters)
     if isinstance(definition, list):
         _check_arg('', definition, list(args))
@@ -122,7 +130,10 @@ def make_struct(definition, *args, **kwargs):
 
 
 def unroll_struct(struct):
-    '''Converts nested Filter and Query objects into nested dicts.'''
+    '''
+    Converts nested Filter and Query objects into nested dicts.
+    '''
+
     if type(struct) in (list, tuple):
         return [unroll_struct(v) for v in struct]
     elif isinstance(struct, dict):
@@ -149,8 +160,12 @@ def _unroll_spec(spec):
 
     return out_spec
 
+
 def unroll_definitions(definitions):
-    '''Unrolls definitions ensuring all arg/kwarg specs are tuples of (key, expected_type).'''
+    '''
+    Unrolls definitions ensuring all arg/kwarg specs are tuples of (key, expected_type).
+    '''
+
     for key, spec in definitions.iteritems():
         if isinstance(spec, dict):
             for arg_type in ['args', 'kwargs']:
