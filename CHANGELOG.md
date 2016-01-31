@@ -1,8 +1,9 @@
 # v3 (WIP)
 
-+ Full ES 2 support
++ Full ES 2 DSL support
 + Removed `Filter` & ES 1 support
 + Exceptions renamed/reduced in favour of `ValueError` where possible
++ 100% test coverage
 
 # v2.3
 
