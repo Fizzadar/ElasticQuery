@@ -2,8 +2,6 @@
 # File: elasticquery/filterquery.py
 # Desc: The base queryfilter/aggregate classes & metaclasses
 
-import json
-
 from .dsl_util import make_struct, unroll_definitions, unroll_struct
 
 
@@ -89,9 +87,6 @@ class BaseQuery(object):
             dsl_type: unroll_struct(self._struct)
         }
 
-    def __str__(self):
-        return json.dumps(self.dict(), indent=4)
-
 
 class BaseAggregate(BaseQuery):
     '''
@@ -147,13 +142,9 @@ class BaseSuggester(BaseQuery):
     def dict(self):
         struct = {
             self._name: {
-                "text": self._text,
+                'text': self._text,
                 self._dsl_type: unroll_struct(self._struct)
             }
         }
-
-        if self._suggs:
-            for sugg in self._suggs:
-                struct.update(sugg.dict())
 
         return struct

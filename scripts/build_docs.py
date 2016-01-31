@@ -5,13 +5,11 @@
 # Desc: quick hack to auto-generate Markdown from the DSL definitions
 
 from elasticquery.aggregates import AGGREGATES
-from elasticquery.filters import FILTERS
 from elasticquery.queries import QUERIES
 from elasticquery.suggesters import SUGGESTERS
 
 STRING_TO_CLASS = {
-    '_query': 'Query',
-    '_filter': 'Filter'
+    '_query': 'Query'
 }
 
 
@@ -119,7 +117,6 @@ Note that all {1} calls can also be passed additional keyword arguments not spec
 
 
 build_dsl_docs(AGGREGATES, 'Aggregates', 'Aggregate', 'docs/aggregates.rst')
-build_dsl_docs(FILTERS, 'Filters', 'Filter', 'docs/filters.rst')
 build_dsl_docs(QUERIES, 'Queries', 'Query', 'docs/queries.rst')
 build_dsl_docs(SUGGESTERS, 'Suggesters', 'Suggester', 'docs/suggesters.rst')
 

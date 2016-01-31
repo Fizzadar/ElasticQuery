@@ -3,7 +3,7 @@
 # Desc: internal ElasticQuery definitions mapping to Elasticsearch aggregate objects
 
 from .dsl import BaseAggregate, MetaAggregate
-from .exception import NoAggregate
+from .exceptions import NoAggregateError
 
 AGGREGATES = {
     'min': {
@@ -97,4 +97,4 @@ class Aggregate(BaseAggregate):
 
     _eq_type = 'aggregate'
     _definitions = AGGREGATES
-    _exception = NoAggregate
+    _exception = NoAggregateError

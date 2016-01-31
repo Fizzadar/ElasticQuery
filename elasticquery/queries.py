@@ -3,7 +3,7 @@
 # Desc: internal ElasticQuery definitions mapping to Elasticsearch query objects
 
 from .dsl import BaseQuery, MetaQuery
-from .exception import NoQuery
+from .exceptions import NoQueryError
 
 QUERIES = {
     'and_': ['_query'],
@@ -38,7 +38,8 @@ QUERIES = {
         'field': True,
         'args': ('like_text',),
         'kwargs': (
-            'max_query_terms', 'ignore_tf', 'fuzziness', 'prefix_length', 'boost', 'analyzer'
+            'max_query_terms', 'ignore_tf', 'fuzziness',
+            'prefix_length', 'boost', 'analyzer'
         )
     },
     'function_score': {
@@ -95,7 +96,7 @@ QUERIES = {
     },
     'range': {
         'field': True,
-        'kwargs': ('gte', 'gt', 'lte', 'lt',)
+        'kwargs': ('gte', 'gt', 'lte', 'lt')
     },
     'regexp': {
         'field': True,
@@ -149,4 +150,4 @@ class Query(BaseQuery):
 
     _eq_type = 'query'
     _definitions = QUERIES
-    _exception = NoQuery
+    _exception = NoQueryError

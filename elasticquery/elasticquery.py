@@ -5,7 +5,6 @@
 import json
 
 from .dsl_util import unroll_struct
-from .exception import NoESClient, NoIndexName, NoDocType
 
 
 def _json_date(obj):
@@ -152,13 +151,13 @@ class ElasticQuery(object):
         '''
 
         if self._es is None:
-            raise NoESClient()
+            raise ValueError('No Elasticsearch instance attached to this query')
 
         if self._index is None:
-            raise NoIndexName()
+            raise ValueError('No index specified for this query')
 
         if self._doc_type is None:
-            raise NoDocType()
+            raise ValueError('No doc type specified for this query')
 
         return self._es.search(
             index=self._index,
@@ -173,6 +172,3 @@ class ElasticQuery(object):
         '''
 
         return json.dumps(self.dict(), default=_json_date, **kwargs)
-
-    def __str__(self):
-        return self.json(indent=4)

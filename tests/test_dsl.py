@@ -8,6 +8,10 @@ from unittest import TestCase
 from jsontest import JsonTest
 
 from elasticquery import Query, Aggregate, Suggester
+from elasticquery.exceptions import (
+    NoQueryError, NoAggregateError, NoSuggesterError,
+    MissingArgError
+)
 from .util import assert_equal
 
 CLASS_NAMES = {
@@ -22,7 +26,11 @@ def _test_query(self, query, test_name, test_data):
         if isinstance(arg, list):
             return [parse_arg(a) for a in arg]
         else:
-            return CLASS_NAMES[arg](arg, {}) if (isinstance(arg, basestring) and arg.startswith('_')) else arg
+            return (
+                CLASS_NAMES[arg](arg, {})
+                if (isinstance(arg, basestring) and arg.startswith('_'))
+                else arg
+            )
 
     args = test_data.get('args', [])
     args = parse_arg(args)
@@ -62,3 +70,41 @@ class TestSuggesters(TestCase):
     jsontest_function = lambda self, test_name, test_data: (
         _test_query(self, Suggester, test_name, test_data)
     )
+
+
+class TestFails(TestCase):
+    def test_no_query(self):
+        with self.assertRaises(NoQueryError):
+            Query.doesnotexist()
+
+    def test_no_aggregate(self):
+        with self.assertRaises(NoAggregateError):
+            Aggregate.doesnotexist()
+
+    def test_no_suggester(self):
+        with self.assertRaises(NoSuggesterError):
+            Suggester.doesnotexist()
+
+    def test_missing_arg(self):
+        with self.assertRaises(MissingArgError):
+            Query.term(None)
+
+    def test_invalid_arg(self):
+        # Test passing not a list
+        with self.assertRaises(ValueError):
+            Query.bool(must=set())
+
+        # And now an invalid list
+        with self.assertRaises(ValueError):
+            Query.bool(must=[None])
+
+        # And now an invalid list
+        with self.assertRaises(ValueError):
+            Query.bool(must=[Aggregate.terms('test', 'test')])
+
+        # And now an invalid list
+        with self.assertRaises(ValueError):
+            Query.range('field', gte=['error'])
+
+        # Empty list should be OK/ignored
+        Query.bool(must=[])

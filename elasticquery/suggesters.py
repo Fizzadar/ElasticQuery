@@ -3,7 +3,7 @@
 # Desc: internal ElasticQuery definitions mapping to Elasticsearch suggester objects
 
 from .dsl import BaseSuggester, MetaSuggester
-from .exception import NoSuggester
+from .exceptions import NoSuggesterError
 
 SUGGESTERS = {
     'term': {
@@ -29,4 +29,4 @@ class Suggester(BaseSuggester):
 
     _eq_type = 'suggester'
     _definitions = SUGGESTERS
-    _exception = NoSuggester
+    _exception = NoSuggesterError
