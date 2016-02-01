@@ -6,12 +6,12 @@ Note that all Query calls can also be passed additional keyword arguments not sp
 
 
 
-Query.span_or
-~~~~~~~~~~~~~
+Query.geo_polygon
+~~~~~~~~~~~~~~~~~
 
 .. code:: python
 
-    Query.span_or([Query])
+    Query.geo_polygon(field, [points])
 
 
 Query.terms
@@ -22,84 +22,52 @@ Query.terms
     Query.terms(field, [value])
 
 
-Query.has_child
-~~~~~~~~~~~~~~~
+Query.simple_query_string
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: python
 
-    Query.has_child(type, query=Query)
+    Query.simple_query_string(query, fields=[])
 
 
-Query.span_first
-~~~~~~~~~~~~~~~~
-
-.. code:: python
-
-    Query.span_first(Query)
-
-
-Query.prefix
-~~~~~~~~~~~~
-
-.. code:: python
-
-    Query.prefix(field, value, boost=None)
-
-
-Query.term
-~~~~~~~~~~
-
-.. code:: python
-
-    Query.term(field, value, boost=None)
-
-
-Query.fuzzy
-~~~~~~~~~~~
-
-.. code:: python
-
-    Query.fuzzy(field, value, boost=None, fuzziness=None, prefix_length=None, max_expansions=None)
-
-
-Query.ids
-~~~~~~~~~
-
-.. code:: python
-
-    Query.ids([values], type=None)
-
-
-Query.dis_max
+Query.missing
 ~~~~~~~~~~~~~
 
 .. code:: python
 
-    Query.dis_max([Query])
+    Query.missing(field)
 
 
-Query.query_string
-~~~~~~~~~~~~~~~~~~
-
-.. code:: python
-
-    Query.query_string(query, fields=[])
-
-
-Query.and\_
-~~~~~~~~~~~
+Query.span_containing
+~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: python
 
-    Query.and_([Query])
+    Query.span_containing(Query, Query)
 
 
-Query.has_parent
+Query.span_multi
 ~~~~~~~~~~~~~~~~
 
 .. code:: python
 
-    Query.has_parent(parent_type, query=Query)
+    Query.span_multi(Query)
+
+
+Query.geohash_cell
+~~~~~~~~~~~~~~~~~~
+
+.. code:: python
+
+    Query.geohash_cell(field, lat=None, lon=None)
+
+
+Query.boosting
+~~~~~~~~~~~~~~
+
+.. code:: python
+
+    Query.boosting(positive=None, negative=None)
 
 
 Query.function_score
@@ -110,20 +78,12 @@ Query.function_score
     Query.function_score([functions], query=Query)
 
 
-Query.geo_shape
-~~~~~~~~~~~~~~~
+Query.term
+~~~~~~~~~~
 
 .. code:: python
 
-    Query.geo_shape(field, type=None, coordinates=[])
-
-
-Query.fuzzy_like_this_field
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code:: python
-
-    Query.fuzzy_like_this_field(field, like_text, max_query_terms=None, ignore_tf=None, fuzziness=None, prefix_length=None, boost=None, analyzer=None)
+    Query.term(field, value, boost=None)
 
 
 Query.nested
@@ -134,44 +94,60 @@ Query.nested
     Query.nested(path, Query)
 
 
-Query.match_all
+Query.dis_max
+~~~~~~~~~~~~~
+
+.. code:: python
+
+    Query.dis_max([Query])
+
+
+Query.indices
+~~~~~~~~~~~~~
+
+.. code:: python
+
+    Query.indices([indices], query=Query, no_match_query=Query)
+
+
+Query.prefix
+~~~~~~~~~~~~
+
+.. code:: python
+
+    Query.prefix(field, value, boost=None)
+
+
+Query.geo_distance_range
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: python
+
+    Query.geo_distance_range(field, lat=None, lon=None)
+
+
+Query.has_parent
+~~~~~~~~~~~~~~~~
+
+.. code:: python
+
+    Query.has_parent(parent_type, query=Query)
+
+
+Query.fuzzy
+~~~~~~~~~~~
+
+.. code:: python
+
+    Query.fuzzy(field, value, boost=None, fuzziness=None, prefix_length=None, max_expansions=None)
+
+
+Query.geo_shape
 ~~~~~~~~~~~~~~~
 
 .. code:: python
 
-    Query.match_all(boost=None)
-
-
-Query.span_near
-~~~~~~~~~~~~~~~
-
-.. code:: python
-
-    Query.span_near([Query])
-
-
-Query.simple_query_string
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code:: python
-
-    Query.simple_query_string(query, fields=[])
-
-
-Query.multi_match
-~~~~~~~~~~~~~~~~~
-
-.. code:: python
-
-    Query.multi_match([fields], query)
-
-
-Query.span_term
-~~~~~~~~~~~~~~~
-
-.. code:: python
-
-    Query.span_term(field, value, boost=None)
+    Query.geo_shape(field, type=None, coordinates=[])
 
 
 Query.regexp
@@ -182,12 +158,12 @@ Query.regexp
     Query.regexp(field, value, boost=None, flags=None)
 
 
-Query.fuzzy_like_this
-~~~~~~~~~~~~~~~~~~~~~
+Query.span_or
+~~~~~~~~~~~~~
 
 .. code:: python
 
-    Query.fuzzy_like_this([fields], like_text)
+    Query.span_or([Query])
 
 
 Query.more_like_this
@@ -196,6 +172,86 @@ Query.more_like_this
 .. code:: python
 
     Query.more_like_this([fields], like_text)
+
+
+Query.match_all
+~~~~~~~~~~~~~~~
+
+.. code:: python
+
+    Query.match_all(boost=None)
+
+
+Query.geo_distance
+~~~~~~~~~~~~~~~~~~
+
+.. code:: python
+
+    Query.geo_distance(field, lat=None, lon=None)
+
+
+Query.span_near
+~~~~~~~~~~~~~~~
+
+.. code:: python
+
+    Query.span_near([Query])
+
+
+Query.exists
+~~~~~~~~~~~~
+
+.. code:: python
+
+    Query.exists(field)
+
+
+Query.multi_match
+~~~~~~~~~~~~~~~~~
+
+.. code:: python
+
+    Query.multi_match([fields], query)
+
+
+Query.geo_bounding_box
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: python
+
+    Query.geo_bounding_box(field, top_left=None, bottom_right=None)
+
+
+Query.span_term
+~~~~~~~~~~~~~~~
+
+.. code:: python
+
+    Query.span_term(field, value, boost=None)
+
+
+Query.span_within
+~~~~~~~~~~~~~~~~~
+
+.. code:: python
+
+    Query.span_within(Query, Query)
+
+
+Query.ids
+~~~~~~~~~
+
+.. code:: python
+
+    Query.ids([values], type=None)
+
+
+Query.has_child
+~~~~~~~~~~~~~~~
+
+.. code:: python
+
+    Query.has_child(type, query=Query)
 
 
 Query.range
@@ -230,20 +286,28 @@ Query.wildcard
     Query.wildcard(field, value, boost=None)
 
 
-Query.indices
-~~~~~~~~~~~~~
-
-.. code:: python
-
-    Query.indices([indices], query=Query, no_match_query=Query)
-
-
-Query.span_multi
+Query.span_first
 ~~~~~~~~~~~~~~~~
 
 .. code:: python
 
-    Query.span_multi(Query)
+    Query.span_first(Query)
+
+
+Query.query_string
+~~~~~~~~~~~~~~~~~~
+
+.. code:: python
+
+    Query.query_string(query, fields=[])
+
+
+Query.limit
+~~~~~~~~~~~
+
+.. code:: python
+
+    Query.limit(value)
 
 
 Query.span_not
@@ -254,12 +318,12 @@ Query.span_not
     Query.span_not(include=Query, exclude=Query)
 
 
-Query.boost
-~~~~~~~~~~~
+Query.type
+~~~~~~~~~~
 
 .. code:: python
 
-    Query.boost(positive=None, negative=None)
+    Query.type(value)
 
 
 Query.constant_score
@@ -276,12 +340,4 @@ Query.match
 .. code:: python
 
     Query.match(field, query, operator=None, zero_terms_query=None, cutoff_frequency=None, boost=None)
-
-
-Query.top_children
-~~~~~~~~~~~~~~~~~~
-
-.. code:: python
-
-    Query.top_children(type, query=Query)
 
