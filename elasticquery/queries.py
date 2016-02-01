@@ -6,7 +6,13 @@ from .dsl import BaseQuery, MetaQuery
 from .exceptions import NoQueryError
 
 QUERIES = {
-    'and_': ['_query'],
+    'match_all': {
+        'kwargs': ('boost',)
+    },
+
+    # Full text queries
+    #
+
     'match': {
         'field': True,
         'args': ('query',),
@@ -15,76 +21,9 @@ QUERIES = {
     'multi_match': {
         'args': ({'fields': []}, 'query')
     },
-    'bool': {
-        'kwargs': ({('must', 'must_not', 'should'): ['_query']},)
-    },
-    'boost': {
-        'kwargs': ({('positive', 'negative'): '_query'})
-    },
     'common': {
         'args': ('query',),
         'process': lambda q: {'body': q}
-    },
-    'constant_score': {
-        'kwargs': ({'query': '_query'},)
-    },
-    'dis_max': {
-        'args': ({'queries': ['_query']},)
-    },
-    'fuzzy_like_this': {
-        'args': ({'fields': []}, 'like_text')
-    },
-    'fuzzy_like_this_field': {
-        'field': True,
-        'args': ('like_text',),
-        'kwargs': (
-            'max_query_terms', 'ignore_tf', 'fuzziness',
-            'prefix_length', 'boost', 'analyzer'
-        )
-    },
-    'function_score': {
-        'args': ({'functions': []},),
-        'kwargs': ({'query': '_query'},)
-    },
-    'fuzzy': {
-        'field': True,
-        'args': ('value',),
-        'kwargs': ('boost', 'fuzziness', 'prefix_length', 'max_expansions')
-    },
-    'geo_shape': {
-        'field': True,
-        'kwargs': ('type', {'coordinates': []}),
-        'field_process': lambda q: {'shape': q}
-    },
-    'has_child': {
-        'args': ('type',),
-        'kwargs': ({'query': '_query'},)
-    },
-    'has_parent': {
-        'args': ('parent_type',),
-        'kwargs': ({'query': '_query'},)
-    },
-    'ids': {
-        'args': ({'values': []},),
-        'kwargs': ('type',)
-    },
-    'indices': {
-        'args': ({'indices': []},),
-        'kwargs': ({('query', 'no_match_query'): '_query'},)
-    },
-    'match_all': {
-        'kwargs': ('boost',)
-    },
-    'more_like_this': {
-        'args': ({'fields': []}, 'like_text')
-    },
-    'nested': {
-        'args': ('path', {'query': '_query'}),
-    },
-    'prefix': {
-        'field': True,
-        'args': ('value',),
-        'kwargs': ('boost',)
     },
     'query_string': {
         'args': ('query',),
@@ -94,19 +33,148 @@ QUERIES = {
         'args': ('query',),
         'kwargs': ({'fields': []},)
     },
+
+    # Term level queries
+    #
+
+    'term': {
+        'field': True,
+        'args': ('value',),
+        'kwargs': ('boost',)
+    },
+    'terms': {
+        'field': True,
+        'value_only': True,
+        'args': ({'value': ['']},)
+    },
     'range': {
         'field': True,
         'kwargs': ('gte', 'gt', 'lte', 'lt')
+    },
+    'exists': {
+        'args': ('field',)
+    },
+    'missing': {
+        'args': ('field',)
+    },
+    'prefix': {
+        'field': True,
+        'args': ('value',),
+        'kwargs': ('boost',)
+    },
+    'wildcard': {
+        'field': True,
+        'args': ('value',),
+        'kwargs': ('boost',)
     },
     'regexp': {
         'field': True,
         'args': ('value',),
         'kwargs': ('boost', 'flags')
     },
-    'span_first': {
-        'args': ({'match': '_query'},)
+    'fuzzy': {
+        'field': True,
+        'args': ('value',),
+        'kwargs': ('boost', 'fuzziness', 'prefix_length', 'max_expansions')
+    },
+    'type': {
+        'args': ('value',)
+    },
+    'ids': {
+        'args': ({'values': []},),
+        'kwargs': ('type',)
+    },
+
+    # Compound queries
+    #
+
+    'constant_score': {
+        'kwargs': ({'query': '_query'},)
+    },
+    'bool': {
+        'kwargs': ({('must', 'must_not', 'should'): ['_query']},)
+    },
+    'dis_max': {
+        'args': ({'queries': ['_query']},)
+    },
+    'function_score': {
+        'args': ({'functions': []},),
+        'kwargs': ({'query': '_query'},)
+    },
+    'boosting': {
+        'kwargs': ({('positive', 'negative'): '_query'})
+    },
+    'indices': {
+        'args': ({'indices': []},),
+        'kwargs': ({('query', 'no_match_query'): '_query'},)
+    },
+    'limit': {
+        'args': ('value',)
+    },
+
+    # Joining queries
+    #
+
+    'nested': {
+        'args': ('path', {'query': '_query'}),
+    },
+    'has_child': {
+        'args': ('type',),
+        'kwargs': ({'query': '_query'},)
+    },
+    'has_parent': {
+        'args': ('parent_type',),
+        'kwargs': ({'query': '_query'},)
+    },
+
+    # Geo queries
+    #
+
+    'geo_shape': {
+        'field': True,
+        'kwargs': ('type', {'coordinates': []}),
+        'field_process': lambda q: {'shape': q}
+    },
+    'geo_bounding_box': {
+        'field': True,
+        'kwargs': ('top_left', 'bottom_right')
+    },
+    'geo_distance': {
+        'field': True,
+        'kwargs': ('lat', 'lon')
+    },
+    'geo_distance_range': {
+        'field': True,
+        'kwargs': ('lat', 'lon')
+    },
+    'geo_polygon': {
+        'field': True,
+        'args': ({'points': []},)
+    },
+    'geohash_cell': {
+        'field': True,
+        'kwargs': ('lat', 'lon',)
+    },
+
+    # Specialized queries
+    #
+
+    'more_like_this': {
+        'args': ({'fields': []}, 'like_text')
+    },
+
+    # Span queries
+    #
+
+    'span_term': {
+        'field': True,
+        'args': ('value',),
+        'kwargs': ('boost',)
     },
     'span_multi': {
+        'args': ({'match': '_query'},)
+    },
+    'span_first': {
         'args': ({'match': '_query'},)
     },
     'span_near': {
@@ -118,29 +186,11 @@ QUERIES = {
     'span_or': {
         'args': ({'clauses': ['_query']},)
     },
-    'span_term': {
-        'field': True,
-        'args': ('value',),
-        'kwargs': ('boost',)
+    'span_containing': {
+        'args': ({('little', 'big'): '_query'},)
     },
-    'term': {
-        'field': True,
-        'args': ('value',),
-        'kwargs': ('boost',)
-    },
-    'terms': {
-        'field': True,
-        'value_only': True,
-        'args': ({'value': ['']},)
-    },
-    'top_children': {
-        'args': ('type',),
-        'kwargs': ({'query': '_query'},)
-    },
-    'wildcard': {
-        'field': True,
-        'args': ('value',),
-        'kwargs': ('boost',)
+    'span_within': {
+        'args': ({('little', 'big'): '_query'},)
     }
 }
 
