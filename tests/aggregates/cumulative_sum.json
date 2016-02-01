@@ -1,0 +1,10 @@
+{
+    "args": ["agg_name", "buckets_name"],
+    "output": {
+        "agg_name": {
+            "cumulative_sum": {
+                "buckets_path": "buckets_name"
+            }
+        }
+    }
+}

@@ -5,7 +5,7 @@
         "negative": "_query"
     },
     "output": {
-        "boost": {
+        "boosting": {
             "positive_boost": 2,
             "positive": {"_query": {}},
             "negative": {"_query": {}}

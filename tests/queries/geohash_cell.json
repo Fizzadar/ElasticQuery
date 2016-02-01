@@ -1,0 +1,15 @@
+{
+    "args": ["geo_field"],
+    "kwargs": {
+        "lat": 50,
+        "lon": "-202"
+    },
+    "output": {
+        "geohash_cell": {
+            "geo_field": {
+                "lat": 50,
+                "lon": "-202"
+            }
+        }
+    }
+}

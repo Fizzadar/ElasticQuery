@@ -1,0 +1,12 @@
+{
+    "args": ["agg_name", {"path": "buckets"}],
+    "output": {
+        "agg_name": {
+            "bucket_selector": {
+                "buckets_path": {
+                    "path": "buckets"
+                }
+            }
+        }
+    }
+}
