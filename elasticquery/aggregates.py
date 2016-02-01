@@ -6,25 +6,28 @@ from .dsl import BaseAggregate, MetaAggregate
 from .exceptions import NoAggregateError
 
 AGGREGATES = {
-    'min': {
-        'args': ('field',)
-    },
-    'max': {
-        'args': ('field',)
-    },
-    'sum': {
-        'args': ('field',)
-    },
+    # Metrics aggregations
+    #
+
     'avg': {
         'args': ('field',)
     },
-    'stats': {
+    'cardinality': {
         'args': ('field',)
     },
     'extended_stats': {
         'args': ('field',)
     },
-    'value_count': {
+    'geo_bounds': {
+        'args': ('field',)
+    },
+    'geo_centroid': {
+        'args': ('field',)
+    },
+    'min': {
+        'args': ('field',)
+    },
+    'max': {
         'args': ('field',)
     },
     'percentiles': {
@@ -33,17 +36,31 @@ AGGREGATES = {
     'percentile_ranks': {
         'args': ('field',)
     },
-    'cardinality': {
+    'scripted_metric': {
+    },
+    'stats': {
         'args': ('field',)
     },
-    'geo_bounds': {
+    'sum': {
         'args': ('field',)
     },
     'top_hits': {
     },
-    'scripted_metric': {
+    'value_count': {
+        'args': ('field',)
     },
-    'global': {
+
+    # Bucket aggregations
+    #
+
+    'children': {
+        'args': ('type',)
+    },
+    'date_histogram': {
+        'args': ('field', 'interval')
+    },
+    'date_range': {
+        'args': ('field', {'ranges': []})
     },
     'filter': {
         'args': ({'filter': '_query'},)
@@ -51,43 +68,82 @@ AGGREGATES = {
     'filters': {
         'args': ({'filters': ['_query']},)
     },
+    'geo_distance': {
+        'args': ('field', 'origin', {'ranges': []})
+    },
+    'geohash_grid': {
+        'args': ('field',)
+    },
+    'global': {
+    },
+    'histogram': {
+        'args': ('field', 'interval')
+    },
+    'ip_range': {
+        'args': ('field', {'ranges': []})
+    },
     'missing': {
         'args': ('field',)
     },
     'nested': {
         'args': ('path',)
     },
+    'range': {
+        'args': ('field', {'ranges': []})
+    },
     'reverse_nested': {
     },
-    'children': {
-        'args': ('type',)
-    },
-    'terms': {
+    'sampler': {
         'args': ('field',)
     },
     'significant_terms': {
         'args': ('field',)
     },
-    'range': {
-        'args': ('field', {'ranges': []})
-    },
-    'date_range': {
-        'args': ('field', {'ranges': []})
-    },
-    'ip_range': {
-        'args': ('field', {'ranges': []})
-    },
-    'histogram': {
-        'args': ('field', 'interval')
-    },
-    'date_histogram': {
-        'args': ('field', 'interval')
-    },
-    'geo_distance': {
-        'args': ('field', 'origin', {'ranges': []})
-    },
-    'geohash_grid': {
+    'terms': {
         'args': ('field',)
+    },
+
+    # Pipeline aggregations
+    #
+
+    'avg_bucket': {
+        'args': ('buckets_path',)
+    },
+    'derivative': {
+        'args': ('buckets_path',)
+    },
+    'max_bucket': {
+        'args': ('buckets_path',)
+    },
+    'min_bucket': {
+        'args': ('buckets_path',)
+    },
+    'sum_bucket': {
+        'args': ('buckets_path',)
+    },
+    'stats_bucket': {
+        'args': ('buckets_path',)
+    },
+    'extended_stats_bucket': {
+        'args': ('buckets_path',)
+    },
+    'percentiles_bucket': {
+        'args': ('buckets_path',)
+    },
+    'moving_avg': {
+        'args': ('buckets_path',)
+    },
+    'cumulative_sum': {
+        'args': ('buckets_path',)
+    },
+    'bucket_script': {
+        'args': ({'buckets_path': {}},)
+    },
+    'bucket_selector': {
+        'args': ({'buckets_path': {}},)
+    },
+    'serial_diff': {
+        'args': ('buckets_path',)
     }
 }
 
