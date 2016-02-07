@@ -94,12 +94,12 @@ QUERIES = {
     'bool': {
         'kwargs': ({('must', 'must_not', 'should'): ['_query']},)
     },
-    'dis_max': {
-        'args': ({'queries': ['_query']},)
-    },
     'function_score': {
         'args': ({'functions': []},),
         'kwargs': ({'query': '_query'},)
+    },
+    'dis_max': {
+        'args': ({'queries': ['_query']},)
     },
     'boosting': {
         'kwargs': ({('positive', 'negative'): '_query'})
@@ -162,6 +162,10 @@ QUERIES = {
     'more_like_this': {
         'args': ({'fields': []}, 'like_text')
     },
+    'template': {
+    },
+    'script': {
+    },
 
     # Span queries
     #
@@ -180,11 +184,11 @@ QUERIES = {
     'span_near': {
         'args': ({'clauses': ['_query']},)
     },
-    'span_not': {
-        'kwargs': ({('include', 'exclude'): '_query'},)
-    },
     'span_or': {
         'args': ({'clauses': ['_query']},)
+    },
+    'span_not': {
+        'kwargs': ({('include', 'exclude'): '_query'},)
     },
     'span_containing': {
         'args': ({('little', 'big'): '_query'},)

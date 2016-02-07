@@ -24,10 +24,10 @@ AGGREGATES = {
     'geo_centroid': {
         'args': ('field',)
     },
-    'min': {
+    'max': {
         'args': ('field',)
     },
-    'max': {
+    'min': {
         'args': ('field',)
     },
     'percentiles': {
