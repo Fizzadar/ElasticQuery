@@ -1,14 +1,11 @@
-# ElasticQuery v3 (WIP) [![PyPI version](https://badge.fury.io/py/ElasticQuery.svg)](https://pypi.python.org/pypi/ElasticQuery)
+# ElasticQuery v3 [![PyPI version](https://badge.fury.io/py/ElasticQuery.svg)](https://pypi.python.org/pypi/ElasticQuery)
 
 A simple query builder for Elasticsearch. Install with `pip install elasticquery`. Uses metod calls and their args/kwargs to generate query/filter/aggregate objects. Outputs dict/json represntation to be passed directly to ES.
 
-### API
-
-+ [ElasticQuery](https://elasticquery.readthedocs.org/client.html)
-+ [Queries](https://elasticquery.readthedocs.org/queries.html)
-+ [Aggregates](https://elasticquery.readthedocs.org/aggregates.html)
-+ [Suggesters](https://elasticquery.readthedocs.org/suggesters.html)
-+ [Filters](https://elasticquery.readthedocs.org/filters.html)
++ [Documentation](https://elasticquery.readthedocs.org/en/latest/)
++ [Queries API](https://elasticquery.readthedocs.org/en/latest/queries.html)
++ [Aggregates API](https://elasticquery.readthedocs.org/en/latest/aggregates.html)
++ [Suggesters API](https://elasticquery.readthedocs.org/en/latest/suggesters.html)
 
 
 ## Synopsis
@@ -18,44 +15,21 @@ from elasticsearch import Elasticsearch
 from elasticquery import ElasticQuery, Filter, Query
 
 
+# Create a query with our ES index details
 q = ElasticQuery(
     es=Elasticsearch(),
     index='mapping_test',
     doc_type='doc_mapping'
 )
 
-# -> query.filtered.filter
-q.filter(
-    # -> query.filtered.filter.bool
-    Filter.bool(must=[
-        # -> query.filtered.filter.bool.must.terms
-        Filter.terms('field', ['this', 'that'])
-    ], must_not=[
-        # -> query.filtered.filter.bool.must_not.or
-        Filter.or_(
-            # -> query.filtered.filter.bool.must_not.or.term
-            Filter.term('another_field', 'matching-term'),
-            # -> query.filtered.filter.bool.must_not.or.query.query_string
-            Filter.query(
-                Query.query_string('A QUERY STRING', default_operator='OR')
-            )
-        )
-    ])
-)
-
-# -> query.filtered.query
+# Query it!
 q.query(
-    # -> query.filtered.query.prefix
-    Query.prefix('field', 'prefixed-')
+    Query.terms('my_field', ['my', 'terms'])
 )
 
-# -> aggregates
+# Aggregate it!
 q.aggregate(
-    # -> aggregates.agg_name
-    Aggregate.date_histogram('agg_name', 'date_field', '1d').aggregate(
-        # aggregates.agg_name.aggregates.sub_agg_name
-        Aggregate.terms('sub_agg_name', 'terms_field', size=50)
-    )
+    Aggregate.sum('my_agg', 'my_field')
 )
 
 # Print the query, then run on ES and print it's output
@@ -64,16 +38,7 @@ print q.get()
 ```
 
 
-## Naming Differences
-
-ElasticQuery attempts to keep all names and arguments in-line with their ES coutnerparts. Unfortunately a number of key terms are reserved by Python, so ElasticQuery implements the following alternatives:
-
-+ `from` -> `from_` (eg setting query['from'])
-+ `or` -> `or_` (eg or_filters)
-+ `and` -> `and_` (eg and_filters)
-
-
-## Testing
+## Development/Testing
 
 + Create virtualenv
 + `pip install requirements.pip`

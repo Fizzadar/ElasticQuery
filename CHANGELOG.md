@@ -1,4 +1,4 @@
-# v3 (WIP)
+# v3
 
 + Full ES 2 DSL support
 + Removed `Filter` & ES 1 support
