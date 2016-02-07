@@ -29,6 +29,6 @@ API
 Exceptions
 ----------
 
-.. automodule:: elasticquery.exception
+.. automodule:: elasticquery.exceptions
     :members:
     :undoc-members:
