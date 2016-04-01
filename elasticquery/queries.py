@@ -9,10 +9,19 @@ QUERIES = {
     'match': {
         'field': True,
         'args': ('query',),
-        'kwargs': ('operator', 'zero_terms_query', 'cutoff_frequency', 'boost')
+        'kwargs': (
+            'operator', 'zero_terms_query', 'cutoff_frequency', 'boost', 'rewrite',
+            'prefix_length', 'fuzziness', 'minimum_should_match', 'analyzer',
+            'max_expansions'
+        )
     },
     'multi_match': {
-        'args': ({'fields': []}, 'query')
+        'args': ({'fields': []}, 'query'),
+        'kwargs': (
+            'operator', 'zero_terms_query', 'cutoff_frequency', 'boost', 'rewrite',
+            'prefix_length', 'fuzziness', 'minimum_should_match', 'analyzer',
+            'max_expansions'
+        )
     },
     'bool': {
         'kwargs': ({('must', 'must_not', 'should'): ['_query']},)
@@ -22,6 +31,10 @@ QUERIES = {
     },
     'common': {
         'args': ('query',),
+        'kwargs': (
+            'minimum_should_match', 'high_freq', 'low_freq', 'high_freq_operator',
+            'low_freq_operator', 'cutoff_frequency'
+        ),
         'process': lambda q: {'body': q}
     },
     'constant_score': {
@@ -89,11 +102,21 @@ QUERIES = {
     },
     'query_string': {
         'args': ('query',),
-        'kwargs': ({'fields': []},)
+        'kwargs': (
+            {'fields': []}, 'default_field', 'default_operator', 'analyzer',
+            'allow_leading_wildcard', 'lowercase_expanded_terms',
+            'enable_position_increments', 'fuzzy_max_expansions', 'fuzziness',
+            'fuzzy_prefix_length', 'phrase_slop', 'boost', 'analyze_wildcard',
+            'auto_generate_phrase_queries', 'max_determinized_states',
+            'minimum_should_match', 'lenient', 'locale', 'time_zone'
+        )
     },
     'simple_query_string': {
         'args': ('query',),
-        'kwargs': ({'fields': []},)
+        'kwargs': (
+            {'fields': []}, 'default_operator', 'analyzer', 'flags', 'locale', 'lenient',
+            'lowercase_expanded_terms', 'analyze_wildcard', 'minimum_should_match'
+        )
     },
     'range': {
         'field': True,
