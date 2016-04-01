@@ -1,13 +1,17 @@
 {
     "args": ["field", "match_value"],
     "kwargs": {
-        "boost": 1.2
+        "boost": 1.2,
+        "fuzziness": "AUTO",
+        "minimum_should_match": 1
     },
     "output": {
         "match": {
             "field": {
                 "query": "match_value",
-                "boost": 1.2
+                "boost": 1.2,
+                "fuzziness": "AUTO",
+                "minimum_should_match": 1
             }
         }
     }
