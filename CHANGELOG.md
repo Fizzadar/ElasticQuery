@@ -1,3 +1,7 @@
+# v2.3.1
+
++ Support for all kwargs on full text queries
+
 # v2.3
 
 + Add suggesters support with `ElasticQuery.Suggester`
