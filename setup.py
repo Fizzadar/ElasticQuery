@@ -7,7 +7,7 @@ from setuptools import setup
 
 if __name__ == '__main__':
     setup(
-        version='3',
+        version='3.1',
         name='ElasticQuery',
         description='A simple query builder for Elasticsearch 2',
         author='Nick Barrett',

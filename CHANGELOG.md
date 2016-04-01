@@ -1,3 +1,7 @@
+# v3.1
+
++ Add support for all full text kwargs
+
 # v3
 
 + Full ES 2 DSL support

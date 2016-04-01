@@ -11,7 +11,7 @@ Query.simple_query_string
 
 .. code:: python
 
-    Query.simple_query_string(query, fields=[])
+    Query.simple_query_string(query, fields=[], default_operator=None, analyzer=None, flags=None, locale=None, lenient=None, lowercase_expanded_terms=None, analyze_wildcard=None, minimum_should_match=None)
 
 
 Query.span_first
@@ -67,7 +67,7 @@ Query.match
 
 .. code:: python
 
-    Query.match(field, query, operator=None, zero_terms_query=None, cutoff_frequency=None, boost=None)
+    Query.match(field, query, operator=None, zero_terms_query=None, cutoff_frequency=None, boost=None, rewrite=None, prefix_length=None, fuzziness=None, minimum_should_match=None, analyzer=None, max_expansions=None)
 
 
 Query.type
@@ -123,7 +123,7 @@ Query.common
 
 .. code:: python
 
-    Query.common(query)
+    Query.common(query, minimum_should_match=None, high_freq=None, low_freq=None, high_freq_operator=None, low_freq_operator=None, cutoff_frequency=None)
 
 
 Query.indices
@@ -195,7 +195,7 @@ Query.multi_match
 
 .. code:: python
 
-    Query.multi_match([fields], query)
+    Query.multi_match([fields], query, operator=None, zero_terms_query=None, cutoff_frequency=None, boost=None, rewrite=None, prefix_length=None, fuzziness=None, minimum_should_match=None, analyzer=None, max_expansions=None)
 
 
 Query.more_like_this
@@ -347,7 +347,7 @@ Query.query_string
 
 .. code:: python
 
-    Query.query_string(query, fields=[])
+    Query.query_string(query, fields=[], default_field=None, default_operator=None, analyzer=None, allow_leading_wildcard=None, lowercase_expanded_terms=None, enable_position_increments=None, fuzzy_max_expansions=None, fuzziness=None, fuzzy_prefix_length=None, phrase_slop=None, boost=None, analyze_wildcard=None, auto_generate_phrase_queries=None, max_determinized_states=None, minimum_should_match=None, lenient=None, locale=None, time_zone=None)
 
 
 Query.constant_score
