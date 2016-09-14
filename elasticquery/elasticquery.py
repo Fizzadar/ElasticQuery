@@ -165,6 +165,26 @@ class ElasticQuery(object):
             body=self.dict()
         )
 
+    def count(self):
+        '''
+        Execute the current query (requires _es, _index & _doc_type).
+        '''
+
+        if self._es is None:
+            raise ValueError('No Elasticsearch instance attached to this query')
+
+        if self._index is None:
+            raise ValueError('No index specified for this query')
+
+        if self._doc_type is None:
+            raise ValueError('No doc type specified for this query')
+
+        return self._es.count(
+            index=self._index,
+            doc_type=self._doc_type,
+            body=self.dict()
+        )
+
     def json(self, **kwargs):
         '''
         Returns a JSON representation of the current query. Kwargs are passed to
