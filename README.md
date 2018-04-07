@@ -41,5 +41,5 @@ print q.get()
 ## Development/Testing
 
 + Create virtualenv
-+ `pip install requirements.pip`
++ `pip install -r requirements.pip`
 + Run `nosetests`
