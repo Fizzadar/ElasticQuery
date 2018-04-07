@@ -12,7 +12,7 @@ A simple query builder for Elasticsearch. Install with `pip install elasticquery
 
 ```py
 from elasticsearch import Elasticsearch
-from elasticquery import ElasticQuery, Filter, Query
+from elasticquery import ElasticQuery, Filter, Aggregate
 
 
 # Create a query with our ES index details
