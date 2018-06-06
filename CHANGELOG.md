@@ -1,3 +1,7 @@
+# v3.2
+
++ Add Python 3 support
+
 # v3.1
 
 + Add support for all full text kwargs
