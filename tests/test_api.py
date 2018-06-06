@@ -19,7 +19,7 @@ class FakeElasticSearch(object):
 class TestJsonDate(TestCase):
     def test_json_date(self):
         self.assertEqual(
-            _json_date(datetime(2016, 01, 01, 0, 0, 0)),
+            _json_date(datetime(2016, 1, 1, 0, 0, 0)),
             '2016-01-01T00:00:00'
         )
 

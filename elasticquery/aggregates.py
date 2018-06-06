@@ -2,6 +2,8 @@
 # File: elasticquery/aggregates.py
 # Desc: internal ElasticQuery definitions mapping to Elasticsearch aggregate objects
 
+import six
+
 from .dsl import BaseAggregate, MetaAggregate
 from .exceptions import NoAggregateError
 
@@ -148,9 +150,8 @@ AGGREGATES = {
 }
 
 
+@six.add_metaclass(MetaAggregate)
 class Aggregate(BaseAggregate):
-    __metaclass__ = MetaAggregate
-
     _eq_type = 'aggregate'
     _definitions = AGGREGATES
     _exception = NoAggregateError

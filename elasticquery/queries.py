@@ -2,6 +2,8 @@
 # File: elasticquery/queries.py
 # Desc: internal ElasticQuery definitions mapping to Elasticsearch query objects
 
+import six
+
 from .dsl import BaseQuery, MetaQuery
 from .exceptions import NoQueryError
 
@@ -222,9 +224,8 @@ QUERIES = {
 }
 
 
+@six.add_metaclass(MetaQuery)
 class Query(BaseQuery):
-    __metaclass__ = MetaQuery
-
     _eq_type = 'query'
     _definitions = QUERIES
     _exception = NoQueryError
