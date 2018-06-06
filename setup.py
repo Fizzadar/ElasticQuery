@@ -18,5 +18,6 @@ if __name__ == '__main__':
         },
         packages=[
             'elasticquery'
-        ]
+        ],
+        install_requires=['six>=1.4.0'],
     )

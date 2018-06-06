@@ -2,6 +2,8 @@
 # File: elasticquery/suggesters.py
 # Desc: internal ElasticQuery definitions mapping to Elasticsearch suggester objects
 
+import six
+
 from .dsl import BaseSuggester, MetaSuggester
 from .exception import NoSuggester
 
@@ -23,9 +25,9 @@ SUGGESTERS = {
     }
 }
 
-class Suggester(BaseSuggester):
-    __metaclass__ = MetaSuggester
 
+@six.add_metaclass(MetaSuggester)
+class Suggester(BaseSuggester):
     _eq_type = 'suggester'
     _definitions = SUGGESTERS
     _exception = NoSuggester

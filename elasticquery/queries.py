@@ -2,8 +2,11 @@
 # File: elasticquery/queries.py
 # Desc: internal ElasticQuery definitions mapping to Elasticsearch query objects
 
+import six
+
 from .dsl import BaseFilterQuery, MetaFilterQuery
 from .exception import NoQuery
+
 
 QUERIES = {
     'match': {
@@ -169,9 +172,8 @@ QUERIES = {
 }
 
 
+@six.add_metaclass(MetaFilterQuery)
 class Query(BaseFilterQuery):
-    __metaclass__ = MetaFilterQuery
-
     _eq_type = 'query'
     _definitions = QUERIES
     _exception = NoQuery

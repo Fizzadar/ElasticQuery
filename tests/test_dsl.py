@@ -5,6 +5,8 @@
 from os import path
 from unittest import TestCase
 
+import six
+
 from jsontest import JsonTest
 
 from elasticquery import Filter, Query, Aggregate, Suggester
@@ -23,7 +25,11 @@ def _test_filterquery(self, filterquery, test_name, test_data):
         if isinstance(arg, list):
             return [parse_arg(a) for a in arg]
         else:
-            return CLASS_NAMES[arg](arg, {}) if (isinstance(arg, basestring) and arg.startswith('_')) else arg
+            return (
+                CLASS_NAMES[arg](arg, {})
+                if (isinstance(arg, six.string_types) and arg.startswith('_'))
+                else arg
+            )
 
     args = test_data.get('args', [])
     args = parse_arg(args)
@@ -31,7 +37,7 @@ def _test_filterquery(self, filterquery, test_name, test_data):
     kwargs = test_data.get('kwargs', {})
     kwargs = {
         k: parse_arg(v) if isinstance(v, list) else parse_arg(v)
-        for k, v in kwargs.iteritems()
+        for k, v in kwargs.items()
     }
 
     output = method(*args, **kwargs).dict()

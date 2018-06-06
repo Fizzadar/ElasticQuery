@@ -9,11 +9,11 @@ def assert_equal(self, output, expected):
     try:
         self.assertEqual(output, expected)
     except AssertionError as e:
-        print 'OUTPUT', output
-        print 'EXPECTED', expected
+        print('OUTPUT', output)
+        print('EXPECTED', expected)
 
         diff = list(dictdiff(output, expected))
         for d in diff:
-            print d
+            print(d)
 
         raise e

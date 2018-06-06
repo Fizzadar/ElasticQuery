@@ -2,8 +2,11 @@
 # File: elasticquery/filters.py
 # Desc: internal ElasticQuery definitions mapping to Elasticsearch filter objects
 
+import six
+
 from .dsl import BaseFilterQuery, MetaFilterQuery
 from .exception import NoFilter
+
 
 FILTERS = {
     'and_': ['_filter'],
@@ -99,9 +102,8 @@ FILTERS = {
 }
 
 
+@six.add_metaclass(MetaFilterQuery)
 class Filter(BaseFilterQuery):
-    __metaclass__ = MetaFilterQuery
-
     _eq_type = 'filter'
     _definitions = FILTERS
     _exception = NoFilter
