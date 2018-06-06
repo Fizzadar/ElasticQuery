@@ -12,141 +12,141 @@ AGGREGATES = {
     #
 
     'avg': {
-        'args': ('field',)
+        'args': ('field',),
     },
     'cardinality': {
-        'args': ('field',)
+        'args': ('field',),
     },
     'extended_stats': {
-        'args': ('field',)
+        'args': ('field',),
     },
     'geo_bounds': {
-        'args': ('field',)
+        'args': ('field',),
     },
     'geo_centroid': {
-        'args': ('field',)
+        'args': ('field',),
     },
     'max': {
-        'args': ('field',)
+        'args': ('field',),
     },
     'min': {
-        'args': ('field',)
+        'args': ('field',),
     },
     'percentiles': {
-        'args': ('field',)
+        'args': ('field',),
     },
     'percentile_ranks': {
-        'args': ('field',)
+        'args': ('field',),
     },
     'scripted_metric': {
     },
     'stats': {
-        'args': ('field',)
+        'args': ('field',),
     },
     'sum': {
-        'args': ('field',)
+        'args': ('field',),
     },
     'top_hits': {
     },
     'value_count': {
-        'args': ('field',)
+        'args': ('field',),
     },
 
     # Bucket aggregations
     #
 
     'children': {
-        'args': ('type',)
+        'args': ('type',),
     },
     'date_histogram': {
-        'args': ('field', 'interval')
+        'args': ('field', 'interval'),
     },
     'date_range': {
-        'args': ('field', {'ranges': []})
+        'args': ('field', {'ranges': []}),
     },
     'filter': {
-        'args': ({'filter': '_query'},)
+        'args': ({'filter': '_query'},),
     },
     'filters': {
-        'args': ({'filters': ['_query']},)
+        'args': ({'filters': ['_query']},),
     },
     'geo_distance': {
-        'args': ('field', 'origin', {'ranges': []})
+        'args': ('field', 'origin', {'ranges': []}),
     },
     'geohash_grid': {
-        'args': ('field',)
+        'args': ('field',),
     },
     'global': {
     },
     'histogram': {
-        'args': ('field', 'interval')
+        'args': ('field', 'interval'),
     },
     'ip_range': {
-        'args': ('field', {'ranges': []})
+        'args': ('field', {'ranges': []}),
     },
     'missing': {
-        'args': ('field',)
+        'args': ('field',),
     },
     'nested': {
-        'args': ('path',)
+        'args': ('path',),
     },
     'range': {
-        'args': ('field', {'ranges': []})
+        'args': ('field', {'ranges': []}),
     },
     'reverse_nested': {
     },
     'sampler': {
-        'args': ('field',)
+        'args': ('field',),
     },
     'significant_terms': {
-        'args': ('field',)
+        'args': ('field',),
     },
     'terms': {
-        'args': ('field',)
+        'args': ('field',),
     },
 
     # Pipeline aggregations
     #
 
     'avg_bucket': {
-        'args': ('buckets_path',)
+        'args': ('buckets_path',),
     },
     'derivative': {
-        'args': ('buckets_path',)
+        'args': ('buckets_path',),
     },
     'max_bucket': {
-        'args': ('buckets_path',)
+        'args': ('buckets_path',),
     },
     'min_bucket': {
-        'args': ('buckets_path',)
+        'args': ('buckets_path',),
     },
     'sum_bucket': {
-        'args': ('buckets_path',)
+        'args': ('buckets_path',),
     },
     'stats_bucket': {
-        'args': ('buckets_path',)
+        'args': ('buckets_path',),
     },
     'extended_stats_bucket': {
-        'args': ('buckets_path',)
+        'args': ('buckets_path',),
     },
     'percentiles_bucket': {
-        'args': ('buckets_path',)
+        'args': ('buckets_path',),
     },
     'moving_avg': {
-        'args': ('buckets_path',)
+        'args': ('buckets_path',),
     },
     'cumulative_sum': {
-        'args': ('buckets_path',)
+        'args': ('buckets_path',),
     },
     'bucket_script': {
-        'args': ({'buckets_path': {}},)
+        'args': ({'buckets_path': {}},),
     },
     'bucket_selector': {
-        'args': ({'buckets_path': {}},)
+        'args': ({'buckets_path': {}},),
     },
     'serial_diff': {
-        'args': ('buckets_path',)
-    }
+        'args': ('buckets_path',),
+    },
 }
 
 

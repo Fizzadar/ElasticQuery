@@ -10,18 +10,18 @@ from .exceptions import NoSuggesterError
 SUGGESTERS = {
     'term': {
         'args': ('field',),
-        'kwargs': ('analyzer', 'size', 'sort', 'suggest_mode')
+        'kwargs': ('analyzer', 'size', 'sort', 'suggest_mode'),
     },
     'phrase': {
         'args': ('field',),
         'kwargs': (
             'gram_size', 'real_word_error_likelihood', 'confidence', 'max_errors',
-            'separator', 'size', 'analyzer', 'shard_size', 'collate'
-        )
+            'separator', 'size', 'analyzer', 'shard_size', 'collate',
+        ),
     },
     'completion': {
         'args': ('field',),
-        'kwargs': ('size',)
+        'kwargs': ('size',),
     },
 }
 

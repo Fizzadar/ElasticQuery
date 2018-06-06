@@ -24,7 +24,7 @@ class MetaQuery(type):
         # Generates a new class object with a struct based on the definitions
         return lambda *args, **kwargs: cls(
             key,
-            make_struct(cls._definitions[key], *args, **kwargs)
+            make_struct(cls._definitions[key], *args, **kwargs),
         )
 
 
@@ -43,7 +43,7 @@ class MetaAggregate(MetaQuery):
         return lambda *args, **kwargs: cls(
             key,
             args[0],
-            make_struct(cls._definitions[key], *args[1:], **kwargs)
+            make_struct(cls._definitions[key], *args[1:], **kwargs),
         )
 
 
@@ -63,7 +63,7 @@ class MetaSuggester(MetaQuery):
             key,
             args[0],
             args[1],
-            make_struct(cls._definitions[key], *args[2:], **kwargs)
+            make_struct(cls._definitions[key], *args[2:], **kwargs),
         )
 
 
@@ -84,7 +84,7 @@ class BaseQuery(object):
         dsl_type = self._dsl_type[:-1] if self._dsl_type.endswith('_') else self._dsl_type
 
         return {
-            dsl_type: unroll_struct(self._struct)
+            dsl_type: unroll_struct(self._struct),
         }
 
 
@@ -105,8 +105,8 @@ class BaseAggregate(BaseQuery):
     def dict(self):
         struct = {
             self._name: {
-                self._dsl_type: unroll_struct(self._struct)
-            }
+                self._dsl_type: unroll_struct(self._struct),
+            },
         }
 
         if self._aggs:
@@ -143,8 +143,8 @@ class BaseSuggester(BaseQuery):
         struct = {
             self._name: {
                 'text': self._text,
-                self._dsl_type: unroll_struct(self._struct)
-            }
+                self._dsl_type: unroll_struct(self._struct),
+            },
         }
 
         return struct

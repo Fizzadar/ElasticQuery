@@ -12,12 +12,12 @@ from jsontest import JsonTest
 from elasticquery import Query, Aggregate, Suggester
 from elasticquery.exceptions import (
     NoQueryError, NoAggregateError, NoSuggesterError,
-    MissingArgError
+    MissingArgError,
 )
 from .util import assert_equal
 
 CLASS_NAMES = {
-    '_query': Query
+    '_query': Query,
 }
 
 

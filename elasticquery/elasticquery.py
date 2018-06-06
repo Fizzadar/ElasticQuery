@@ -114,8 +114,8 @@ class ElasticQuery(object):
         else:
             self._struct['sort'].append({
                 field: {
-                    'order': order
-                }
+                    'order': order,
+                },
             })
 
         return self
@@ -162,7 +162,7 @@ class ElasticQuery(object):
         return self._es.search(
             index=self._index,
             doc_type=self._doc_type,
-            body=self.dict()
+            body=self.dict(),
         )
 
     def count(self):
@@ -182,7 +182,7 @@ class ElasticQuery(object):
         return self._es.count(
             index=self._index,
             doc_type=self._doc_type,
-            body=self.dict()
+            body=self.dict(),
         )
 
     def json(self, **kwargs):

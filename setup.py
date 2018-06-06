@@ -14,10 +14,10 @@ if __name__ == '__main__':
         author_email='pointlessrambler@gmail.com',
         url='http://github.com/Fizzadar/ElasticQuery',
         package_dir={
-            'ElasticQuery': 'elasticquery'
+            'ElasticQuery': 'elasticquery',
         },
         packages=[
-            'elasticquery'
+            'elasticquery',
         ],
         install_requires=['six>=1.4.0'],
     )

@@ -94,7 +94,7 @@ Note that all {1} calls can also be passed additional keyword arguments not spec
 
     out += '\n\n'
 
-    for key, argspec in definitions.iteritems():
+    for key, argspec in definitions.items():
         args_string = make_args_string(argspec, cls_name)
 
         title_key = key
