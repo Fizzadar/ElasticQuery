@@ -1,3 +1,7 @@
+# v2.4
+
++ Python 3 support
+
 # v2.3.1
 
 + Support for all kwargs on full text queries
