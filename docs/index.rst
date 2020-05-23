@@ -1,7 +1,7 @@
 ElasticQuery
 ============
 
-A simple query builder for Elasticsearch. Install with ``pip install elasticquery``. Uses metod calls and their args/kwargs to generate query/filter/aggregate objects. Outputs dict/json represntation to be passed directly to ES.
+A simple query builder for Elasticsearch. Install with ``pip install elasticquery``. Uses method calls and their args/kwargs to generate query/filter/aggregate objects. Outputs dict/json represntation to be passed directly to ES.
 
 .. toctree::
    :maxdepth: 1
