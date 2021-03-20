@@ -1,6 +1,6 @@
 # ElasticQuery v3 [![PyPI version](https://badge.fury.io/py/ElasticQuery.svg)](https://pypi.python.org/pypi/ElasticQuery)
 
-A simple query builder for Elasticsearch. Install with `pip install elasticquery`. Uses metod calls and their args/kwargs to generate query/filter/aggregate objects. Outputs dict/json represntation to be passed directly to ES.
+A simple query builder for Elasticsearch. Install with `pip install elasticquery`. Uses metod calls and their args/kwargs to generate query/filter/aggregate objects. Outputs dict/json representation to be passed directly to ES.
 
 + [Documentation](https://elasticquery.readthedocs.org/en/latest/)
 + [Queries API](https://elasticquery.readthedocs.org/en/latest/queries.html)
